@@ -51,6 +51,7 @@ if (empty($_SESSION['userid'])) {
     Flight::route('POST /do/issue-submit', array('GithubController', '_doSubmitIssue'));
     Flight::route('POST /do/create-squad', array('SquadController', '_doCreateSquad'));
     Flight::route('POST /do/modify-squad', array('SquadController', '_doModifySquad'));
+    Flight::route('/do/squad/delete/@id', array('SquadController', '_doRemoveSquad'));
     Flight::route('POST /do/assign-to-platoon', ['MemberController', '_doAssignMemberToPlatoon']);
 
     // modals

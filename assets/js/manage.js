@@ -53,6 +53,24 @@ $(function() {
         });
     });
 
+    $(".modal").delegate("#delete_squad_btn", "click", function(e) {
+        e.preventDefault();
+        var squad_id = $("input[name='squad_id']").val(),
+            squad = $('.squad-'+squad_id+' li');
+        if (squad.length > 0) {
+            $(".viewPanel").modal('hide');
+            swal('Error', 'Can\'t remove if members are still assigned!', 'error');
+        } else {
+            $.post("do/squad/delete/"+squad_id, function() {
+                $(".viewPanel").modal('hide');
+                setTimeout(function() {
+                    location.reload();
+                }, 600);
+            });
+        }
+
+    });
+
     var itemMoved, targetplatoon, sourcePlatoon, action = null;
     $(".sortable").sortable({
         revert: true,

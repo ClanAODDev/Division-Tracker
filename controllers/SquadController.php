@@ -33,6 +33,23 @@ class SquadController
 
     }
 
+    public static function _doRemoveSquad($id)
+    {
+        $user = User::find(intval($_SESSION['userid']));
+
+        if ($user->role > 0) {
+            if (Squad::delete($id)) {
+                $data = array('success' => true, 'message' => "Removed!");
+            } else {
+                $data = array('success' => false, 'message' => "Unit does not exist!");
+            }
+        } else {
+            $data = array('success' => false, 'message' => "You do not have access to perform this function");
+        }
+
+        echo Flight::json($data);
+    }
+
 
     public static function _createSquad()
     {

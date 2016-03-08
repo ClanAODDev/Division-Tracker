@@ -2,14 +2,14 @@
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title"><strong>Modify</strong> Squad</h4>
+	<h4 class="modal-title"><strong>Modify</strong></h4>
 </div>
 
 <form id="modify_squad">
 
 	<div class="modal-body">
 
-		<p>Select a squad leader to assign to this squad. Or select none to create a squad without a leader, to be assigned later. If the player you want is not listed, ensure that they are set as a squad leader through their tracker profile, that they are assigned to the correct platoon, and that they aren't already a leader of an existing squad.</p>
+		<p>Select a leader to assign. Or select none to create a TBA, to be assigned later. If the player you want is not listed, ensure they have the correct permission and that they aren't already assigned elsewhere.</p>
 
 		<input type='hidden' name='squad_id' value='<?php echo $_POST['squad_id'] ?>'></input>
 
@@ -29,8 +29,9 @@
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-success" id="modify_squad_btn">Modify Squad</button>
+		<button type="button" class="btn btn-danger pull-left" id="delete_squad_btn"><i class="fa fa-trash"></i> Delete</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-success" id="modify_squad_btn">Save</button>
 	</div>
 
 </form>

@@ -21,7 +21,7 @@
 
 			<div class="col-xs-8">
 				<div class="row">
-					
+
 					<?php $i=1; ?>
 					<?php foreach ($squads as $squad): ?>
 
@@ -29,8 +29,9 @@
 						<?php $leader_name = (!is_null($leader)) ? $leader->forum_name : "TBA"; ?>
 						<?php $members = Squad::members($squad->id); ?>
 
-						<div class="col-xs-6">
-							<h3 class="page-header squad-header"><?php echo $leader_name ?> <a href="#" class="btn btn-xs btn-default modify-squad" style="position: absolute; left: 15px;"><i class="fa fa-wrench"></i> Edit Squad</a><span class="badge pull-right"><?php echo count((array)$members); ?></span></h3>
+
+						<div class="col-xs-6 squad-<?php echo $squad->id ?>">
+							<h3 class="page-header squad-header"><?php echo $leader_name ?> <a href="#" class="btn btn-xs btn-default modify-squad" style="position: absolute; left: 15px;"><i class="fa fa-wrench"></i> Edit <?php echo Locality::run('Squad', $division->id); ?></a><span class="badge pull-right"><?php echo count((array)$members); ?></span></h3>
 
 							<ul class="list-group sortable" data-squad-id="<?php echo $squad->id ?>" data-platoon-id="<?php echo $platoon->id ?>" data-division-id="<?php echo $division->id ?>">
 								<?php foreach ($members as $member): ?>
@@ -79,7 +80,7 @@
 										<li class="list-group-item" data-member-id="<?php echo $member->id ?>">
 											<img src="assets/images/grab.svg" class="pull-right" style="width: 8px; opacity: .20;">
 											<?php echo Rank::convert($member->rank_id)->abbr . " " . ucwords($member->forum_name); ?>
-										</li> 
+										</li>
 									<?php endforeach; ?>
 								</ul>
 							</div>

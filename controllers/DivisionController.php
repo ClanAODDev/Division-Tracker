@@ -120,9 +120,9 @@ class DivisionController
                 $data = array('success' => false, 'message' => "Member does not exist!");
             }
         } else {
-            $data = array('success' => false, 'message' => "You do not have acess to perform this function");
+            $data = array('success' => false, 'message' => "You do not have access to perform this function");
         }
-         echo json_encode($data);
+        echo json_encode($data);
     }
 
     public static function _manage_loas()

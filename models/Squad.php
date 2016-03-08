@@ -53,6 +53,16 @@ class Squad extends Application
         $member->save($params);
     }
 
+    public static function delete($id)
+    {
+        $squad = self::find(array('id' => $id));
+        if (count($squad)) {
+            Flight::aod()->remove($squad);
+        }
+
+        return (bool) Flight::aod()->affected_rows;
+    }
+
     public static function modify($params)
     {
         $member = new self();
