@@ -8,8 +8,8 @@ class GraphicsController
 
         $division = Division::findByName($division)->id;
 
-        // error_reporting(E_ALL);
-        // ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
         header('Content-Type: image/png');
         date_default_timezone_set('America/New_York');
 
@@ -79,7 +79,7 @@ class GraphicsController
 
             foreach ($daily as $player) {
                 $y = $y + 20;
-                $name = strtoupper($player->rank) . " " . strtoupper($player->forum_name);
+                $name = strtoupper($player->forum_name);
                 // number
                 imagettftext($im, 6, 0, $num_col_1, $y, $orange, $tinyfont, "{$i}.");
                 // name
@@ -102,7 +102,7 @@ class GraphicsController
 
             foreach ($monthly as $player) {
                 $y = $y + 20;
-                $name = strtoupper($player->rank) . " " . strtoupper($player->forum_name);
+                $name = strtoupper($player->forum_name);
                 // number
                 imagettftext($im, 6, 0, $num_col_2, $y, $orange, $tinyfont, "{$i}.");
                 // name
@@ -116,8 +116,8 @@ class GraphicsController
             // total aod games stat
 
             $personnel = new stdClass();
-            $personnel->recruitsThisMonth = Division::recruitsThisMonth($division)->count;
-            $personnel->totalCount = Division::totalCount($division)->count;
+            $personnel->recruitsThisMonth = Division::recruitsThisMonth($division);
+            $personnel->totalCount = Division::totalCount($division);
 
 
             $personnel->recruitsThisMonth = sprintf('%03d', $personnel->recruitsThisMonth);
