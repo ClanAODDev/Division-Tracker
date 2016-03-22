@@ -14,15 +14,9 @@ if ($("#canvas2").length || $("#canvas3").length) {
 
 if ($("#canvasPromotions").length) {
     var json = $("#canvasPromotions").attr('data-stats');
-    var donutData = $.parseJSON(json);
-    var donutCtx = document.getElementById("chart").getContext("2d");
-    window.myDonut = new Chart(donutCtx).Doughnut(donutData, {
-        animationEasing: "easeInOutQuint",
-        animationSteps: 75,
-        percentageInnerCutout: 50,
-        animateScale: true,
-        responsive: true
-    });
+    var barData = $.parseJSON(json);
+    var ctx3 = document.getElementById("chart").getContext("2d");
+    window.myBar = new Chart(ctx3).Bar(barData);
 }
 
 

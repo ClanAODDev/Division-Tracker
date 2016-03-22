@@ -77,24 +77,30 @@ foreach ($promotions->members as $member) {
                 <div class='panel-heading'>Promotions by rank</div>
                 <div class='panel-body'>
 
-                    <?php
-                    $data = array();
-                    $colors = array('#505160', '#68829e', '#aebd38', '#598234', '#7d4427', '#2c7873' );
+                    <?php $data = array(); ?>
+                    <?php $labels = array(); ?>
 
-                    foreach ($promotions->stats as $stat) {
-                        $random = array_rand($colors);
-                        $color = $colors[$random];
-                        $highlight = hex2rgb($color);
+                    <?php foreach ($promotions->stats as $rank) {
+                        array_push($labels, Rank::convert($rank['rank_id'])->desc);
+                    } ?>
+                    <?php $data['labels'] = $labels; ?>
 
-                        unset($colors[$random]);
-                        $data[] = array(
-                            'label' => Rank::convert($stat['rank_id'])->desc,
-                            'value' => $stat['count'],
-                            'color' => $color,
-                            'highlight' => "rgba({$highlight[0]}, {$highlight[1]}, {$highlight[2]}, .9)"
-                        );
+                    <?php $datastats = array(); ?>
+                    <?php foreach ($promotions->stats as $rank) {
+                        array_push($datastats, $rank['count']);
+                    } ?>
 
-                    }
+                    <?php $data['datasets'] = [
+                        [
+                            'fillColor' => "rgba(220,220,220,0.2)",
+                            'strokeColor' => "rgba(220,220,220,1)",
+                            'pointColor' => "rgba(220,220,220,1)",
+                            'pointStrokeColor' => "#28b62c",
+                            'pointHighlightFill' => "#fff",
+                            'pointHighlightStroke' => "rgba(220,220,220,1)",
+                            'data' => $datastats
+                        ]
+                    ];
                     $data = json_encode($data);
                     ?>
 
