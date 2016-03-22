@@ -64,8 +64,7 @@ foreach ($promotions->members as $member) {
                 <div class="panel-heading">Share information</div>
 
                     <pre class='well code' id='activity'
-                        onClick="$(this).selectText()">[table]<?php foreach ($promotions->members as $member): ?>[tr][td]<?php echo $member['forum_name'] . " &raquo; " . Rank::convert(($member['rank_id']))->abbr; ?>[/td][td]<?php echo date('y-m-d', strtotime($member['last_promotion'])); ?>[/td][/tr]<?php endforeach; ?>[/table]
-                    </pre>
+                        onClick="$(this).selectText()">[table]<?php foreach ($promotions->members as $member): ?>[tr][td]<?php echo $member['forum_name'] . " &raquo; " . Rank::convert(($member['rank_id']))->abbr; ?>[/td][td]<?php echo date('y-m-d', strtotime($member['last_promotion'])); ?>[/td][/tr]<?php endforeach; ?>[/table]</pre>
             </div>
 
         </div>
