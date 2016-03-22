@@ -29,9 +29,9 @@ class DivisionController
         $tools = Tool::find_all($user->role);
         $divisions = Division::find_all();
         $division = Division::find($member->game_id);
+        $js = 'report';
         if ($division instanceof Division) {
             $promotions = Division::getPromotionsThisMonth($division->id);
-
             Flight::render('reports/promotions', compact('division', 'promotions'), 'content');
             Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
         }

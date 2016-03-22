@@ -29,6 +29,15 @@ function getUserRoleName($role)
     return $role;
 }
 
+function hex2rgb($hex)
+{
+    return array(
+        hexdec(substr($hex,1,2)),
+        hexdec(substr($hex,3,2)),
+        hexdec(substr($hex,5,2))
+    );
+}
+
 /**
  * password hash generation
  */

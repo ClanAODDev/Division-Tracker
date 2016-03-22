@@ -128,7 +128,13 @@ class Division extends Application
 
     public static function getPromotionsThisMonth($id)
     {
-        return Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+        $data = new stdClass();
+
+        $data->members = Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+
+        $data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM " . Member::$table . " WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+
+        return $data;
 
     }
 }
