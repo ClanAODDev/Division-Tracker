@@ -64,35 +64,37 @@ if (empty($_SESSION['userid'])) {
 
     // reports
     Flight::route('/reports/retention', array('ReportController', '_retentionNumbers'));
+    Flight::route('/reports/promotions', array('DivisionController', '_getPromotions'));
+    Flight::route('/reports/promotions/@sort', array('DivisionController', '_getPromotions'));
+
 
     // cURLS
     Flight::route('POST /do/check-division-threads', array('RecruitingController', '_doDivisionThreadCheck'));
 
     //REST API FOR PS2 STATS
     Flight::route('GET /ps2activity/@char', array('PS2StatsController','_getPS2Activity'));
-    /*
-    Flight::route('/settings', array('UserController', '_settings'));
-
-    // view screens
-    Flight::route('/member/[0-9]+', array('MemberController', '_profile'));
-
-
-
-    // manage
-
-    Flight::route('/manage/division', array('DivisionController', '_manage_division'));
-    Flight::route('/manage/loas', array('DivisionController', '_manage_loas'));
-
-
-    // admin
-    Flight::route('/admin', array('AdminController', '_show'));
-    */
 
     // update user activity
     if (isset($_SESSION['userid'])) {
         User::updateActivityStatus($_SESSION['userid']);
     }
+
+    /**
+     * Promotions
+     */
+    /*Flight::route('/promotions', array('DivisionController', '_getPromotions'));
+    Flight::route('GET /promotions/@division', function($division) {
+        $division = Division::findByName($division);
+        if ($division instanceof Division) {
+            var_dump($division);
+        } else {
+            Flight::redirect('/404', 404);
+        }
+    });*/
+
+
 }
+
 
 // 404 redirect
 Flight::map('notFound', array('ApplicationController', '_404'));
@@ -108,11 +110,3 @@ Flight::route('GET /authenticate', array('UserController', '_authenticate'));
 Flight::route('POST /do/authenticate', array('UserController', '_doAuthenticate'));
 Flight::route('POST /do/reset-authentication', array('UserController', '_doResetAuthentication'));
 
-/*// handle errors privately unless localhost
-if(!in_array($_SERVER['REMOTE_ADDR'], array( '127.0.0.1', '::1' ))){
-    Flight::set('flight.log_errors', true);
-    Flight::map('error', function(Exception $ex){
-        Flight::redirect('/error', 500);
-    });
-}
-*/

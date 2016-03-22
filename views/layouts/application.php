@@ -106,6 +106,7 @@
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports</a>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="reports/retention">Retention Numbers</a></li>
+                                                    <li><a href="reports/promotions">Recent Promotions</a></li>
                                                 </ul>
                                             </li>
                                         <?php endif; ?>
