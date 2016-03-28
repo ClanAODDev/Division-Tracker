@@ -1,5 +1,5 @@
 <?php if ($memberInfo->status_id == 4) : ?><!-- member is removed -->
-	<div class='alert alert-danger'><i class='fa fa-times-circle fa-lg'></i> This remember is currently removed from the division and will not appear on the division structure until he is re-recruited and his member status is approved on the forums.</div>
+	<div class='alert alert-danger'><i class='fa fa-times-circle fa-lg'></i> This member is currently not active in any division currently supported by the tracker. To add this member to a division, they will need to go through the recruiting process.</div>
 
 <?php elseif ($memberInfo->status_id == 999) : ?><!-- member is pending approval -->
 	<div class='alert alert-warning'><i class='fa fa-exclamation-triangle fa-lg'></i> This member is pending, and will not have any forum specific information until their member status has been approved.</div>
