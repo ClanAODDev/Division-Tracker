@@ -65,7 +65,6 @@ if (empty($_SESSION['userid'])) {
     // reports
     Flight::route('/reports/retention', array('ReportController', '_retentionNumbers'));
     Flight::route('/reports/promotions', array('DivisionController', '_getPromotions'));
-    Flight::route('/reports/promotions/@sort', array('DivisionController', '_getPromotions'));
 
 
     // cURLS
