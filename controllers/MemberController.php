@@ -428,15 +428,18 @@ class MemberController
 
     public static function _doKickFromAod()
     {
-        $user = Member::findMemberId($_SESSION['memberid']);
-        $id = $_POST['id'];
+        $user = Member::find($_SESSION['memberid']);
+        $target = Member::find(['member_id' => $_POST['id']]);
+
         Member::kickFromAod($id);
+
         UserAction::create(array(
             'type_id' => 2,
             'date' => date("Y-m-d H:i:s"),
-            'user_id' => $user,
-            'target_id' => $id
+            'user_id' => $user->member_id,
+            'target_id' => $target->member_id
         ));
+
     }
 
 }
