@@ -19,7 +19,17 @@ class Slack
     /**
      * @return mixed
      */
-    public function sendPayload()
+    public function send()
+    {
+        if ($this->message) {
+            return $this->sendPayload();
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    private function sendPayload()
     {
         $data = [
             "username" => "Tracker-v2",
