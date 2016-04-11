@@ -346,7 +346,7 @@ class MemberController
 
                 // temporary recruiting notifications
                 $slack = new Slack;
-                $message = $member->forum_name . " just recruited " . $params['forum_name'] . "!";
+                $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! Congratulations! :thumbsup:";
                 $slack->message($message)->send();
 
                 $data = array('success' => true, 'message' => "Member successfully added!");
