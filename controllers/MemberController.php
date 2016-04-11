@@ -325,6 +325,12 @@ class MemberController
                     'user_id' => $member->member_id,
                     'target_id' => $params['member_id']
                 ));
+                
+                // temporary recruiting notifications
+                $slack = new Slack;
+                $message = $member->forum_name . " just recruited " . $params['forum_name'] . "!";
+                $slack->message($message)->sendPayload();
+                
                 $data = array('success' => true, 'message' => "Existing member successfully updated!");
             } else {
                 $data = array('success' => false, 'message' => "Existing member could not be updated.");

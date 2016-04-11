@@ -71,7 +71,7 @@ if (empty($_SESSION['userid'])) {
     Flight::route('POST /do/check-division-threads', array('RecruitingController', '_doDivisionThreadCheck'));
 
     //REST API FOR PS2 STATS
-    Flight::route('GET /ps2activity/@char', array('PS2StatsController','_getPS2Activity'));
+    Flight::route('GET /ps2activity/@char', array('PS2StatsController', '_getPS2Activity'));
 
     // update user activity
     if (isset($_SESSION['userid'])) {
