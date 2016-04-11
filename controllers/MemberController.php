@@ -344,10 +344,12 @@ class MemberController
                     'target_id' => $params['member_id']
                 ));
 
-                // temporary recruiting notifications
-                $slack = new Slack;
-                $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! Congratulations! :thumbsup:";
-                $slack->message($message)->send();
+                // temporary recruiting notifications for battlefront
+                if ($_POST['game_id'] === 4) {
+                    $slack = new Slack;
+                    $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! Congratulations! :thumbsup:";
+                    $slack->message($message)->send();
+                }
 
                 $data = array('success' => true, 'message' => "Member successfully added!");
             } else {
