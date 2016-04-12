@@ -347,7 +347,7 @@ class MemberController
                 // temporary recruiting notifications for battlefront
                 if ($_POST['game_id'] == 4) {
                     $slack = new Slack;
-                    $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! Congratulations! :thumbsup:";
+                    $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! :thumbsup:";
                     $slack->message($message)->send();
                 }
 
