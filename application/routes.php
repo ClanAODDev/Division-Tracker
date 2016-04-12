@@ -61,11 +61,9 @@ if (empty($_SESSION['userid'])) {
     Flight::route('/create/squad', array('SquadController', '_createSquad'));
     Flight::route('/modify/squad', array('SquadController', '_modifySquad'));
 
-
     // reports
     Flight::route('/reports/retention', array('ReportController', '_retentionNumbers'));
     Flight::route('/reports/promotions', array('DivisionController', '_getPromotions'));
-
 
     // cURLS
     Flight::route('POST /do/check-division-threads', array('RecruitingController', '_doDivisionThreadCheck'));
@@ -91,9 +89,7 @@ if (empty($_SESSION['userid'])) {
         }
     });*/
 
-
 }
-
 
 // 404 redirect
 Flight::map('notFound', array('ApplicationController', '_404'));

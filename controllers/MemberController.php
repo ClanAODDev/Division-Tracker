@@ -434,7 +434,7 @@ class MemberController
         $user = Member::find($_SESSION['memberid']);
         $target = Member::find(['member_id' => $_POST['id']]);
 
-        Member::kickFromAod($id);
+        Member::kickFromAod($target->member_id);
 
         UserAction::create(array(
             'type_id' => 2,
