@@ -38,7 +38,7 @@ class Slack
         ];
 
         $payload = json_encode($data);
-        $this->curlRequest($payload);
+        return $this->curlRequest($payload);
     }
 
     /**

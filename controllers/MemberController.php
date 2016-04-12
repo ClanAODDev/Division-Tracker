@@ -41,12 +41,12 @@ class MemberController
                     $activity_page = $divisionInfo->short_name;
                     break;
                 case "ps2":
-                $handle_info = MemberHandle::findHandle($memberInfo->id, 11);
+                    $handle_info = MemberHandle::findHandle($memberInfo->id, 11);
 
-                  if(empty($handle_info->handle_value)){
-                      $handle = $memberInfo->forum_name;
+                    if(empty($handle_info->handle_value)){
+                        $handle = $memberInfo->forum_name;
                     }else{
-                      $handle=$handle_info->handle_value;
+                        $handle=$handle_info->handle_value;
                     }
                     $activity = array(
                         'ps2_character_name'=>$handle
@@ -345,7 +345,7 @@ class MemberController
                 ));
 
                 // temporary recruiting notifications for battlefront
-                if ($_POST['game_id'] === 4) {
+                if ($_POST['game_id'] == 4) {
                     $slack = new Slack;
                     $message = $member->forum_name . " just recruited " . $params['forum_name'] . "! Congratulations! :thumbsup:";
                     $slack->message($message)->send();
