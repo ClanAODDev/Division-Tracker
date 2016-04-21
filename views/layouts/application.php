@@ -180,7 +180,7 @@
     <?php if (User::isLoggedIn()): ?>
         <?php $alerts = Alert::find_all($_SESSION['userid']); ?>
         <?php if (count((array) $alerts)) : ?>
-            <div class="container">
+            <div class="container margin-top-20">
                 <?php foreach ($alerts as $alert) : ?>
                     <div data-id="<?php echo $alert->id; ?>" data-user="<?php echo $user->id; ?>"
                          class="alert-dismissable alert alert-<?php echo $alert->type; ?>" role="alert">
