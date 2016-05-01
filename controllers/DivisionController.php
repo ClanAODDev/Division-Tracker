@@ -184,6 +184,9 @@ class DivisionController
             case 7:
                 $division_structure = new H1Z1DivisionStructure($member->game_id);
                 break;
+            case 9:
+                $division_structure = new OWDivisionStructure($member->game_id);
+                break;
             default:
                 $division_structure = new DivisionStructure($member->game_id);
         }
