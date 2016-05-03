@@ -146,15 +146,12 @@
 									</div>
 								<?php endif; ?>
 
-
 								<div class='text-center message text-danger'></div>
 							</div>
 
 						</div>
 
-
 						<!-- // tab 3 - Recruiting thread status check -->
-
 
 						<div class='tab-pane' id='tab3'>
 							<div class='col-sm-6'>
@@ -207,7 +204,12 @@
 
 										<?php $welcomePmString = RecruitingString::findByName('welcome-pm', $member->game_id); ?>
 										<?php if (count($welcomePmString)): ?>
-											<li role='presentation'><a href='#welcome-pm' aria-controls='welcome-pm' role='tab' data-toggle='tab'><span class='badge'>3</span> Send Welcome PM</a></li>
+											<li role='presentation'><a href='#welcome-pm' aria-controls='welcome-pm' role='tab' data-toggle='tab'><span class='badge'><i class="fa fa-star"></i></span> Send Welcome PM</a></li>
+										<?php endif; ?>
+
+										<?php $divStructurePost = RecruitingString::findByName('division-structure-post', $member->game_id); ?>
+										<?php if (count($divStructurePost)): ?>
+											<li role='presentation'><a href='#division-structure-post' aria-controls='division-structure-post' role='tab' data-toggle='tab'><span class='badge'><i class="fa fa-star"></i></span> Division Structure Post</a></li>
 										<?php endif; ?>
 									</ul>
 
@@ -235,6 +237,27 @@
 											</div>
 										<?php endif; ?>
 
+										<?php if (count($divStructurePost)): ?>
+											<div role='tabpanel' class='tab-pane' id='division-structure-post'>
+												<div class='row margin-top-20'>
+													<div class='col-md-6'>
+														<p>Your division has opted to post division recruitments to your division structure</p>
+														<p>Click the copy button to copy the contents of the box to your clipboard. Then follow the link to create a post.</p>
+														<p class='margin-top-20'><a href='http://www.clanaod.net/forums/showthread.php?t=<?php echo $division->division_structure_thread ?>' class='text-center structure-link'><button type='button' class='btn btn-primary'>Create division structure post</button></a></p>
+													</div>
+
+													<div class='col-md-6'>
+														<div class='well code'>
+
+															<button type='button' class='post-code-btn copy-button btn btn-default tool pull-right' title='Copy to clipboard'><i class='fa fa-copy'></i></button>
+
+															<code class='post-code' data-post="<?php echo $divStructurePost->string; ?>"></code>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										<?php endif; ?>
 
 										<div role='tabpanel' class='tab-pane active' id='member-request'>
 											<div class='row margin-top-20'>

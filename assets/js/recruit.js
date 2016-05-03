@@ -241,6 +241,19 @@ function loadThreadCheck() {
         });
     }
 
+    // division structure
+    if ($("#division-structure-post").find(".post-code").length) {
+        var postString = $("#division-structure-post").find(".post-code").attr('data-post');
+        postCode = postString.replace(/%%member_name%%/g, player);
+        postCode = postCode.replace(/%%member_id%%/g, member_id);
+        $("#division-structure-post .post-code").html(postCode);
+        $('.post-code-btn').attr("data-clipboard-text", postCode);
+        $(".structure-link").click(function (e) {
+            e.preventDefault();
+            windowOpener($(this).attr("href"), "AOD Squad Tracking", "width=1000,height=600,scrollbars=yes");
+        });
+    }
+
     if (ingame) {
 
         ingame = ingame.replace('AOD_', '');
