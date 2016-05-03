@@ -70,17 +70,22 @@ class OWDivisionStructure
         /**
          * -----general sergeants-----
          */
-
-        $division_structure .= "[center][size=3][color={$this->platoon_pos_color}]General Sergeants[/color]\r\n";
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
-        foreach ($general_sergeants as $player) {
-            $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
-            $aod_url = Member::createAODlink(array('member_id' => $player->member_id, 'forum_name' => $player_name));
+        if (count($general_sergeants)) {
+            $division_structure .= "[center][size=3][color={$this->platoon_pos_color}]General Sergeants[/color]\r\n";
 
-            $division_structure .= "{$aod_url}\r\n";
+            foreach ($general_sergeants as $player) {
+                $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
+                $aod_url = Member::createAODlink(array(
+                    'member_id' => $player->member_id,
+                    'forum_name' => $player_name
+                ));
+
+                $division_structure .= "{$aod_url}\r\n";
+            }
+            $division_structure .= "[/size][/center]";
         }
 
-        $division_structure .= "[/size][/center]";
         $division_structure .= "[/td][/tr][/table]";
 
         /**
