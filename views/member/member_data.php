@@ -57,10 +57,17 @@
     <?php foreach ($aliases as $alias): ?>
         <?php if ($alias->isVisible): ?>
             <?php $invalid = ($alias->isInvalid) ? "<label class=\"label label-danger\" title=\"Invalid\"><i class=\"fa fa-times\"></i></label>" : null; ?>
+
+            <?php if (property_exists($alias, 'url')): ?>
             <a target="_blank"
                href="<?php echo $alias->url . $alias->handle_value; ?>"
-               class="list-group-item"><?php echo $alias->name . $invalid ?> - <?php echo $alias->handle_value ?> <span class='pull-right'><i
+               class="list-group-item"><?php echo $alias->name . $invalid ?><span class='pull-right'><i
                         class='text-info fa fa-external-link'></i></span></a>
+                <?php else: ?>
+                <li class="list-group-item disabled">
+                    <?php echo $alias->name . $invalid ?><span class="pull-right"><?php echo $alias->handle_value ?></span>
+                </li>
+                <?php endif; ?>
         <?php endif; ?>
     <?php endforeach; ?>
 
