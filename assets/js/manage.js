@@ -134,7 +134,7 @@ $(function() {
         }
     });
 
-    // manage platoon
+    // manage platoonf
     // fix for affix panel
     $('#sidebar').width($('.sidebar-parent').width());
     // activate on resize
@@ -386,7 +386,7 @@ $(function() {
 
     // contact
     $(".modal").delegate(".pm-btn", "click", function(e) {
-        var pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u=' + $('.modal').attr('data-id');
+        var pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u=' + $('.modal').attr('data-member-id');
         windowOpener(pm_url, "Mass PM", "width=900,height=600,scrollbars=yes");
     });
 
