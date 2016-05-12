@@ -203,7 +203,7 @@
 
 <div id="footer" class="navbar navbar-default">
     <div class="container">
-        <small class="text-muted">Copright &copy; Angels of Death <span class="hidden-xs">2005-2015. All rights reserved.</span><br/><span
+        <small class="text-muted">Copyright &copy; Angels of Death <span class="hidden-xs">2005-2015. All rights reserved.</span><br/><span
                 class="hidden-xs"> Built to run on <a href="https://www.google.com/chrome/"><strong>Google
                         Chrome</strong></a></span></small>
     </div>
