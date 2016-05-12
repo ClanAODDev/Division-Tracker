@@ -2,19 +2,22 @@
 
 class PartTime extends Application
 {
+    public static $id_field = 'id';
+    public static $name = 'forum_name';
+    public static $table = 'part_timers';
     public $id;
     public $member_id;
     public $forum_name;
     public $ingame_alias;
     public $game_id;
 
-    public static $id_field = 'id';
-    public static $name = 'forum_name';
-    public static $table = 'part_timers';
-
     public static function find_all($game_id)
     {
-        return self::find(array('game_id' => $game_id));
+        $members = self::find(array('game_id' => $game_id));
+        usort($members, function ($a, $b) {
+            return strcmp($a->forum_name, $b->forum_name);
+        });
+        return $members;
     }
 
     public static function add($params)
