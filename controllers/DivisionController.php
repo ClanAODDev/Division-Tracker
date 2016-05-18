@@ -168,21 +168,22 @@ class DivisionController
     public static function _generateDivisionStructure()
     {
         $member = Member::find(intval($_SESSION['memberid']));
+
         switch ($member->game_id) {
             case 2:
                 $division_structure = new BfDivisionStructure($member->game_id);
                 break;
-            case 3:
-                $division_structure = new WgDivisionStructure($member->game_id);
-                break;
             case 4:
+                $division_structure = new SWBDivisionStructure($member->game_id);
+                break;
+            case 5:
                 $division_structure = new SWBDivisionStructure($member->game_id);
                 break;
             case 6:
                 $division_structure = new PS2DivisionStructure($member->game_id);
                 break;
-            case 7:
-                $division_structure = new H1Z1DivisionStructure($member->game_id);
+            case 8:
+                $division_structure = new WFDivisionStructure($member->game_id);
                 break;
             case 9:
                 $division_structure = new OWDivisionStructure($member->game_id);
