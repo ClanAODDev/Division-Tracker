@@ -37,6 +37,21 @@ class SWBDivisionStructure
         self::generate();
     }
 
+    private function getDivisionLeaders($division_structure)
+    {
+        $division_leaders = Division::findDivisionLeaders($this->game_id);
+        foreach ($division_leaders as $division_leader) {
+            $aod_url = Member::createAODlink([
+                'member_id' => $division_leader->member_id,
+                'rank' => Rank::convert($division_leader->rank_id)->abbr,
+                'forum_name' => $division_leader->forum_name,
+            ]);
+            $division_structure .= (property_exists($division_leader,
+                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n" : "{$aod_url}\r\n";
+        }
+        return $division_structure;
+    }
+
 
     public function generate()
     {
@@ -54,14 +69,7 @@ class SWBDivisionStructure
 
         $division_structure .= "\r\n\r\n[center][size=5][color={$this->div_name_color}][b][i][u]Division Leaders[/u][/i][/b][/color][/size][/center]\r\n";
         $division_structure .= "[center][size=4]";
-
-        $division_leaders = Division::findDivisionLeaders($this->game_id);
-        foreach ($division_leaders as $player) {
-            $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name, 'color'=>$this->division_leaders_color));
-            $division_structure .= "{$aod_url} - {$player->position_desc}\r\n";
-        }
-
+        $division_structure = $this->getDivisionLeaders($division_structure);
         $division_structure .= "[/size][/center]\r\n\r\n";
 
         /**
