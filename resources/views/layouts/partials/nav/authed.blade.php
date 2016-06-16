@@ -10,6 +10,7 @@
 
     <ul class="nav navbar-nav navbar-left">
 
+        <!-- User Control Panel Drop Down -->
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">User CP<span class="caret"></span></a>
 
@@ -34,16 +35,31 @@
             </ul>
         </li>
 
+        <!-- NCO Tools Drop Down -->
+        @if (!Auth::user()->isRole('user'))
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="disabled"><a href="#">Add new recruit</a></li>
+                    <li class="disabled"><a href="#">Manage inactive members</a></li>
+                    @if (Auth::user()->isRole('srLeader') || Auth::user()->isRole('admin'))
+                        <li class="disabled"><a href="#">Generate division structure</a></li>
+                    @endif
+                    <li class="disabled"><a href="#">Manage LOAs</a></li>
+                    <li class="disabled"><a href="#">Manage Part Time</a></li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Admin Drop Down -->
         @if (Auth::user()->isRole('admin'))
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li class="disabled"><a href="#">API</a></li>
                     <li class="divider"></li>
-                    <li><a href={{ action('API\APIController@divisions') }} target="_blank" role="button">Divisions</a>
-                    </li>
-                    <li><a href={{ action('API\APIController@platoons') }} target="_blank" role="button">Platoons</a>
-                    </li>
+                    <li><a href={{ action('API\APIController@divisions') }} target="_blank" role="button">Divisions</a></li>
+                    <li><a href={{ action('API\APIController@platoons') }} target="_blank" role="button">Platoons</a></li>
                     <li><a href={{ action('API\APIController@squads') }} target="_blank" role="button">Squads</a></li>
                 </ul>
             </li>
