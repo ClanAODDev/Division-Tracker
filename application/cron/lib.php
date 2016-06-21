@@ -1,7 +1,7 @@
 <?php
 
 require 'config.php';
-require '/usr/www/aodwebhost/public/tracker/application/uagent.php';
+require '/var/www/html/tracker/application/uagent.php';
 
 function dbConnect()
 {
