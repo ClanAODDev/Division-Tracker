@@ -1,0 +1,12 @@
+{
+    "name": "flashadvocate/division-tracker",
+    "authors": [
+        {
+            "name": "flashadvocate",
+            "email": "flashadvocate@gmail.com"
+        }
+    ],
+    "require": {
+        "mikecao/flight": "^1.2"
+    }
+}
