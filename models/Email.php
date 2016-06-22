@@ -1,5 +1,6 @@
 <?php
 
+use Http\Adapter\Guzzle6\Client;
 use Mailgun\Mailgun;
 
 class Email
@@ -27,10 +28,12 @@ class Email
 
     public function send()
     {
-        $mgClient = new Mailgun(MAILGUN_TOKEN);
+
+        $client = new Client();
+        $mailgun = new Mailgun(MAILGUN_TOKEN, $client);
         $domain = MAILGUN_DOMAIN;
 
-        $result = $mgClient->sendMessage($domain, array(
+        $result = $mailgun->sendMessage($domain, array(
             'from' => self::$from,
             'to' => $this->to,
             'subject' => $this->subject,
