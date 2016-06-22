@@ -5,8 +5,7 @@ use Mailgun\Mailgun;
 
 class Email
 {
-    public static $bcc = "admin@aodwebhost.site.nfoservers.com";
-    public static $from = "AOD Division Tracker <admin@aodwebhost.site.nfoservers.com>";
+    public static $from = "AOD Division Tracker <admin@aod-tracker.com>";
     public $to;
     public $subject;
     public $message;
@@ -32,13 +31,13 @@ class Email
         $mailgun = new Mailgun(MAILGUN_TOKEN, $client);
         $domain = MAILGUN_DOMAIN;
 
-        $result = $mailgun->sendMessage($domain, array(
+        $result = $mailgun->sendMessage($domain, [
             'from' => self::$from,
             'to' => $this->to,
             'html' => $this->message,
             'subject' => $this->subject,
             'text' => "This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser\'s address bar. \r\n\r\nhttp://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\nPLEASE DO NOT REPLY TO THIS E-MAIL";
-        ));
+        ]);
     }
 }
 
