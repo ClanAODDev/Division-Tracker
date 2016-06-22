@@ -5,3 +5,5 @@ config_bak.php
 
 .vagrant
 db
+
+/vendor/
