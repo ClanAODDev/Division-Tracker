@@ -20,7 +20,6 @@ class Email
         $email->message .= "<h1><strong>{$user->username}</strong>,</h1>";
         $email->message .= "<p>This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser's address bar.</p>";
         $email->message .= "<p>http://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\n</p>";
-        $email->message .= "<p><small>If you believe you have received this email in error, or the account was not created by you, please let us know by sending an email to admin@aodwebhost.site.nfoservers.com</small></p>";
         $email->message .= "<p><small>PLEASE DO NOT REPLY TO THIS E-MAIL</small></p>";
         $email->send();
     }
@@ -36,8 +35,9 @@ class Email
         $result = $mailgun->sendMessage($domain, array(
             'from' => self::$from,
             'to' => $this->to,
+            'html' => $this->message,
             'subject' => $this->subject,
-            'text' => $this->message
+            'text' => "This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser\'s address bar. \r\n\r\nhttp://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\nPLEASE DO NOT REPLY TO THIS E-MAIL";
         ));
     }
 }
