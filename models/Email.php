@@ -20,17 +20,17 @@ class Email
         $email->message .= "<p>This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser's address bar.</p>";
         $email->message .= "<p>http://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\n</p>";
         $email->message .= "<p><small>PLEASE DO NOT REPLY TO THIS E-MAIL</small></p>";
-        $email->send();
+        $email->send($user);
     }
 
 
-    public function send()
+    public function send($user)
     {
 
         $client = new Client();
         $mailgun = new Mailgun(MAILGUN_TOKEN, $client);
         $domain = MAILGUN_DOMAIN;
-        
+
         $mailgun->sendMessage($domain,
             [
                 'from' => self::$from,
