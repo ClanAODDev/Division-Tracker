@@ -5,7 +5,7 @@
 github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "1.4.2"
-github_url      = "https://radw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
+github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
 # https://github.com/settings/tokens
@@ -13,7 +13,7 @@ github_pat          = ""
 
 # Server Configuration
 
-hostname        = "trackerv2"
+hostname        = "tracker_v2.dev"
 
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
@@ -67,7 +67,7 @@ composer_packages     = [        # List any global Composer packages that you wa
 # Default web server document root
 # Symfony's public directory is assumed "web"
 # Laravel's public directory is assumed "public"
-public_folder         = "/"
+public_folder         = "/vagrant"
 
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
@@ -94,7 +94,7 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.define "vapro" do |vapro|
+  config.vm.define "Vaprobash" do |vapro|
   end
 
   if Vagrant.has_plugin?("vagrant-hostmanager")
