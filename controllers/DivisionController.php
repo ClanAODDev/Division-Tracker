@@ -188,6 +188,9 @@ class DivisionController
             case 9:
                 $division_structure = new OWDivisionStructure($member->game_id);
                 break;
+            case 10:
+                $division_structure = new WoWDivisionStructure($member->game_id);
+                break;
             default:
                 $division_structure = new DivisionStructure($member->game_id);
         }

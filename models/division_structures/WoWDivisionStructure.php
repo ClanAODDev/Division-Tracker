@@ -1,6 +1,6 @@
 <?php
 
-class PS2DivisionStructure
+class WoWDivisionStructure
 {
     private $banner;
 
