@@ -96,8 +96,8 @@ class WoWDivisionStructure
             $division_structure .= "[/td]";
             $division_structure .= "[/tr][/table]\r\n\r\n";
 
-            return $division_structure;
         }
+        return $division_structure;
     }
 
     /**
