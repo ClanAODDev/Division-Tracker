@@ -213,7 +213,7 @@ class WoWDivisionStructure
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
                     false, true));
                 $division_structure .= "[size=1]";
-                foreach ($recruits as $recruit)$this->division_leaders_color = "#FF0000"; {
+                foreach ($recruits as $recruit) {
                     $aod_url = Member::createAODlink([
                         'member_id' => $recruit->member_id,
                         'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
