@@ -6,7 +6,7 @@ class WoWDivisionStructure
 
     public function __construct($game_id)
     {
-        $this->banner = "http://i65.tinypic.com/14m5j4z.png";
+        $this->banner = "http://i65.tinypic.com/2wdpkde.png";
         $this->game_id = $game_id;
 
         // get data
@@ -44,19 +44,22 @@ class WoWDivisionStructure
         // division leaders
         $division_structure .= "\r\n\r\n[size=5][color={$this->division_leaders_color}][b][i][u]Division Leadership[/u][/i][/b][/color][/size]\r\n";
         $division_structure .= "[size=4]";
-        $division_structure = $this->getDivisionLeaders($division_structure);
+        $division_structure .= $this->getDivisionLeaders($division_structure);
         $division_structure .= "[/size][/center]\r\n\r\n";
 
         // general sergeants
-        $division_structure = $this->getGeneralSergeants($division_structure);
+        $division_structure .= $this->getGeneralSergeants($division_structure);
 
         // groups
         $division_structure .= "[TABLE=\"align: center\"]";
-        $division_structure = $this->getGroups($division_structure);
+        $division_structure .= $this->getGroups($division_structure);
         $division_structure .= "[/table]";
 
         // LOAs
-        $division_structure = $this->getLoas($division_structure);
+        $division_structure .= $this->getLoas($division_structure);
+
+        // part timers
+        $division_structure .= $this->getPartTimers($division_structure);
 
         // populate content
         $this->content = $division_structure;
