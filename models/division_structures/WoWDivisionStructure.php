@@ -14,6 +14,7 @@ class WoWDivisionStructure
         $this->platoons = Platoon::find_all($this->game_id);
 
         // colors
+        $this->division_leaders_color = "#FF0000";
         $this->general_sergeants_color = "#00FFFF";
         $this->platoon_name_color = "#00FFFF";
         $this->platoon_leader_color = "#FFA07A";
