@@ -175,7 +175,7 @@ class WoWDivisionStructure
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
                     false, true));
                 $division_structure .= "[size=1]";
-                foreach ($recruits as $recruit) {
+                foreach ($recruits as $recruit)$this->division_leaders_color = "#FF0000"; {
                     $aod_url = Member::createAODlink([
                         'member_id' => $recruit->member_id,
                         'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
@@ -192,16 +192,14 @@ class WoWDivisionStructure
             // squad members
             $squadMembers = arrayToObject(Squad::findSquadMembers($squad->id, true, $squad_leader->member_id));
             if (count((array) $squadMembers)) {
-                $division_structure .= "[list=1]";
                 foreach ($squadMembers as $squadMember) {
                     $player_name = Rank::convert($squadMember->rank_id)->abbr . " " . $squadMember->forum_name;
                     $aod_url = Member::createAODlink(array(
                         'member_id' => $squadMember->member_id,
                         'forum_name' => $player_name
                     ));
-                    $division_structure .= "[*]{$aod_url}\r\n";
+                    $division_structure .= "{$aod_url}\r\n";
                 }
-                $division_structure .= "[/list]";
             }
             // end squad members
             $division_structure .= "[/td]";
