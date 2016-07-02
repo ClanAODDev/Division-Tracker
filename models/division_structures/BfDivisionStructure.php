@@ -132,11 +132,21 @@ class BfDivisionStructure
             foreach ($squads as $squad) {
                 if ($squad->leader_id != 0) {
                     $squad_leader = Member::findById($squad->leader_id);
+
                     $memberHandle = MemberHandle::findHandle($squad_leader->id, $this->division->primary_handle);
-                    $squad_leader->handle = $memberHandle->handle_value;
+                    if (is_object($memberHandle)) {
+                        $squad_leader->handle = $memberHandle->handle_value;
+                    }
+
                     $player_name = Rank::convert($squad_leader->rank_id)->abbr." ".$squad_leader->forum_name;
+
                     $aod_url = Member::createAODlink(array('member_id'=>$squad_leader->member_id, 'forum_name'=>$player_name, 'color'=>$this->squad_leaders_color));
-                    $bl_url = "[url=" . $memberHandle->url .  $squad_leader->handle. "][BL][/url]";
+
+                    if (is_object($memberHandle)) {
+                        $bl_url = "[url=" . $memberHandle->url . $squad_leader->handle . "][BL][/url]";
+                    } else {
+                        $bl_url = '[color=#ff0000]XXX[/color]';
+                    }
 
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n{$aod_url} {$bl_url}[/size]\r\n\r\n";
                     $division_structure .= "[size=1]";
