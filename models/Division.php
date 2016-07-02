@@ -146,9 +146,9 @@ class Division extends Application
         $month_ini = (new DateTime('first day of last month'))->format('Y-m-d');
         $month_end = (new DateTime('last day of last month'))->format('Y-m-d');
 
-        $data->members = Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion BETWEEN {$month_ini} AND {$month_end} AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+        $data->members = Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}' AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
 
-        $data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM " . Member::$table . " WHERE last_promotion BETWEEN {$month_ini} AND {$month_end}  AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+        $data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM " . Member::$table . " WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}'  AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
 
         return $data;
 
