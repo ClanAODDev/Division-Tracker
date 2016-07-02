@@ -47,7 +47,7 @@ class DivisionController
         $js = 'report';
         if ($division instanceof Division) {
             $promotions = Division::getPromotionsLastMonth($division->id);
-            Flight::render('reports/promotions', compact('division', 'promotions'), 'content');
+            Flight::render('reports/promotionsLastMonth', compact('division', 'promotions'), 'content');
             Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
         }
     }
