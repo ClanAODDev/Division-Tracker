@@ -34,10 +34,13 @@ foreach ($promotions->members as $member) {
             <div class="panel panel-primary">
                 <div class="panel-heading">Recently promoted (<?php echo count($promotions->members); ?>)</div>
 
-                <div class="panel-body"><p>
+                <div class="panel-body">
+                    <p>
                         <strong>Note: </strong>Recruits automatically reflect their last promoted date as the date they
                         were inducted into the clan, and are not included in this report.
-                    </p></div>
+                    </p>
+                    <p><a href="/promotions/last-month">View last month's promotions</a></p>
+                </div>
 
                 <?php if (count($promotions->members)): ?>
                     <div class="list-group">
