@@ -16,7 +16,7 @@ class Report extends Application
 
         $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE join_date BETWEEN '{$date_ini}' AND '{$date_end}'";
 
-        return Flight::aod()->sql($sql)->one;
+        return Flight::aod()->sql($sql)->one();
     }
 
     public static function recruitedLast30days($game_id)
