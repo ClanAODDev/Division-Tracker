@@ -11,8 +11,7 @@ class Report extends Application
 
     public static function findAllRecruitsThisMonth()
     {
-        date_default_timezone_set('America/New_York');
-        $date_ini = (new DateTime('first of this month'))->format('Y-m-d');
+        $date_ini = (new DateTime('first day of this month'))->format('Y-m-d');
         $date_end = (new DateTime('today'))->format('Y-m-d');
 
         $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE join_date BETWEEN '{$date_ini}' AND '{$date_end}'";
