@@ -28,16 +28,24 @@
 		</div>
 	<?php endif; ?>
 
-	<!-- stats! -->
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Recruits this month</div>
-				<div class="panel-body count-detail-big striped-bg">
-					<span class="count-animated"><?php echo $recruitData ?></span>
-				</div>
-			</div>
+	<!-- main division list -->
+	<div class='row'>
+		<div class='col-md-12'>
+			<?php echo $divisions_list ?>
 		</div>
+	</div>
+
+
+    <!-- stats! -->
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Recruits this month</div>
+                <div class="panel-body count-detail-big striped-bg">
+                    <span class="count-animated"><?php echo $recruitData ?></span>
+                </div>
+            </div>
+        </div>
         <div class="col-xs-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Total active members tracked</div>
@@ -46,14 +54,7 @@
                 </div>
             </div>
         </div>
-	</div>
-
-	<!-- main division list -->
-	<div class='row'>
-		<div class='col-md-12'>
-			<?php echo $divisions_list ?>
-		</div>
-	</div>
+    </div>
 
 	<?php if ($user->role > 0) : ?>
 
