@@ -11,7 +11,7 @@ class Report extends Application
 
     public static function findAllRecruitsThisMonth()
     {
-        date_default_timezone_set('America/New York');
+        date_default_timezone_set('America/New_York');
         $date_ini = (new DateTime('first of this month'))->format('Y-m-d');
         $date_end = (new DateTime('today'))->format('Y-m-d');
 
