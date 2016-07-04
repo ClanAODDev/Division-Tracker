@@ -14,7 +14,7 @@ class Report extends Application
         $date_ini = (new DateTime('first day of this month'))->format('Y-m-d');
         $date_end = (new DateTime('today'))->format('Y-m-d');
 
-        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE join_date BETWEEN '{$date_ini}' AND '{$date_end}'";
+        $sql = "SELECT count(*) as count FROM " . UserAction::$table . " WHERE type_id = 1 AND date BETWEEN '{$date_ini}' AND '{$date_end}'";
 
         $count = Flight::aod()->sql($sql)->one();
 
