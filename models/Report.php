@@ -11,11 +11,12 @@ class Report extends Application
 
     public static function findAllRecruitsThisMonth()
     {
-        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE rank_id = 1 AND status_id = 1 AND join_date <= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND last_activity >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)";
+        $date_ini = (new DateTime('first of this month'))->format('Y-m-d');
+        $date_end = (new DateTime('today'))->format('Y-m-d');
 
-        $params = Flight::aod()->sql($sql)->one();
+        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE join_date BETWEEN '{$date_ini}' AND '{$date_end}'";
 
-        return $params['count'];
+        return Flight::aod()->sql($sql)->one;
     }
 
     public static function recruitedLast30days($game_id)
