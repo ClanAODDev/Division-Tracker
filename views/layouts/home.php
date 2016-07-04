@@ -28,6 +28,26 @@
 		</div>
 	<?php endif; ?>
 
+	<!-- stats! -->
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Recruits this month</div>
+				<div class="panel-body count-detail-big striped-bg">
+					<span class="animated"><?php echo $recruitData ?></span>
+				</div>
+			</div>
+		</div>
+        <div class="col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total active members tracked</div>
+                <div class="panel-body count-detail-big striped-bg">
+                    <span class="animated"><?php echo $activeMembers ?></span>
+                </div>
+            </div>
+        </div>
+	</div>
+
 	<!-- main division list -->
 	<div class='row'>
 		<div class='col-md-12'>

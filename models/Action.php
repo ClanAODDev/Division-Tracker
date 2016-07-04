@@ -14,4 +14,5 @@ class Action extends Application
     {
         return self::fetch_all();
     }
+    
 }

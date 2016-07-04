@@ -9,6 +9,15 @@ class Report extends Application
         return objectToArray($params);
     }
 
+    public static function findAllRecruitsThisMonth()
+    {
+        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE rank_id = 1 AND status_id = 1 AND join_date <= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND last_activity >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)";
+
+        $params = Flight::aod()->sql($sql)->one();
+
+        return $params['count'];
+    }
+
     public static function recruitedLast30days($game_id)
     {
         $sql = "SELECT * FROM

@@ -16,11 +16,15 @@ class ApplicationController
         $platoon = Platoon::find($member->platoon_id);
         $squads = Squad::findAll($member->game_id, $member->platoon_id);
 
+        // report stuff
+        $recruitData = Report::findAllRecruitsThisMonth();
+        $activeMembers = Member::findAllActiveMembers();
+
         Flight::render('user/main_tools', compact('user', 'tools'), 'main_tools');
         Flight::render('member/personnel', compact('member', 'squad', 'platoon', 'squads'), 'personnel');
         Flight::render('application/divisions', compact('divisions'), 'divisions_list');
         Flight::render('user/notifications', array('notifications' => $notifications->messages), 'notifications_list');
-        Flight::render('layouts/home', compact('user', 'member', 'division'), 'content');
+        Flight::render('layouts/home', compact('user', 'member', 'division', 'recruitData', 'activeMembers'), 'content');
         Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'division'));
     }
 
