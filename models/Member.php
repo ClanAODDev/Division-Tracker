@@ -69,7 +69,7 @@ class Member extends Application
             Flight::aod()->from(self::$table)
                 ->where(['status_id' => 1])
                 ->select()
-                ->one()
+                ->many()
         );
     }
 
