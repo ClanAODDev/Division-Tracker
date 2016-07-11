@@ -43,17 +43,17 @@ class MemberController
                 case "ps2":
                     $handle_info = MemberHandle::findHandle($memberInfo->id, 11);
 
-                    if(empty($handle_info->handle_value)){
+                    if (empty($handle_info->handle_value)) {
                         $handle = $memberInfo->forum_name;
-                    }else{
-                        $handle=$handle_info->handle_value;
+                    } else {
+                        $handle = $handle_info->handle_value;
                     }
                     $activity = array(
-                        'ps2_character_name'=>$handle
+                        'ps2_character_name' => $handle
                     );
-                    $extrajs[]="libraries/angular.min";
-                    $extrajs[]="libraries/angular-chart.min";
-                    $extrajs[]="ps2/controllers";
+                    $extrajs[] = "libraries/angular.min";
+                    $extrajs[] = "libraries/angular-chart.min";
+                    $extrajs[] = "ps2/controllers";
                     $activity_page = $divisionInfo->short_name;
                     break;
                 default:
@@ -96,7 +96,7 @@ class MemberController
                 'member' => $member,
                 'tools' => $tools,
                 'divisions' => $divisions,
-                'extrajs'=>$extrajs
+                'extrajs' => $extrajs
             ));
 
         } else {
@@ -179,8 +179,11 @@ class MemberController
                 $data = array('success' => false, 'message' => "Recruiter id is invalid.");
                 // validate squad leader / squad_id setting
             } else {
-                if ($respMember->member_id != $member->member_id && $memberData['position_id'] == 5 && $memberData['squad_id'] != 0) {
-                    $data = array('success' => false, 'message' => "Squad leaders cannot be in a squad.");
+
+                if ($respMember->position_id < 5) {
+                    if ($respMember->member_id != $member->member_id && $memberData['position_id'] == 5 && $memberData['squad_id'] != 0) {
+                        $data = array('success' => false, 'message' => "Squad leaders cannot be in a squad.");
+                    }
                 } else {
 
                     // update member info
