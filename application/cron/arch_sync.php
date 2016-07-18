@@ -61,7 +61,10 @@ if (count($divisions)) {
                 $lastactive = $column[4];
                 $lastpost = $column[5];
                 $postcount = $column[6];
-                $aodrankval = $column[8] - 2;
+
+                // only convert if rank is recruit or above
+                $aodrankval = ($column[8] > 2) ? $column[8] - 2 : 1;
+                
                 $aoddivision = $division['id'];
                 $aodstatus = convertStatus($column[10]);
 

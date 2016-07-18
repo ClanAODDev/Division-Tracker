@@ -177,7 +177,7 @@ class MemberController
             // validate recruiter
             if ($memberData['recruiter'] != 0 && !Member::exists($memberData['recruiter'])) {
                 $data = array('success' => false, 'message' => "Recruiter id is invalid.");
-                
+
                 // validate squad leader / squad_id setting
             } else {
                 if ($respMember->position_id < 5 && $memberData['position_id'] == 5 && $memberData['squad_id'] != 0) {
