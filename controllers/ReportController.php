@@ -7,7 +7,7 @@ class ReportController
     {
         $user = User::find(intval($_SESSION['userid']));
 
-        if ($user->role >= 3 || User::isDev()) {
+        if ($user->rank >= 9 || User::isDev()) {
             $member = Member::find(intval($_SESSION['memberid']));
             $tools = Tool::find_all($user->role);
             $divisions = Division::find_all();
