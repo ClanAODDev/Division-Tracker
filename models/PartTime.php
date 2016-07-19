@@ -21,7 +21,7 @@ class PartTime extends Application
             return $members;
         }
 
-        return 0;
+        return [];
     }
 
     public static function add($params)

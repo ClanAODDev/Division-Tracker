@@ -45,7 +45,7 @@
         <div class="col-md-9 col-md-pull-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">Currently Assigned</div>
-                <?php if ($part_time > 0): ?>
+                <?php if (count($part_time)): ?>
                     <div class="panel-body">
                         <!--  Form Input -->
                         <input class="form-control" id="search-collection" type="text" placeholder="Filter list"/>
@@ -53,7 +53,7 @@
                 <?php endif; ?>
                 <div class="collection">
 
-                    <?php if ($part_time > 0): ?>
+                    <?php if (count($part_time)): ?>
                         <?php foreach ($part_time as $member): ?>
                             <li class="list-group-item collection-item part-timer"
                                 data-member-id="<?php echo $member->id ?>"><?php echo $member->forum_name ?><span
