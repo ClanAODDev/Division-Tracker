@@ -14,12 +14,14 @@ class PartTime extends Application
     public static function find_all($game_id)
     {
         $members = self::find(array('game_id' => $game_id));
-        if (is_array($members)) {
+        if (is_array($members) && count($members)) {
             usort($members, function ($a, $b) {
                 return strcmp($a->forum_name, $b->forum_name);
             });
+            return $members;
         }
-        return $members;
+
+        return 0;
     }
 
     public static function add($params)
