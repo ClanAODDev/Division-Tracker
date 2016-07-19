@@ -100,7 +100,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools<span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <?php if ($user->role > 2 || User::isDev()) : ?>
                                         <?php if ($member->rank_id >= 9 || User::isDev()): ?>
                                             <li class="dropdown-submenu">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports</a>
@@ -111,7 +110,6 @@
                                             </li>
                                         <?php endif; ?>
                                         <li class='divider'></li>
-                                    <?php endif; ?>
                                     <?php foreach ($tools as $tool) : ?>
                                         <?php $disabled = ($tool->disabled) ? "disabled" : null; ?>
                                         <li><a href="<?php echo $tool->tool_path ?>"
@@ -155,7 +153,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://www.clanaod.net/forums/private.php?do=newpm&u=31832">Report Issue</a></li>
                             </ul>
-                            
+
                         </li>
 
                     </ul>
