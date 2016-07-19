@@ -101,7 +101,7 @@
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <?php if ($user->role > 2 || User::isDev()) : ?>
-                                        <?php if ($user->role >= 3 || User::isDev()): ?>
+                                        <?php if ($user->rank >= 9 || User::isDev()): ?>
                                             <li class="dropdown-submenu">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports</a>
                                                 <ul class="dropdown-menu">

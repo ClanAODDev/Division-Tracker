@@ -63,8 +63,8 @@ if (empty($_SESSION['userid'])) {
 
     // reports
     Flight::route('/reports/retention', array('ReportController', '_retentionNumbers'));
-    Flight::route('/reports/promotions', array('DivisionController', '_getPromotions'));
-    Flight::route('/reports/promotions/last-month', array('DivisionController', '_getPromotionsLastMonth'));
+    Flight::route('/reports/promotions', array('ReportsController', '_getPromotions'));
+    Flight::route('/reports/promotions/last-month', array('ReportsController', '_getPromotionsLastMonth'));
 
     // cURLS
     Flight::route('POST /do/check-division-threads', array('RecruitingController', '_doDivisionThreadCheck'));

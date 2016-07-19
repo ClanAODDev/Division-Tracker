@@ -22,36 +22,6 @@ class DivisionController
         }
     }
 
-    public static function _getPromotions()
-    {
-        $user = User::find(intval($_SESSION['userid']));
-        $member = Member::find(intval($_SESSION['memberid']));
-        $tools = Tool::find_all($user->role);
-        $divisions = Division::find_all();
-        $division = Division::find($member->game_id);
-        $js = 'report';
-        if ($division instanceof Division) {
-            $promotions = Division::getPromotionsThisMonth($division->id);
-            Flight::render('reports/promotions', compact('division', 'promotions'), 'content');
-            Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
-        }
-    }
-
-    public static function _getPromotionsLastMonth()
-    {
-        $user = User::find(intval($_SESSION['userid']));
-        $member = Member::find(intval($_SESSION['memberid']));
-        $tools = Tool::find_all($user->role);
-        $divisions = Division::find_all();
-        $division = Division::find($member->game_id);
-        $js = 'report';
-        if ($division instanceof Division) {
-            $promotions = Division::getPromotionsLastMonth($division->id);
-            Flight::render('reports/promotionsLastMonth', compact('division', 'promotions'), 'content');
-            Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
-        }
-    }
-
     public static function _manage_inactives()
     {
         $user = User::find(intval($_SESSION['userid']));
