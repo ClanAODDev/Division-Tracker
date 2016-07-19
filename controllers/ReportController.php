@@ -6,9 +6,9 @@ class ReportController
     public static function _retentionNumbers()
     {
         $user = User::find(intval($_SESSION['userid']));
+        $member = Member::find(intval($_SESSION['memberid']));
 
-        if ($user->rank >= 9 || User::isDev()) {
-            $member = Member::find(intval($_SESSION['memberid']));
+        if ($member->rank_id >= 9 || User::isDev()) {
             $tools = Tool::find_all($user->role);
             $divisions = Division::find_all();
             $recruited = Report::recruitedLast30days($member->game_id);
@@ -19,7 +19,7 @@ class ReportController
             Flight::render('reports/retention', compact('recruited', 'removed', 'js', 'monthlyBreakdown', 'byTheMonth'),
                 'content');
             Flight::render('layouts/application',
-                array('user' => $user, 'member' => $member, 'tools' => $tools, 'divisions' => $divisions));
+                ['user' => $user, 'member' => $member, 'tools' => $tools, 'divisions' => $divisions]);
         } else {
             Flight::redirect('/404', 404);
         }
@@ -29,14 +29,19 @@ class ReportController
     {
         $user = User::find(intval($_SESSION['userid']));
         $member = Member::find(intval($_SESSION['memberid']));
-        $tools = Tool::find_all($user->role);
-        $divisions = Division::find_all();
-        $division = Division::find($member->game_id);
-        $js = 'report';
-        if ($division instanceof Division) {
-            $promotions = Division::getPromotionsThisMonth($division->id);
-            Flight::render('reports/promotions', compact('division', 'promotions'), 'content');
-            Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
+
+        if ($member->rank_id >= 9 || User::isDev()) {
+            $tools = Tool::find_all($user->role);
+            $divisions = Division::find_all();
+            $division = Division::find($member->game_id);
+            $js = 'report';
+            if ($division instanceof Division) {
+                $promotions = Division::getPromotionsThisMonth($division->id);
+                Flight::render('reports/promotions', compact('division', 'promotions'), 'content');
+                Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
+            }
+        } else {
+            Flight::redirect('/404', 404);
         }
     }
 
@@ -44,14 +49,19 @@ class ReportController
     {
         $user = User::find(intval($_SESSION['userid']));
         $member = Member::find(intval($_SESSION['memberid']));
-        $tools = Tool::find_all($user->role);
-        $divisions = Division::find_all();
-        $division = Division::find($member->game_id);
-        $js = 'report';
-        if ($division instanceof Division) {
-            $promotions = Division::getPromotionsLastMonth($division->id);
-            Flight::render('reports/promotionsLastMonth', compact('division', 'promotions'), 'content');
-            Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
+
+        if ($member->rank_id >= 9 || User::isDev()) {
+            $tools = Tool::find_all($user->role);
+            $divisions = Division::find_all();
+            $division = Division::find($member->game_id);
+            $js = 'report';
+            if ($division instanceof Division) {
+                $promotions = Division::getPromotionsLastMonth($division->id);
+                Flight::render('reports/promotionsLastMonth', compact('division', 'promotions'), 'content');
+                Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions', 'js'));
+            }
+        } else {
+            Flight::redirect('/404', 404);
         }
     }
 
