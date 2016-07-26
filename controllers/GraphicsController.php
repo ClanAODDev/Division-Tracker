@@ -134,7 +134,7 @@ class GraphicsController
 
 
         imagepng($im);
-        imagepng($im, "assets/images/toplist-cache.png");
+        //imagepng($im, "assets/images/toplist-cache.png");
         imagedestroy($im);
     }
 }
