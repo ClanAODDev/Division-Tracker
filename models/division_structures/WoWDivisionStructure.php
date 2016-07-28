@@ -6,7 +6,7 @@ class WoWDivisionStructure
 
     public function __construct($game_id)
     {
-        $this->banner = "http://i65.tinypic.com/2wdpkde.png";
+        $this->banner = "http://i66.tinypic.com/10x5zsl.png";
         $this->game_id = $game_id;
 
         // get data
