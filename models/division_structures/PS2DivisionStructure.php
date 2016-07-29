@@ -173,6 +173,7 @@ class PS2DivisionStructure
                     'forum_name' => Rank::convert($squad_leader->rank_id)->abbr . " " . ucfirst($squad_leader->forum_name),
                     'color' => $this->squad_leader_color
                 ]);
+
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
@@ -193,7 +194,16 @@ class PS2DivisionStructure
             }
             // end squad leader
             // squad members
-            $squadMembers = arrayToObject(Squad::findSquadMembers($squad->id, true, $squad_leader->member_id));
+
+
+            $squadMembers = arrayToObject(
+                Squad::findSquadMembers(
+                    $squad->id,
+                    true,
+                    (isset($squad_leader)) ? $squad_leader->member_id : null
+                ));
+
+
             if (count((array) $squadMembers)) {
                 $division_structure .= "[list=1]";
                 foreach ($squadMembers as $squadMember) {
