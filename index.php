@@ -4,6 +4,9 @@ require_once 'vendor/autoload.php';
 require_once 'application/config.php';
 require_once 'application/functions.php';
 
+ini_set('session.gc_maxlifetime', 3600);
+session_set_cookie_params(3600);
+
 session_start();
 
 if (get_magic_quotes_gpc()) {
