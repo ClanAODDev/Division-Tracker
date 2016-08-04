@@ -28,7 +28,7 @@
 
 				<?php endif; ?>
 				<span class="pull-left">
-					<?php echo $game->server ?><br /><span class="text-muted">Played <?php echo formatTime(strtotime($game->datetime)); ?></span>
+					<?php echo $game->server ?><br /><span class="text-muted">Played <?php echo formatTime(strtotime($game->datetime), 1); ?></span>
 				</span>
 			</a>
 		<?php endforeach; ?>
