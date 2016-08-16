@@ -48,7 +48,9 @@ class WoWDivisionStructure
         $division_structure .= "[/size][/center]\r\n\r\n";
 
         // general sergeants
+        $division_structure .= "[center]";
         $division_structure = $this->getGeneralSergeants($division_structure);
+        $division_structure .= "[/center]";
 
         // groups
         $division_structure .= "[TABLE=\"align: center\"]";
@@ -139,7 +141,7 @@ class WoWDivisionStructure
                 ]);
                 $division_structure .= "{$aod_url}\r\n";
             }
-            $division_structure .= "[/size][/center]";
+            $division_structure .= "[/size]";
         }
         return $division_structure;
     }
