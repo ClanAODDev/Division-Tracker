@@ -210,7 +210,7 @@ class BfDivisionStructure
 
         // end last platoon
         $division_structure .= "[/tr][/table]\r\n\r\n";
-        
+
 
         /**
          * -----------LOAS------------
