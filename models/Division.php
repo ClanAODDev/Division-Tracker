@@ -44,10 +44,10 @@ class Division extends Application
 
     public static function findDivisionLeaders($gid)
     {
-        $conditions = array(
-            'position_id @' => array(1, 2),
+        $conditions = [
+            'position_id @' => [1, 2, 3],
             'game_id' => $gid
-        );
+        ];
         $params = arrayToObject(Flight::aod()->from(Member::$table)->sortAsc('position_id')->sortDesc('rank_id')->where($conditions)->select()->many());
         foreach ($params as $member) {
             $position = Position::find($member->position_id);
