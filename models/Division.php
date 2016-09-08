@@ -1,145 +1,175 @@
 <?php
 
-class Division extends Application {
-	public static $table      = 'divisions';
-	public static $id_field   = 'id';
-	public static $name_field = 'short_name';
-	public $id;
-	public $description;
-	public $short_name;
-	public $full_name;
-	public $subforum;
-	public $short_descr;
-	public $division_structure_thread;
-	public $recruiting_process_thread;
-	public $welcome_forum;
-	public $primary_handle;
+class Division extends Application
+{
+    public static $table = 'divisions';
+    public static $id_field = 'id';
+    public static $name_field = 'short_name';
+    public $id;
+    public $description;
+    public $short_name;
+    public $full_name;
+    public $subforum;
+    public $short_descr;
+    public $division_structure_thread;
+    public $recruiting_process_thread;
+    public $welcome_forum;
+    public $primary_handle;
 
-	public static function find_all() {
-		return Flight::aod()->using('Division')
-		                    ->sortAsc('full_name')
-		                    ->find();
-	}
+    public static function find_all()
+    {
+        return Flight::aod()->using('Division')
+            ->sortAsc('full_name')
+            ->find();
+    }
 
-	//public static function hasUnassignedMembers()
+    //public static function hasUnassignedMembers()
 
-	public static function findUnassigned($game_id) {
-		$params = Flight::aod()->using('Member');
-		$data   = $params->find(['position_id @' => [0, 6, 4, 5], 'status_id' => 1, 'platoon_id' => 0, 'game_id' => $game_id]);
-		return $data;
-	}
+    public static function findUnassigned($game_id)
+    {
+        $params = Flight::aod()->using('Member');
+        $data = $params->find([
+            'position_id @' => [0, 6, 4, 5],
+            'status_id' => 1,
+            'platoon_id' => 0,
+            'game_id' => $game_id,
+        ]);
 
-	public static function findById($id) {
-		return (object) self::find($id);
-	}
+        return $data;
+    }
 
-	public static function findByName($short_name) {
-		return (object) self::find($short_name);
-	}
+    public static function findById($id)
+    {
+        return (object) self::find($id);
+    }
 
-	public static function findDivisionLeaders($gid, $showGeneralSergeants = false) {
-		$positions = [1, 2];
+    public static function findByName($short_name)
+    {
+        return (object) self::find($short_name);
+    }
 
-		if ($showGeneralSergeants) {
-			$positions = array_merge($positions, [3]);
-		}
+    public static function findDivisionLeaders($gid, $showGeneralSergeants = false)
+    {
+        $positions = [1, 2];
 
-		$conditions = [
-			'position_id @' => $positions,
-			'game_id'       => $gid
-		];
+        if ($showGeneralSergeants) {
+            $positions = array_merge($positions, [3]);
+        }
 
-		$params = arrayToObject(Flight::aod()->from(Member::$table)->sortAsc('position_id')->sortDesc('rank_id')->where($conditions)->select()->many());
-		foreach ($params as $member) {
-			$position              = Position::find($member->position_id);
-			$member->position_desc = $position->desc;
-		}
-		return $params;
-	}
+        $conditions = [
+            'position_id @' => $positions,
+            'game_id' => $gid,
+        ];
 
-	public static function findGeneralSergeants($gid) {
-		$conditions = array(
-			'position_id' => 3,
-			'game_id'     => $gid,
-			'status_id'   => 1,
-		);
-		return arrayToObject(Flight::aod()->from(Member::$table)->sortDesc('rank_id')->where($conditions)->select()->many());
-	}
+        $params = arrayToObject(Flight::aod()->from(Member::$table)->sortAsc('position_id')->sortDesc('rank_id')->where($conditions)->select()->many());
+        foreach ($params as $member) {
+            $position = Position::find($member->position_id);
+            $member->position_desc = $position->desc;
+        }
 
-	public static function findSquadLeaders($gid, $order_by_rank = false) {
-		$sql = "SELECT last_activity, rank.abbr, member_id, forum_name, platoon.name, member.battlelog_name FROM ".Member::$table." LEFT JOIN platoon ON platoon.id = member.platoon_id LEFT JOIN rank ON rank.id = member.rank_id WHERE member.game_id = {$gid} AND position_id = 5";
+        return $params;
+    }
 
-		if ($order_by_rank) {
-			$sql .= " ORDER BY member.rank_id DESC, member.forum_name ASC ";
-		} else {
-			$sql .= " ORDER BY platoon.id, forum_name";
-		}
+    public static function findGeneralSergeants($gid)
+    {
+        $conditions = [
+            'position_id' => 3,
+            'game_id' => $gid,
+            'status_id' => 1,
+        ];
 
-		$params = Flight::aod()->sql($sql)->one();
-		return arrayToObject($params);
-	}
+        return arrayToObject(Flight::aod()->from(Member::$table)->sortDesc('rank_id')->where($conditions)->select()->many());
+    }
 
-	public static function countSquadLeaders($game_id) {
-		$sql    = "SELECT count(*) as count FROM ".Member::$table." WHERE position_id = 5 AND game_id = {$game_id}";
-		$params = Flight::aod()->sql($sql)->one();
-		return $params['count'];
-	}
+    public static function findSquadLeaders($gid, $order_by_rank = false)
+    {
+        $sql = "SELECT last_activity, rank.abbr, member_id, forum_name, platoon.name, member.battlelog_name FROM " . Member::$table . " LEFT JOIN platoon ON platoon.id = member.platoon_id LEFT JOIN rank ON rank.id = member.rank_id WHERE member.game_id = {$gid} AND position_id = 5";
 
-	public static function recruitsThisMonth($game_id) {
+        if ($order_by_rank) {
+            $sql .= " ORDER BY member.rank_id DESC, member.forum_name ASC ";
+        } else {
+            $sql .= " ORDER BY platoon.id, forum_name";
+        }
 
-		$query = "SELECT count(*) as recruits FROM user_actions INNER JOIN member ON member.member_id=user_actions.user_id WHERE game_id={$game_id} AND type_id=1 AND date >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)";
-		$data  = Flight::aod()->sql($query)->one();
-		return $data['recruits'];
-	}
+        $params = Flight::aod()->sql($sql)->one();
 
-	public static function recruitingStats($game_id) {
-		$days_30 = Flight::aod()->sql("SELECT count(*) as count FROM ".Member::$table." WHERE join_date >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$game_id}")->one();
-		$days_60 = Flight::aod()->sql("SELECT count(*) as count FROM ".Member::$table." WHERE YEAR(join_date) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND MONTH(join_date) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND game_id = {$game_id};")->one();
-		$days_90 = Flight::aod()->sql("SELECT count(*) as count FROM ".Member::$table." WHERE YEAR(join_date) = YEAR(CURDATE() - INTERVAL 2 MONTH) AND MONTH(join_date) = MONTH(CURDATE() - INTERVAL 2 MONTH) AND game_id = {$game_id};")->one();
+        return arrayToObject($params);
+    }
 
-		$stats          = new stdClass();
-		$stats->days_30 = $days_30['count'];
-		$stats->days_60 = $days_60['count'];
-		$stats->days_90 = $days_90['count'];
-		return $stats;
-	}
+    public static function countSquadLeaders($game_id)
+    {
+        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE position_id = 5 AND game_id = {$game_id}";
+        $params = Flight::aod()->sql($sql)->one();
 
-	public static function totalCount($game_id) {
-		$sql = "SELECT count(*) as count FROM ".Member::$table." WHERE member.game_id = {$game_id} AND status_id IN (1,3,999)";
-		return Flight::aod()->sql($sql)->one()['count'];
-	}
+        return $params['count'];
+    }
 
-	public static function _create() {
-	}
+    public static function recruitsThisMonth($game_id)
+    {
 
-	public static function _modify() {
-	}
+        $query = "SELECT count(*) as recruits FROM user_actions INNER JOIN member ON member.member_id=user_actions.user_id WHERE game_id={$game_id} AND type_id=1 AND date >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)";
+        $data = Flight::aod()->sql($query)->one();
 
-	public static function _delete() {
-	}
+        return $data['recruits'];
+    }
 
-	public static function getPromotionsThisMonth($id) {
-		$data = new stdClass();
+    public static function recruitingStats($game_id)
+    {
+        $days_30 = Flight::aod()->sql("SELECT count(*) as count FROM " . Member::$table . " WHERE join_date >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$game_id}")->one();
+        $days_60 = Flight::aod()->sql("SELECT count(*) as count FROM " . Member::$table . " WHERE YEAR(join_date) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND MONTH(join_date) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND game_id = {$game_id};")->one();
+        $days_90 = Flight::aod()->sql("SELECT count(*) as count FROM " . Member::$table . " WHERE YEAR(join_date) = YEAR(CURDATE() - INTERVAL 2 MONTH) AND MONTH(join_date) = MONTH(CURDATE() - INTERVAL 2 MONTH) AND game_id = {$game_id};")->one();
 
-		$data->members = Flight::aod()->sql("SELECT * FROM ".Member::$table." WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+        $stats = new stdClass();
+        $stats->days_30 = $days_30['count'];
+        $stats->days_60 = $days_60['count'];
+        $stats->days_90 = $days_90['count'];
 
-		$data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM ".Member::$table." WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+        return $stats;
+    }
 
-		return $data;
+    public static function totalCount($game_id)
+    {
+        $sql = "SELECT count(*) as count FROM " . Member::$table . " WHERE member.game_id = {$game_id} AND status_id IN (1,3,999)";
 
-	}
+        return Flight::aod()->sql($sql)->one()['count'];
+    }
 
-	public static function getPromotionsLastMonth($id) {
-		$data = new stdClass();
+    public static function _create()
+    {
+    }
 
-		$month_ini = (new DateTime('first day of last month'))->format('Y-m-d');
-		$month_end = (new DateTime('last day of last month'))->format('Y-m-d');
+    public static function _modify()
+    {
+    }
 
-		$data->members = Flight::aod()->sql("SELECT * FROM ".Member::$table." WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}' AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+    public static function _delete()
+    {
+    }
 
-		$data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM ".Member::$table." WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}'  AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+    public static function getPromotionsThisMonth($id)
+    {
+        $data = new stdClass();
 
-		return $data;
+        $data->members = Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
 
-	}
+        $data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM " . Member::$table . " WHERE last_promotion >= DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+
+        return $data;
+
+    }
+
+    public static function getPromotionsLastMonth($id)
+    {
+        $data = new stdClass();
+
+        $month_ini = (new DateTime('first day of last month'))->format('Y-m-d');
+        $month_end = (new DateTime('last day of last month'))->format('Y-m-d');
+
+        $data->members = Flight::aod()->sql("SELECT * FROM " . Member::$table . " WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}' AND game_id = {$id} AND rank_id > 1 ORDER BY rank_id DESC, forum_name")->many();
+
+        $data->stats = Flight::aod()->sql("SELECT rank_id, count(*) as count FROM " . Member::$table . " WHERE last_promotion BETWEEN '{$month_ini}' AND '{$month_end}'  AND game_id = {$id} AND rank_id > 1 GROUP BY rank_id")->many();
+
+        return $data;
+
+    }
 }
