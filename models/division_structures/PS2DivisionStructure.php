@@ -201,7 +201,8 @@ class PS2DivisionStructure
                     $squad->id,
                     true,
                     (isset($squad_leader)) ? $squad_leader->member_id : null
-                ));
+                )
+            );
 
 
             if (count((array) $squadMembers)) {

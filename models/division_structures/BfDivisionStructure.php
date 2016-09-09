@@ -182,7 +182,14 @@ class BfDivisionStructure
                 $division_structure .= "\r\n";
 
                 // squad members
-                $squadMembers = arrayToObject(Squad::findSquadMembers($squad->id, true, $squad_leader->member_id));
+                $squadMembers = arrayToObject(
+                    Squad::findSquadMembers(
+                        $squad->id,
+                        true,
+                        (isset($squad_leader)) ? $squad_leader->member_id : null
+                    )
+                );
+                
                 if (count((array) $squadMembers)) {
                     foreach ($squadMembers as $player) {
                         if ($memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle)) {
