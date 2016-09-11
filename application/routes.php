@@ -10,7 +10,6 @@ if (empty($_SESSION['userid'])) {
     Flight::route('POST /do/register', array('UserController', '_doRegister'));
     Flight::route('/invalid-login', array('ApplicationController', '_invalidLogin'));
     Flight::route('POST /do/online-list', array('ApplicationController', '_doUsersOnline'));
-    Flight::route('/donate', ['ApplicationController', '_donationsIndex']);
 } else {
 
     // user views
@@ -72,6 +71,8 @@ if (empty($_SESSION['userid'])) {
 
     //REST API FOR PS2 STATS
     Flight::route('GET /ps2activity/@char', array('PS2StatsController', '_getPS2Activity'));
+
+    Flight::route('/donate', ['ApplicationController', '_donationsIndex']);
 
     // update user activity
     if (isset($_SESSION['userid'])) {
