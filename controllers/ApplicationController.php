@@ -75,6 +75,12 @@ class ApplicationController
         Flight::render('member/search', compact('results'));
     }
 
+    public static function _donationsIndex()
+    {
+        Flight::render('application/donations', [], 'content');
+        Flight::render('layouts/application');
+    }
+
     public static function _invalidLogin()
     {
         Flight::render('errors/invalid_login', [], 'content');

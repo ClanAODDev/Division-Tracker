@@ -10,6 +10,7 @@ if (empty($_SESSION['userid'])) {
     Flight::route('POST /do/register', array('UserController', '_doRegister'));
     Flight::route('/invalid-login', array('ApplicationController', '_invalidLogin'));
     Flight::route('POST /do/online-list', array('ApplicationController', '_doUsersOnline'));
+    Flight::route('/donate', ['ApplicationController', '_donationsIndex']);
 } else {
 
     // user views

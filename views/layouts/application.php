@@ -156,6 +156,8 @@
 
                             </li>
 
+                            <li><a href="donate">Donate</a></li>
+
                         </ul>
                     </div>
 
