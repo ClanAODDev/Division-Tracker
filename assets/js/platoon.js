@@ -32,7 +32,7 @@
                 "iDataSort": 1,
                 "aTargets": [5]
             }],
-            stateSave: false,
+            stateSave: true,
             paging: false,
             "bServerSide": false,
             "drawCallback": function(settings) {
