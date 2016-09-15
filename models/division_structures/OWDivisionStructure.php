@@ -167,7 +167,14 @@ class OWDivisionStructure
                 $division_structure .= "\r\n";
 
                 // squad members
-                $squadMembers = arrayToObject(Squad::findSquadMembers($squad->id, true, $squad_leader->member_id));
+                $squadMembers = arrayToObject(
+                    Squad::findSquadMembers(
+                        $squad->id,
+                        true,
+                        (isset($squad_leader)) ? $squad_leader->member_id : null
+                    )
+                );
+
                 if (count((array) $squadMembers)) {
                     foreach ($squadMembers as $player) {
                         $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
