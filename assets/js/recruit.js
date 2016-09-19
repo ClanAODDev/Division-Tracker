@@ -52,6 +52,11 @@ $(function () {
                     return false;
                 }
 
+                if (member_id > 100000) {
+                    $(".message").html("<i class='fa fa-times'></i> You are attempting to enter a forum thread id as the member id. Please ensure you are entering the correct id.").effect("bounce");
+                    return false;
+                }
+
                 // force selection of a game if the dropdown exists
                 if ($('#games').length) {
                     if ($('#games option:selected').length < 1) {

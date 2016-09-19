@@ -270,11 +270,7 @@ class MemberController
         if (Member::exists($member_id)) {
             $data = array('success' => false, 'memberExists' => true);
         } else {
-            if (abs($member_id - Member::getLastRct()) > 200) {
-                $data = array('success' => false, 'invalidId' => true);
-            } else {
                 $data = array('success' => true);
-            }
         }
         echo(json_encode($data));
     }
