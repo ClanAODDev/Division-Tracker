@@ -29,7 +29,14 @@
     <p>Operational costs for the tracker are currently <strong>$30.00 USD</strong> monthly. This includes the droplet ($15.00 /mo), recurring charges for snapshot backups ($0.20 at current size), as well as the deployment service ($15.00), provided by <a href="http://forge.laravel.com">Laravel Forge</a>
     </p>
     <p class="text-center"><a class="btn btn-primary" type="button" target="_blank" href="https://paypal.me/aodtracker">Donate Now</a>
-    <h2>Contributors</h2><hr/>
-    <p>No contributors, yet!</p>
+
+    <div class="col-xs-8">
+	    <h2>Contributors</h2><hr/>
+	    <p>Matchmaker</p>
+    </div>
+    <div class="col-xs-4">
+    	<h2>Balance</h2>
+    	<p>$9.41</p>
+    </div>
     </div>
 </div>
