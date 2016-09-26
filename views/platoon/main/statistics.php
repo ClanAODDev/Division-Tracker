@@ -9,7 +9,7 @@
 		<div class='panel-heading'>Forum Activity</div>
 		<div class='panel-body striped-bg'>
 			<div id="canvas-holder" data-stats="<?php echo htmlentities($activity, ENT_QUOTES, 'UTF-8'); ?>">
-				<canvas id="chart-area" style="filter: drop-shadow(0px 0px 10px rgba(0,0,0,.5));"/>
+				<canvas id="chart-area" />
 			</div>
 		</div>
 	</div>
