@@ -9,7 +9,8 @@
     <div class='page-header'>
         <h2><strong>Tracker
                 <small>Donations</small>
-            </strong></h2>
+            </strong>
+        </h2>
     </div>
 
 
@@ -22,21 +23,25 @@
         <div class="col-xs-6">
             <p>Server costs up to this point have come entirely out of my pocket (or Deity's, who graciously covered expenses while it was hosted by NFO). Now, I would like to look to the AOD community for assistance with ensuring the server stays up and running.</p>
             <p>If you find the tools and functionality of the tracker useful, and are willing to contribute, I appreciate any and all assistance. Even if it's just a dollar, your help goes a long way to keeping the lights on.</p>
-            <p>Additionally, I will continue to publish the names of individuals who contribute toward the coffers. If you wish to be added to the list, please include your AOD username with your donation (in the comment box).
+            <p>Additionally, I will continue to publish the names of individuals who contribute toward the coffers. If you wish to be added to the list, please include your AOD username with your donation (in the comment box).</p>
+        </div>
+        <div class="col-xs-12">`
+            <p>Operational costs for the tracker are currently
+                <strong>$30.00 USD</strong> monthly. This includes the droplet ($15.00 /mo), recurring charges for snapshot backups ($0.20 at current size), as well as the deployment service ($15.00), provided by
+                <a href="http://forge.laravel.com">Laravel Forge</a>
             </p>
-    </div>
-    <div class="col-xs-12">`
-    <p>Operational costs for the tracker are currently <strong>$30.00 USD</strong> monthly. This includes the droplet ($15.00 /mo), recurring charges for snapshot backups ($0.20 at current size), as well as the deployment service ($15.00), provided by <a href="http://forge.laravel.com">Laravel Forge</a>
-    </p>
-    <p class="text-center"><a class="btn btn-primary" type="button" target="_blank" href="https://paypal.me/aodtracker">Donate Now</a>
+            <p class="text-center">
+                <a class="btn btn-primary" type="button" target="_blank"
+                   href="https://paypal.me/aodtracker">Donate Now</a>
+            </p>
 
-    <div class="col-xs-8">
-	    <h2>Contributors</h2><hr/>
-	    <p>Matchmaker</p>
-    </div>
-    <div class="col-xs-4">
-    	<h2>Balance</h2><hr />
-    	<p>$9.41</p>
-    </div>
+            <div class="col-xs-8">
+                <h2>Contributors</h2>
+                <hr/>
+
+                <p>Matchmaker</p>
+                <p>Silencer77</p>
+                <p>Darkn3ss F4lls</p>
+            </div>
     </div>
 </div>
