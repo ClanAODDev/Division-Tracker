@@ -25,7 +25,7 @@ class BdoDivisionStructure
         $this->platoon_pos_color = "#40E0D0";
 
         // number of columns
-        $this->num_columns = 3;
+        $this->num_columns = 4;
 
         // widths
         $this->players_width = 900;
@@ -134,7 +134,7 @@ class BdoDivisionStructure
 
                 $bl_url = "[size=2]IGF: {$player->handle}[/size]";
 
-                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n\{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
+                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
             } else {
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
