@@ -12,8 +12,7 @@
             </strong>
         </h2>
     </div>
-
-
+    
     <div class="row">
         <div class="col-xs-6">
             <p>As many of you know, the tracker has been a personal project of mine for almost 2 years. I do it completely free of charge as a way to not only grow as a developer, but also as a way to give back to a community that has become very much a part of my life.</p>
