@@ -84,7 +84,7 @@ class BdoDivisionStructure
         foreach ($general_sergeants as $player) {
             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
-            $player->handle = (property_exists($memberHandle, 'handle_value'))
+            $player->handle = (is_object($memberHandle))
                 ? $memberHandle->handle_value
                 : 'XXX';
 
@@ -122,7 +122,7 @@ class BdoDivisionStructure
             // is a platoon leader assigned?
             if ($platoon->leader_id != 0) {
                 $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
-                $player->handle = (property_exists($memberHandle, 'handle_value'))
+                $player->handle = (is_object($memberHandle))
                     ? $memberHandle->handle_value
                     : 'XXX';
 
@@ -202,7 +202,7 @@ class BdoDivisionStructure
                 if (count((array) $squadMembers)) {
                     foreach ($squadMembers as $player) {
                         if ($memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle)) {
-                            $player->handle = (property_exists($memberHandle, 'handle_value'))
+                            $player->handle = (is_object($memberHandle))
                                 ? $memberHandle->handle_value
                                 : 'XXX';
 
