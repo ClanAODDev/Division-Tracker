@@ -158,7 +158,7 @@ class BdoDivisionStructure
                         $bl_url = '[color=#ff0000]XXX[/color]';
                     }
 
-                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
+                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n{$aod_url}\r\n{$bl_url}\r\n\r\n";
 
                     // direct recruits
                     $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id, $squad->id, true));
