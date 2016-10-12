@@ -63,7 +63,7 @@ class BdoDivisionStructure
         // banner
         $division_structure .= "[center][img]http://i.imgur.com/n460d57.png[/img]
         NA Orwen Server*
-        [small]*Check TS channel header for server channel[/small][/center]\r\n";
+        [size=2]*Check TS channel header for server channel[/size][/center]\r\n";
 
         /**
          * ------division leaders-----
@@ -91,7 +91,7 @@ class BdoDivisionStructure
             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
             $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
 
-            $bl_url = "IGF: {$player->handle}";
+            $bl_url = "[size=2]IGF: {$player->handle}[/size]";
             $division_structure .= "{$aod_url} \r\n{$bl_url}\r\n\r\n";
         }
 
@@ -132,9 +132,9 @@ class BdoDivisionStructure
                     'forum_name' => $player_name
                 ));
 
-                $bl_url = "IGF: {$player->handle}";
+                $bl_url = "[size=2]IGF: {$player->handle}[/size]";
 
-                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
+                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n\{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
             } else {
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
@@ -153,12 +153,12 @@ class BdoDivisionStructure
                     $aod_url = Member::createAODlink(array('member_id'=>$squad_leader->member_id, 'forum_name'=>$player_name, 'color'=>$this->squad_leaders_color));
 
                     if (is_object($memberHandle)) {
-                        $bl_url = "IGF: {$memberHandle->handle_value}";
+                        $bl_url = "[size=2]IGF: {$memberHandle->handle_value}[/size]";
                     } else {
                         $bl_url = '[color=#ff0000]XXX[/color]';
                     }
 
-                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n{$aod_url} {$bl_url}[/size]\r\n\r\n";
+                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
                     $division_structure .= "[size=1]";
 
                     // direct recruits
@@ -212,7 +212,7 @@ class BdoDivisionStructure
                                 'forum_name' => $player_name
                             ));
 
-                            $bl_url = "IGF: {$player->handle}";
+                            $bl_url = "[size=2]IGF: {$player->handle}[/size]";
                             $division_structure .= "{$aod_url}\r\n{$bl_url}\r\n\r\n";
                         }
                     }
