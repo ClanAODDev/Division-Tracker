@@ -83,11 +83,16 @@ class BdoDivisionStructure
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
         foreach ($general_sergeants as $player) {
             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
-            $player->handle = $memberHandle->handle_value;
+
+            $player->handle = (property_exists($memberHandle, 'handle_value'))
+                ? $memberHandle->handle_value
+                : 'XXX';
+
             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
             $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
-            $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
-            $division_structure .= "{$aod_url} {$bl_url}\r\n";
+
+            $bl_url = "IGF: {$memberHandle->handle_value}";
+            $division_structure .= "{$aod_url} \r\n{$bl_url}\r\n\r\n";
         }
 
         $division_structure .= "[/size][/center]";
@@ -117,11 +122,19 @@ class BdoDivisionStructure
             // is a platoon leader assigned?
             if ($platoon->leader_id != 0) {
                 $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
-                $player->handle = $memberHandle->handle_value;
+                $player->handle = (property_exists($memberHandle, 'handle_value'))
+                    ? $memberHandle->handle_value
+                    : 'XXX';
+
                 $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-                $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name, 'color'=>$this->platoon_leaders_color));
-                $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
-                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n{$aod_url} {$bl_url}[/size]\r\n\r\n";
+                $aod_url = Member::createAODlink(array(
+                    'member_id' => $player->member_id,
+                    'forum_name' => $player_name
+                ));
+
+                $bl_url = "IGF: {$memberHandle->handle_value}";
+
+                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n{$aod_url}\r\n{$bl_url}[/size]\r\n\r\n";
             } else {
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
@@ -134,16 +147,13 @@ class BdoDivisionStructure
                     $squad_leader = Member::findById($squad->leader_id);
 
                     $memberHandle = MemberHandle::findHandle($squad_leader->id, $this->division->primary_handle);
-                    if (is_object($memberHandle)) {
-                        $squad_leader->handle = $memberHandle->handle_value;
-                    }
 
                     $player_name = Rank::convert($squad_leader->rank_id)->abbr." ".$squad_leader->forum_name;
 
                     $aod_url = Member::createAODlink(array('member_id'=>$squad_leader->member_id, 'forum_name'=>$player_name, 'color'=>$this->squad_leaders_color));
 
                     if (is_object($memberHandle)) {
-                        $bl_url = "[url=" . $memberHandle->url . $squad_leader->handle . "][BL][/url]";
+                        $bl_url = "IGF: {$squad_leader->handle_value}";
                     } else {
                         $bl_url = '[color=#ff0000]XXX[/color]';
                     }
@@ -160,13 +170,12 @@ class BdoDivisionStructure
                         foreach ($recruits as $player) {
                             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-                            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
+                            $aod_url = Member::createAODlink(['member_id'=>$player->member_id, 'forum_name'=>$player_name]);
 
                             // does member have a division primary member handle?
                             if (count(( array ) $memberHandle)) {
-                                $player->handle = $memberHandle->handle_value;
-                                $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
-                                $division_structure .= "[*]{$aod_url} {$bl_url}\r\n";
+                                $bl_url = "IGF: {$memberHandle->handle_value}";
+                                $division_structure .= "[*]{$aod_url}\r\n{$bl_url}\r\n\r\n";
                             } else {
                                 $division_structure .= "[*]{$aod_url} [color=red]XX[/color]\r\n";
                             }
@@ -193,11 +202,18 @@ class BdoDivisionStructure
                 if (count((array) $squadMembers)) {
                     foreach ($squadMembers as $player) {
                         if ($memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle)) {
-                            $player->handle = $memberHandle->handle_value;
+                            $player->handle = (property_exists($memberHandle, 'handle_value'))
+                                ? $memberHandle->handle_value
+                                : 'XXX';
+
                             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-                            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
-                            $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
-                            $division_structure .= "{$aod_url} {$bl_url}\r\n";
+                            $aod_url = Member::createAODlink(array(
+                                'member_id' => $player->member_id,
+                                'forum_name' => $player_name
+                            ));
+
+                            $bl_url = "IGF: {$memberHandle->handle_value}";
+                            $division_structure .= "{$aod_url}\r\n{$bl_url}\r\n\r\n";
                         }
                     }
                 }
