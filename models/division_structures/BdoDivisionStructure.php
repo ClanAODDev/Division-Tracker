@@ -199,7 +199,8 @@ class BdoDivisionStructure
 
                 if (count((array) $squadMembers)) {
                     foreach ($squadMembers as $player) {
-                        if ($memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle)) {
+
+                        $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                             $player->handle = (is_object($memberHandle))
                                 ? $memberHandle->handle_value
                                 : 'XXX';
@@ -212,7 +213,7 @@ class BdoDivisionStructure
 
                             $bl_url = "[size=1]IGF: {$player->handle}[/size]";
                             $division_structure .= "{$aod_url}\r\n{$bl_url}\r\n\r\n";
-                        }
+
                     }
                 }
 
