@@ -254,8 +254,11 @@ class BdoDivisionStructure
             if ($i % 20 == 0) {
                 $division_structure .= "[/td][td]";
             }
-            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>"AOD_".$player->forum_name));
-            $division_structure .= "{$aod_url}\r\n";
+            $aod_url = Member::createAODlink([
+                'member_id' => $player->member_id,
+                'forum_name'=> "AOD_" . $player->forum_name
+            ]);
+            $division_structure .= "{$aod_url}\r\nIGF: {$player->ingame_alias}\r\n\r\n";
             $i++;
         }
         $division_structure .= "[/td]";
