@@ -259,7 +259,7 @@ class BdoDivisionStructure
             $i++;
         }
         $division_structure .= "[/td]";
-        $division_structure .= "[/tr][/table]\r\n\r\n";`
+        $division_structure .= "[/tr][/table]\r\n\r\n";
 
 
         /**
