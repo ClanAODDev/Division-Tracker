@@ -233,6 +233,34 @@ class BdoDivisionStructure
         // end last platoon
         $division_structure .= "[/tr][/table]\r\n\r\n";
 
+        /**
+         * --------part timers--------
+         */
+
+        $i = 1;
+
+        // header
+        $division_structure .= "\r\n[table='align:center,width: {$this->info_width}']";
+        $division_structure .= "[tr][td]\r\n[center][size=3][color={$this->platoon_pos_color}][b]Part Time Members[/b][/color][/size][/center][/td][/tr]";
+        $division_structure .= "[/table]\r\n\r\n";
+
+        // players
+        $division_structure .= "[table='align:center,width: {$this->info_width}']";
+        $division_structure .= "[tr][td]";
+
+        $partTimers = PartTime::find_all($this->game_id);
+
+        foreach ($partTimers as $player) {
+            if ($i % 20 == 0) {
+                $division_structure .= "[/td][td]";
+            }
+            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>"AOD_".$player->forum_name));
+            $division_structure .= "{$aod_url}\r\n";
+            $i++;
+        }
+        $division_structure .= "[/td]";
+        $division_structure .= "[/tr][/table]\r\n\r\n";`
+
 
         /**
          * -----------LOAS------------
