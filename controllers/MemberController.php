@@ -286,7 +286,6 @@ class MemberController
         $squad_id = ($user->role >= 2 || User::isDev()) ? $_POST['squad_id'] : (Squad::mySquadId($member->id)) ?: 0;
         $recruiter = $member->member_id;
 
-
         $position_id = 6;
 
         // provide params for brand new members
@@ -355,7 +354,7 @@ class MemberController
 
         }
 
-        if ($insert_id != 0) {
+        if (isset($insert_id) && $insert_id != 0) {
             if (isset($_POST['played_games'])) {
                 $games = $_POST['played_games'];
                 foreach ($games as $game) {
