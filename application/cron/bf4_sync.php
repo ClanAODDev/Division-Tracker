@@ -22,7 +22,7 @@ if (dbConnect()) {
 		}
 
 		// fetch battlelog persona id
-		$params = $pdo->query("SELECT m.member_id, h.handle_account_id FROM member m INNER JOIN member_handles h ON h.member_id = m.id WHERE m.id = {$next_player} AND m.status_id = 1 AND m.game_id = 2 AND h.handle_type = 2")->fetch(); 
+		$params = $pdo->query("SELECT m.member_id, h.handle_value FROM member m INNER JOIN member_handles h ON h.member_id = m.id WHERE m.id = {$next_player} AND m.status_id = 1 AND m.game_id = 2 AND h.handle_type = 2")->fetch();
 
 		if (empty($params)) {
 
@@ -32,7 +32,7 @@ if (dbConnect()) {
 		} else {
 
 			// fetch battlelog data
-			$reports = parse_battlelog_reports($params['handle_account_id'], 'bf4');
+			$reports = parse_battlelog_reports($params['handle_value'], 'bf4');
 			bf_newActivity($reports, "bf4", $params['member_id'], $next_player);
 			$pdo->prepare("UPDATE crontab SET value = {$next_player}+1 WHERE id = 1 ")->execute(); 
 

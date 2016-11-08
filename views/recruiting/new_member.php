@@ -60,7 +60,7 @@
 									<ul>
 										<li>You must <strong>be in Teamspeak</strong> whenever you're ingame.</li>
 										<li>You must <strong>login to the forums</strong> at least once a month.</li>
-										<li>You should strive to <strong>be a contributing member</strong> of the clan. Play with us as often as you can. DOn't be a lone wolf.</li>
+										<li>You should strive to <strong>be a contributing member</strong> of the clan. Play with us as often as you can. Don't be a lone wolf.</li>
 										<li>You must <strong>show respect</strong> to other members as well as all other public players.</li>
 									</ul>
 
@@ -99,7 +99,7 @@
 								</div>
 
 								<div class='form-group ingame-group'>
-									<label for='ingame' class='col-sm-3 control-label'><strong>Ingame Name</strong></label>
+									<label for='ingame' class='col-sm-3 control-label'><strong><?php echo Locality::run('Ingame Name', $division->id); ?></strong></label>
 									<div class='col-sm-9'>
 										<input type='text' class='form-control' placeholder='JoeSnuffy25' id='ingame' name='ingame' tabindex='3'>
 									</div>

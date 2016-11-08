@@ -378,6 +378,10 @@ class MemberController
             }
         }
 
+        if (empty($data['success'])) {
+            $data = array('success' => false, 'message' => "Something went wrong. This incident has been logged.");
+        }
+
         echo(json_encode($data));
     }
 
