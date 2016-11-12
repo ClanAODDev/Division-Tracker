@@ -49,7 +49,7 @@ $(function () {
             names = [];
 
         // iterate windows
-        for (w = 1; w < x; w++) {
+        for (w = 0; w < x; w++) {
 
             // iterate members
             for (i = w * 20; i < w * 20 + 20; i++) {
@@ -62,7 +62,7 @@ $(function () {
 
             var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm&"
                     + implode('&u[]=', names) + "/",
-                link = "<a class=\"btn btn-primary\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + w + "</a>";
+                link = "<a class=\"btn btn-primary\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + (w + 1) + "</a>";
 
             $(".pm-links .btn-group").append(link);
             names = [];
