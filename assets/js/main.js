@@ -32,7 +32,7 @@ $(function () {
         var content = "" +
             "<div class=\"panel panel-default pm-links\">" +
             "<div class='panel-heading'>Send Mass PM</div>" +
-            "<div class=\"panel-body\"><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p></div></div>";
+            "<div class=\"panel-body\"><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p><div class=\"btn-group\"></div></div></div>";
 
         $('.breadcrumb').after(content);
 
@@ -64,7 +64,7 @@ $(function () {
                     + implode('&u[]=', names) + "/",
                 link = "<a class=\"btn btn-primary\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + w + "</a>";
 
-            $(".pm-links .panel-body").append(link);
+            $(".pm-links .btn-group").append(link);
             names = [];
         }
     }
