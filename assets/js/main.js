@@ -49,7 +49,7 @@ $(function () {
             names = [];
 
         // iterate windows
-        for (w = 0; w < x; w++) {
+        for (w = 1; w < x; w++) {
 
             // iterate members
             for (i = w * 20; i < w * 20 + 20; i++) {
