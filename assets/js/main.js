@@ -31,7 +31,7 @@ $(function () {
 
         var members = $(this).attr('data-members');
 
-        memberPm(members);
+        memberPm(members.split(','));
     });
 
     function memberPm(members) {
