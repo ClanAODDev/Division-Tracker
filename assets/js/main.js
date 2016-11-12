@@ -51,9 +51,11 @@ $(function () {
                 }
             }
 
-            var link = "<a href='http://www.clanaod.net/forums/private.php?do=newpm&u[]=" + implode('&u[]=', names) + "/'>PM Link</a><br />";
+            var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm&u[]="
+                    + implode('&u[]=', names) + "/",
+                link = "<a class='btn btn-primary' href=''>PM Link #" + w + "</a><br />";
 
-            $(".container").append(link);
+            $(".breadcrumb").after(link);
             names = [];
         }
     }
