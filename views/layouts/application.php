@@ -156,7 +156,7 @@
 
                             </li>
 
-                            <li><a href="donate">Donate</a></li>
+                            <li><a href="https://paypal.me/aodtracker">Donate</a></li>
 
                         </ul>
                     </div>

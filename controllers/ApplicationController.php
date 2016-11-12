@@ -75,18 +75,6 @@ class ApplicationController
         Flight::render('member/search', compact('results'));
     }
 
-    public static function _donationsIndex()
-    {
-        $user = User::find(intval($_SESSION['userid']));
-        $member = Member::find(intval($_SESSION['memberid']));
-        $tools = Tool::find_all($user->role);
-        $divisions = Division::find_all();
-        $division = Division::findById(intval($member->game_id));
-
-        Flight::render('application/donations', [], 'content');
-        Flight::render('layouts/application', compact('user', 'member', 'tools', 'divisions'));
-    }
-
     public static function _invalidLogin()
     {
         Flight::render('errors/invalid_login', [], 'content');

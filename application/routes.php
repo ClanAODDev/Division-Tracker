@@ -72,8 +72,6 @@ if (empty($_SESSION['userid'])) {
     //REST API FOR PS2 STATS
     Flight::route('GET /ps2activity/@char', array('PS2StatsController', '_getPS2Activity'));
 
-    Flight::route('/donate', ['ApplicationController', '_donationsIndex']);
-
     // update user activity
     if (isset($_SESSION['userid'])) {
         User::updateActivityStatus($_SESSION['userid']);
