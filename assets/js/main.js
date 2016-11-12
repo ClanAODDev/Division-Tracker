@@ -29,6 +29,10 @@ $(function () {
     $(".send-pm").click(function (e) {
         e.preventDefault();
 
+        var content = "<div class=\"alert alert-info pm-links\"><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p><p>" + link + "</p></div>";
+
+        $('.breadcrumb').after(content);
+
         var members = $(this).attr('data-members');
 
         memberPm(members.split(','));
@@ -53,9 +57,9 @@ $(function () {
 
             var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm&u[]="
                     + implode('&u[]=', names) + "/",
-                link = "<a class='btn btn-primary' href=''>PM Link #" + w + "</a><br />";
+                link = "<a class=\"btn btn-primary\" href=\"" + pmUrl + "\">PM Link #" + w + "</a><br />";
 
-            $(".breadcrumb").after(link);
+            $(".pm-links").append(link);
             names = [];
         }
     }
