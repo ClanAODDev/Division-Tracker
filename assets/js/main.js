@@ -31,8 +31,8 @@ $(function () {
 
         var content = "" +
             "<div class=\"panel panel-default pm-links\">" +
-            "<div class='panel-heading'><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p></div>" +
-            "<div class=\"panel-body\"></div></div>";
+            "<div class='panel-heading'>Send Mass PM</div>" +
+            "<div class=\"panel-body\"><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p></div></div>";
 
         $('.breadcrumb').after(content);
 
@@ -40,7 +40,7 @@ $(function () {
 
         memberPm(members.split(','));
 
-        $(this).prop('disabled', true);
+        $(this).remove();
     });
 
     function memberPm(members) {
