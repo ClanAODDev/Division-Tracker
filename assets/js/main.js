@@ -28,19 +28,35 @@ $(function () {
 
     $(".send-pm").click(function (e) {
         e.preventDefault();
-        var members = $(this).attr('data-members'),
-            intArray = members.split(",").map(Number).filter(Boolean),
-            windows = Math.ceil(intArray.length / 20),
-            randomNum = Math.random();
 
-        if (windows > 1) {
-            var i = 0;
-            if (confirm("Note about forum PM limitation")) {
-                // open dialog and generate PM buttons to handle rows of "20's"
-            }
-        }
+        var members = $(this).attr('data-members');
 
+        memberPm(members);
     });
+
+    function memberPm(members) {
+        var y = members.length,
+            x = Math.ceil(y / 20),
+            names = [];
+
+        for (w = 0; w < x; w++) {
+            for (i = w * 20; i < w * 20 + 20; i++) {
+                if (i >= y) {
+                    break;
+                }
+
+                names.push(members[i]);
+            }
+
+            var memberIds = implode('&u[]=', names),
+                pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm" + memberIds,
+                link = "<a class='btn btn-primary' href='" + pmUrl + "'>PM Set #" + w + "</a>";
+
+            $('.container').append(link);
+            names = [];
+
+        }
+    }
 
     $(".modal").delegate("#submit-issue #submit_btn", "click", function (e) {
 
@@ -485,25 +501,24 @@ function validateEmail(email) {
 }
 
 
-function memberPm(members) {
 
-    var y = members.length,
-        x = Math.ceil(y / 20),
-        names = [];
-
-    // iterate windows
-    for (w = 0; w < x; w++) {
-
-        // iterate members
-        for (i = w * 20; i < w * 20 + 20; i++) {
-            if (i >= y) {
-                break;
-            } else {
-                names.push(members[i])
-            }
-        }
-
-        alert(names);
-        names = [];
+function implode(glue, pieces) {
+    var i = '',
+        retVal = '',
+        tGlue = '';
+    if (arguments.length === 1) {
+        pieces = glue;
+        glue = '';
     }
+    if (typeof pieces === 'object') {
+        if (Object.prototype.toString.call(pieces) === '[object Array]') {
+            return pieces.join(glue);
+        }
+        for (i in pieces) {
+            retVal += tGlue + pieces[i];
+            tGlue = glue;
+        }
+        return retVal;
+    }
+    return pieces;
 }
