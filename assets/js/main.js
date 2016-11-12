@@ -39,23 +39,44 @@ $(function () {
             x = Math.ceil(y / 20),
             names = [];
 
+        // iterate windows
         for (w = 0; w < x; w++) {
+
+            // iterate members
             for (i = w * 20; i < w * 20 + 20; i++) {
                 if (i >= y) {
                     break;
+                } else {
+                    names.push(members[i])
                 }
-
-                names.push(members[i]);
             }
 
-            var memberIds = implode('&u[]=', names),
-                pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm" + memberIds,
-                link = "<a class='btn btn-primary' href='" + pmUrl + "'>PM Set #" + w + "</a>";
+            var link = "<a href='http://www.clanaod.net/forums/private.php?do=newpm&u[]=" + implode('&u[]=', names) + "/'>PM Link</a><br />";
 
-            $('.container').append(link);
+            $(".container").append(link);
             names = [];
-
         }
+    }
+
+    function implode(glue, pieces) {
+        var i = '',
+            retVal = '',
+            tGlue = '';
+        if (arguments.length === 1) {
+            pieces = glue;
+            glue = '';
+        }
+        if (typeof pieces === 'object') {
+            if (Object.prototype.toString.call(pieces) === '[object Array]') {
+                return pieces.join(glue);
+            }
+            for (i in pieces) {
+                retVal += tGlue + pieces[i];
+                tGlue = glue;
+            }
+            return retVal;
+        }
+        return pieces;
     }
 
     $(".modal").delegate("#submit-issue #submit_btn", "click", function (e) {
@@ -500,25 +521,3 @@ function validateEmail(email) {
     return (!regExp.test(email)) ? true : false;
 }
 
-
-
-function implode(glue, pieces) {
-    var i = '',
-        retVal = '',
-        tGlue = '';
-    if (arguments.length === 1) {
-        pieces = glue;
-        glue = '';
-    }
-    if (typeof pieces === 'object') {
-        if (Object.prototype.toString.call(pieces) === '[object Array]') {
-            return pieces.join(glue);
-        }
-        for (i in pieces) {
-            retVal += tGlue + pieces[i];
-            tGlue = glue;
-        }
-        return retVal;
-    }
-    return pieces;
-}
