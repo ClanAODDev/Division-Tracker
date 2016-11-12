@@ -29,13 +29,21 @@ $(function () {
     $(".send-pm").click(function (e) {
         e.preventDefault();
 
-        var content = "<div class=\"panel panel-default pm-links\"><div class='panel-heading'><p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p></div><div class=\"panel-body\"></div></div>";
+        var content = "" +
+            "<div class=\"panel panel-default pm-links\">" +
+            "<div class='panel-heading'>" +
+            "<p>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</p>" +
+            "</div>" +
+            "<div class=\"panel-body\"></div>" +
+            "</div>";
 
         $('.breadcrumb').after(content);
 
         var members = $(this).attr('data-members');
 
         memberPm(members.split(','));
+
+        $(this).disable();
     });
 
     function memberPm(members) {
