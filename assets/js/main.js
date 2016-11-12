@@ -60,7 +60,7 @@ $(function () {
                 }
             }
 
-            var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm&u[]="
+            var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm"
                     + implode('&u[]=', names) + "/",
                 link = "<a class=\"btn btn-primary\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + w + "</a>";
 
