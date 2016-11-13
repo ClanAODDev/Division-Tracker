@@ -226,24 +226,37 @@ $(function () {
         }).get();
 
         if (searchIDs.length > 0) {
-            $(".pm-links").remove();
 
-            var content = "" +
-                "<div class=\"panel panel-primary pm-links\">" +
-                "<div class='panel-heading'><strong>Send Mass PM</strong></div>" +
-                "<div class=\"panel-body\"><div class=\"btn-group\"></div></div>" +
-                "<div class=\"panel-footer text-muted\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
+            // handle excess selection
+            if (searchIDs.length > 20) {
 
-            $(content).hide().insertBefore(".jumbotron").fadeIn();
+                $(".pm-links").remove();
 
-            memberPm(searchIDs);
+                var content = "" +
+                    "<div class=\"panel panel-primary pm-links\">" +
+                    "<div class='panel-heading'><strong>Send Mass PM</strong></div>" +
+                    "<div class=\"panel-body\"><div class=\"btn-group\"></div></div>" +
+                    "<div class=\"panel-footer text-muted\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
 
-            $("html, body").animate({scrollTop: 0}, "slow");
-            
+                $(content).hide().insertBefore(".jumbotron").fadeIn();
+
+                memberPm(searchIDs);
+
+                $("html, body").animate({scrollTop: 0}, "slow");
+
+
+            } else {
+                // less than 20
+                var joinedIds = searchIDs.join('&u[]=');
+                
+                var pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u[]=' + joinedIds;
+
+                windowOpener(pm_url, "Mass PM", "width=900,height=600,scrollbars=yes");
+            }
+
         } else {
             alert('You must select someone to PM!')
         }
-
     });
 
     $(".toggle-pm").click(function () {
