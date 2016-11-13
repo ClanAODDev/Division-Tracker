@@ -33,7 +33,7 @@ $(function () {
             "<div class=\"panel panel-primary pm-links\">" +
             "<div class='panel-heading'><strong>Send Mass PM</strong></div>" +
             "<div class=\"panel-body\"><div class=\"btn-group\"></div></div>" +
-            "<div class=\"panel-footer\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
+            "<div class=\"panel-footer text-muted\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
 
         $(content).hide().insertAfter(".breadcrumb").fadeIn();
 
