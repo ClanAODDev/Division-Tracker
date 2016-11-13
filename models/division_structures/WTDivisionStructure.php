@@ -114,7 +114,7 @@ class WTDivisionStructure
                 $division_structure .= "[td]";
             }
 
-            $division_structure .= "[size=5]{$platoon->name}[/size]\r\n\r\n";
+            $division_structure .= "[size=5][color=#ffff00]{$platoon->name}[/color][/size]\r\n\r\n";
 
             // Legion Commander
             $player = Member::findByMemberId($platoon->leader_id);
