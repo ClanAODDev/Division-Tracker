@@ -96,7 +96,7 @@
 							<?php foreach ($inactives as $player) : ?>
 								<?php $inactive_ids[] = $player->member_id; ?>
 
-								<?php $inactiveCopy .= "[tr][td][COLOR=\"#FFD700\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=http://aodwebhost.site.nfoservers.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][td]" . formatTime(strtotime($player->last_activity)) . "[/td][td]" . ordSuffix($player->plt_number) . " Platoon[/td][/tr]"; ?>
+								<?php $inactiveCopy .= "[tr][td][COLOR=\"#FFD700\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=http://aod-tracker.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][td]" . formatTime(strtotime($player->last_activity)) . "[/td][td]" . ordSuffix($player->plt_number) . " Platoon[/td][/tr]"; ?>
 
 								<li class='list-group-item clearfix' data-user-id='<?php echo $player->member_id ?>' data-player-id='<?php echo $player->member_id ?>'>
 									<div class='col-xs-1'><img src='assets/images/grab.svg' style='width: 8px; opacity: .20;' /></div>
