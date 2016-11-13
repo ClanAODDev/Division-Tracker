@@ -90,7 +90,13 @@ class WTDivisionStructure
             $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
             $aod_url = Member::createAODlink(array('member_id' => $player->member_id, 'forum_name' => $player_name));
 
-            $division_structure .= "{$aod_url}\r\n";
+            $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+
+            $player->handle = (is_object($memberHandle))
+                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                : 'XXX';
+
+            $division_structure .= "{$aod_url} {$player->handle}\r\n";
         }
 
         $division_structure .= "[/size][/center]";
@@ -121,7 +127,7 @@ class WTDivisionStructure
 
             $suffix = ordSuffix($platoon->number);
 
-            // is a Legion Commander assigned?
+            // is a Wing Commander assigned?
             if ($platoon->leader_id != 0) {
                 $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
                 $aod_url = Member::createAODlink(array(
@@ -130,12 +136,18 @@ class WTDivisionStructure
                     'color' => $this->platoon_leaders_color
                 ));
 
-                $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n{$aod_url}[/size]\r\n\r\n";
+                $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+
+                $player->handle = (is_object($memberHandle))
+                    ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                    : 'XXX';
+
+                $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n{$aod_url} {$player->handle}[/size]\r\n\r\n";
             } else {
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
 
-            // Regimental Leaders
+            // Squadron Leaders
             $squads = Squad::findAll($this->game_id, $platoon->id);
 
             $squadCount = 0;
@@ -147,13 +159,20 @@ class WTDivisionStructure
                 if ($squad->leader_id != 0) {
                     $squad_leader = Member::findById($squad->leader_id);
                     $player_name = Rank::convert($squad_leader->rank_id)->abbr . " " . $squad_leader->forum_name;
+
                     $aod_url = Member::createAODlink(array(
                         'member_id' => $squad_leader->member_id,
                         'forum_name' => $player_name,
                         'color' => $this->squad_leaders_color
                     ));
 
-                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Squadron Leader[/color]\r\n{$aod_url}[/size]\r\n\r\n";
+                    $memberHandle = MemberHandle::findHandle($squad_leader->id, $this->division->primary_handle);
+
+                    $squad_leader->handle = (is_object($memberHandle))
+                        ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                        : 'XXX';
+
+                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Squadron Leader[/color]\r\n{$aod_url} {$squad_leader->handle}[/size]\r\n\r\n";
                     $division_structure .= "[size=2]";
 
                     // direct recruits
@@ -170,7 +189,13 @@ class WTDivisionStructure
                                 'forum_name' => $player_name
                             ));
 
-                            $division_structure .= "[*]{$aod_url}\r\n";
+                            $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+
+                            $player->handle = (is_object($memberHandle))
+                                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                                : 'XXX';
+
+                            $division_structure .= "[*]{$aod_url} {$player->handle}\r\n";
                         }
 
                         $division_structure .= "[/list]";
