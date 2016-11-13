@@ -223,7 +223,14 @@ class WTDivisionStructure
                             'member_id' => $player->member_id,
                             'forum_name' => $player_name
                         ));
-                        $division_structure .= "{$aod_url}\r\n";
+
+                        $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+
+                        $player->handle = (is_object($memberHandle))
+                            ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                            : 'XXX';
+
+                        $division_structure .= "{$aod_url} {$player->handle}\r\n";
                     }
                 }
 
