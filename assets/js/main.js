@@ -63,7 +63,7 @@ $(function () {
 
             var pmUrl = "http://www.clanaod.net/forums/private.php?do=newpm&u[]="
                     + implode('&u[]=', names) + "/",
-                link = "<a class=\"btn btn-primary\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + (w + 1) + "</a>";
+                link = "<a class=\"btn btn-default\" target='_blank' href=\"" + pmUrl + "\">PM Link #" + (w + 1) + "</a>";
 
             $(".pm-links .btn-group").append(link);
             names = [];
