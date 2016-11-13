@@ -281,7 +281,7 @@ class WTDivisionStructure
                     ? "[url=http://warthunder.com/en/community/userinfo/?nick={$player->ingame_alias}][color=00ff00]⟹[/color][/url]"
                     : "XXX";
 
-                $division_structure .= "{$aod_url}\r\n";
+                $division_structure .= "{$aod_url} {$player->ingame_alias}\r\n";
                 $i++;
             }
 
