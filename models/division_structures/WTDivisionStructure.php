@@ -119,6 +119,8 @@ class WTDivisionStructure
             // Legion Commander
             $player = Member::findByMemberId($platoon->leader_id);
 
+            $suffix = ordSuffix($platoon->number);
+
             // is a Legion Commander assigned?
             if ($platoon->leader_id != 0) {
                 $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
@@ -128,18 +130,19 @@ class WTDivisionStructure
                     'color' => $this->platoon_leaders_color
                 ));
 
-                $suffix = ordSuffix($platoon->number);
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n{$aod_url}[/size]\r\n\r\n";
             } else {
-                $division_structure .= "[size=3][color={$this->platoon_pos_color}]Wing Commander[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
+                $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
 
             // Regimental Leaders
             $squads = Squad::findAll($this->game_id, $platoon->id);
 
-            $i = 0;
+            $squadCount = 0;
             foreach ($squads as $squad) {
-                $i++;
+                $squadCount++;
+
+                $suffix = ordSuffix($squadCount);
 
                 if ($squad->leader_id != 0) {
                     $squad_leader = Member::findById($squad->leader_id);
@@ -150,7 +153,6 @@ class WTDivisionStructure
                         'color' => $this->squad_leaders_color
                     ));
 
-                    $suffix = ordSuffix($i);
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Squadron Leader[/color]\r\n{$aod_url}[/size]\r\n\r\n";
                     $division_structure .= "[size=2]";
 
@@ -174,7 +176,7 @@ class WTDivisionStructure
                         $division_structure .= "[/list]";
                     }
                 } else {
-                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squadron Leader[/color]\r\n[color={$this->squad_leaders_color}]TBA[/color][/size]\r\n";
+                    $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Squadron Leader[/color]\r\n[color={$this->squad_leaders_color}]TBA[/color][/size]\r\n";
                     $division_structure .= "[size=2]";
                 }
 
