@@ -93,7 +93,7 @@ class WTDivisionStructure
             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
             $player->handle = (is_object($memberHandle))
-                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][color=ffff00]◼[/color][/url]"
                 : 'XXX';
 
             $division_structure .= "{$aod_url} {$player->handle}\r\n";
@@ -139,7 +139,7 @@ class WTDivisionStructure
                 $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
                 $player->handle = (is_object($memberHandle))
-                    ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                    ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][color=ffff00]◼[/color][/url]"
                     : 'XXX';
 
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Wing Commander[/color]\r\n{$aod_url} {$player->handle}[/size]\r\n\r\n";
@@ -169,7 +169,7 @@ class WTDivisionStructure
                     $memberHandle = MemberHandle::findHandle($squad_leader->id, $this->division->primary_handle);
 
                     $squad_leader->handle = (is_object($memberHandle))
-                        ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                        ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][color=ffff00]◼[/color][/url]"
                         : 'XXX';
 
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]{$suffix} Squadron Leader[/color]\r\n{$aod_url} {$squad_leader->handle}[/size]\r\n\r\n";
@@ -192,7 +192,7 @@ class WTDivisionStructure
                             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
                             $player->handle = (is_object($memberHandle))
-                                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                                ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][color=ffff00]◼[/color][/url]"
                                 : 'XXX';
 
                             $division_structure .= "[*]{$aod_url} {$player->handle}\r\n";
@@ -227,7 +227,7 @@ class WTDivisionStructure
                         $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
                         $player->handle = (is_object($memberHandle))
-                            ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][WT][/url]"
+                            ? "[url=http://warthunder.com/en/community/userinfo/?nick={$memberHandle->handle_value}][color=ffff00]◼[/color][/url]"
                             : 'XXX';
 
                         $division_structure .= "{$aod_url} {$player->handle}\r\n";
