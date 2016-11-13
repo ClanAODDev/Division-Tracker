@@ -29,6 +29,8 @@ $(function () {
     $(".send-pm").click(function (e) {
         e.preventDefault();
 
+        $(".pm-links").remove();
+
         var content = "" +
             "<div class=\"panel panel-primary pm-links\">" +
             "<div class='panel-heading'><strong>Send Mass PM</strong></div>" +
