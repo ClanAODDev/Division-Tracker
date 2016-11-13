@@ -236,7 +236,8 @@ $(function () {
 
             $(content).hide().insertBefore(".jumbotron").fadeIn();
 
-            memberPm(searchIDs.split(','));
+            memberPm(searchIDs);
+
         } else {
             alert('You must select someone to PM!')
         }
