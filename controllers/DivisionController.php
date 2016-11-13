@@ -175,6 +175,9 @@ class DivisionController
             case 12:
                 $division_structure = new BdoDivisionStructure($member->game_id);
                 break;
+            case 15:
+                $division_structure = new WTDivisionStructure($member->game_id);
+                break;
             default:
                 $division_structure = new DivisionStructure($member->game_id);
         }
