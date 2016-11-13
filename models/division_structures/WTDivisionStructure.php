@@ -25,7 +25,7 @@ class WTDivisionStructure
         $this->platoon_pos_color = "#40E0D0";
 
         // number of columns
-        $this->num_columns = 4;
+        $this->num_columns = 3;
 
         // widths
         $this->players_width = 900;
@@ -146,7 +146,7 @@ class WTDivisionStructure
                     ));
 
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squadron Leader[/color]\r\n{$aod_url}[/size]\r\n\r\n";
-                    $division_structure .= "[size=1]";
+                    $division_structure .= "[size=2]";
 
                     // direct recruits
                     $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
@@ -169,7 +169,7 @@ class WTDivisionStructure
                     }
                 } else {
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squadron Leader[/color]\r\n[color={$this->squad_leaders_color}]TBA[/color][/size]\r\n";
-                    $division_structure .= "[size=1]";
+                    $division_structure .= "[size=2]";
                 }
 
                 $division_structure .= "\r\n";
