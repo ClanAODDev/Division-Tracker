@@ -238,6 +238,8 @@ $(function () {
 
             memberPm(searchIDs);
 
+            $("html, body").animate({scrollTop: 0}, "slow");
+            
         } else {
             alert('You must select someone to PM!')
         }
