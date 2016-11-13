@@ -60,10 +60,10 @@
 
 								<?php endforeach; ?>
 								<?php $flaggedCopy .= "[/table]"; ?>
-								<?php $flagged_ids = implode("&u[]=", $flagged_ids); ?>
+								<?php $flagged_ids = implode(",", $flagged_ids); ?>
 
 							</ul>
-							<div class='panel-footer clearfix'><a href='http://www.clanaod.net/forums/private.php?do=newpm&u[]=<?php echo $flagged_ids ?>' class='mass-pm-btn pull-right popup-link btn btn-default'><i class='fa fa-users'></i> Mass PM Players</a> <button type='button' class='copy-button btn btn-default tool pull-right' title='Copy to clipboard' data-clipboard-text='<?php echo $flaggedCopy ?>'><i class='fa fa-copy'></i> Copy player list</button>
+							<div class='panel-footer clearfix'><a href='#' data-members="<?php echo $flagged_ids ?>" class='send-pm pull-right popup-link btn btn-default'><i class='fa fa-users'></i> Mass PM Players</a> <button type='button' class='copy-button btn btn-default tool pull-right' title='Copy to clipboard' data-clipboard-text='<?php echo $flaggedCopy ?>'><i class='fa fa-copy'></i> Copy player list</button>
 							</div>
 						</div>
 					</div>
@@ -111,10 +111,10 @@
 
 							<?php $inactiveCopy .= "[/table]"; ?>
 
-							<?php $inactive_ids = implode("&u[]=", $inactive_ids); ?>
+							<?php $inactive_ids = implode(",", $inactive_ids); ?>
 
 						</ul>
-						<div class='panel-footer clearfix'><a href='http://www.clanaod.net/forums/private.php?do=newpm&u[]=<?php echo $inactive_ids ?>' class='mass-pm-btn pull-right popup-link btn btn-default'><i class='fa fa-users'></i> Mass PM Players</a> <button type='button' class='copy-button btn btn-default tool pull-right' title='Copy to clipboard' data-clipboard-text='<?php echo $inactiveCopy ?>'><i class='fa fa-copy'></i> Copy player list</button></div>
+						<div class='panel-footer clearfix'><a href='#' data-members="<?php echo $inactive_ids ?>" class='send-pm pull-right popup-link btn btn-default'><i class='fa fa-users'></i> Mass PM Players</a> <button type='button' class='copy-button btn btn-default tool pull-right' title='Copy to clipboard' data-clipboard-text='<?php echo $inactiveCopy ?>'><i class='fa fa-copy'></i> Copy player list</button></div>
 					</div>
 				</div>
 			</div>
