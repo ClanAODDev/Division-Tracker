@@ -276,6 +276,11 @@ class WTDivisionStructure
                     'member_id' => $player->member_id,
                     'forum_name' => "AOD_" . $player->forum_name
                 ));
+
+                $player->ingame_alias = (!empty($player->ingame_alias))
+                    ? "[url=http://warthunder.com/en/community/userinfo/?nick={$player->ingame_alias}][color=00ff00]⟹[/color][/url]"
+                    : "XXX";
+
                 $division_structure .= "{$aod_url}\r\n";
                 $i++;
             }
