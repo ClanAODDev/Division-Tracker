@@ -45,13 +45,13 @@ class WTDivisionStructure
         $division_structure = "[table='align:center,width: {$this->info_width}']";
         $division_structure .= "[tr][td]";
 
-        $division_structure .= "[center][img]http://i.imgur.com/QZW3kW9.png[/img][/center]\r\n";
+        $division_structure .= "[center][img]http://i.imgur.com/QZW3kW9.png[/img][/center]\r\n\r\n";
 
         /**
          * Division stats
          */
 
-        $division_structure .= "[center][size=5][color={$this->div_name_color}][b][i][u]Division Membership[/u][/i][/b][/color][/size][/center]";
+        $division_structure .= "[center][size=5][color={$this->div_name_color}][b][i][u]Division Membership[/u][/i][/b][/color][/size][/center]\r\n";
 
         $division_structure .= "[center][color=800080]\r\n";
         $division_structure .= "TOTAL: " . Division::totalCount($this->game_id) . "\r\n";
@@ -64,7 +64,7 @@ class WTDivisionStructure
          * ------division leaders-----
          */
 
-        $division_structure .= "\r\n\r\n[center][size=5][color={$this->div_name_color}][b][i][u]Division Leaders[/u][/i][/b][/color][/size][/center]\r\n";
+        $division_structure .= "\r\n\r\n[center][size=5][color={$this->div_name_color}][b][i][u]Division Leaders[/u][/i][/b][/color][/size][/center]\r\n\r\n";
         $division_structure .= "[center][size=4]";
 
         $division_leaders = Division::findDivisionLeaders($this->game_id);
