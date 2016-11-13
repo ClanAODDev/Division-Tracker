@@ -18,9 +18,7 @@
 							<?php else: ?>
 								<small class='pull-right text-<?php echo inactiveClass($player->last_activity); ?>'>Seen <?php echo formatTime(strtotime($player->last_activity), 1); ?></small>
 							<?php endif; ?></a>
-						<?php endforeach; ?>		
-
-
+						<?php endforeach; ?>
 					</div>
 
 					<div class='panel-footer'>

@@ -224,11 +224,19 @@ $(function () {
         var searchIDs = $("#squads input:checkbox:checked, #squad input:checkbox:checked").map(function () {
             return $(this).data('id');
         }).get();
-        var joinedIds = searchIDs.join('&u[]=');
-        var pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u[]=' + joinedIds;
 
         if (searchIDs.length > 0) {
-            windowOpener(pm_url, "Mass PM", "width=900,height=600,scrollbars=yes");
+            $(".pm-links").remove();
+
+            var content = "" +
+                "<div class=\"panel panel-primary pm-links\">" +
+                "<div class='panel-heading'><strong>Send Mass PM</strong></div>" +
+                "<div class=\"panel-body\"><div class=\"btn-group\"></div></div>" +
+                "<div class=\"panel-footer text-muted\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
+
+            $(content).hide().insertBefore(".jumbotron").fadeIn();
+
+            memberPm(searchIDs.split(','));
         } else {
             alert('You must select someone to PM!')
         }
