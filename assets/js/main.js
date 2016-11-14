@@ -37,6 +37,8 @@ $(function () {
             "<div class=\"panel-body\"><div class=\"btn-group\"></div></div>" +
             "<div class=\"panel-footer text-muted\"><small>The AOD forums enforce a 20-member limit on PM messages. To respect this limitation, the following buttons will generate a separate PM to each set of 20 members.</small></div></div>";
 
+        $("html, body").animate({scrollTop: 0}, "slow");
+
         $(content).hide().insertAfter(".breadcrumb").fadeIn();
 
         var members = $(this).attr('data-members');
