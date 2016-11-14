@@ -244,12 +244,10 @@ $(function () {
 
                 $("html, body").animate({scrollTop: 0}, "slow");
 
-
             } else {
                 // less than 20
-                var joinedIds = searchIDs.join('&u[]=');
-                
-                var pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u[]=' + joinedIds;
+                var joinedIds = searchIDs.join('&u[]='),
+                    pm_url = 'http://www.clanaod.net/forums/private.php?do=newpm&u[]=' + joinedIds;
 
                 windowOpener(pm_url, "Mass PM", "width=900,height=600,scrollbars=yes");
             }

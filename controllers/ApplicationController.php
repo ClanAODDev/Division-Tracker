@@ -107,4 +107,46 @@ class ApplicationController
         AlertStatus::create($params);
     }
 
+    public static function _doGetPersonaId($player)
+    {
+        if ( ! empty($player)) {
+            return self::getBattlelogId($player);
+        } else {
+            return "You must provide a player name! Ex. /battlefield/get-persona-id/{player}";
+        }
+    }
+
+    private function getBattlelogId($battlelogName)
+    {
+        // check for bf4 entry
+        $url = "http://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
+
+        ini_set('default_socket_timeout', 10);
+
+        $headers = get_headers_curl($url);
+
+        if ($headers) {
+
+            if (stripos($headers[0], '40') !== false || stripos($headers[0], '50') !== false) {
+
+                $result = array('error' => true, 'message' => 'Player not found, or BF Stats server down.');
+
+            } else {
+
+                $json = get_bf4db_dump($url);
+                $data = json_decode($json);
+                $personaId = $data->player->id;
+                if ( ! containsNumbers($data->player->id)) {
+                    $result = array('error' => true, 'message' => 'Player not found, or BF Stats server down.');
+                } else {
+                    $result = array('error' => false, 'id' => $personaId);
+                }
+            }
+
+            return $result;
+        }
+
+        return $result = array('error' => true, 'message' => 'Timed out. Probably a 404.');
+    }
+
 }

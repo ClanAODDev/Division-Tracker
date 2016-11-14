@@ -69,6 +69,9 @@ if (empty($_SESSION['userid'])) {
     // cURLS
     Flight::route('POST /do/check-division-threads', array('RecruitingController', '_doDivisionThreadCheck'));
 
+    // persona id lookup
+    Flight::route('/battlefield/get-persona-id/@player', ['ApplicationController', '_doGetPersonaId']);
+
     //REST API FOR PS2 STATS
     Flight::route('GET /ps2activity/@char', array('PS2StatsController', '_getPS2Activity'));
 
