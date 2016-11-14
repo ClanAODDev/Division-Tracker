@@ -481,3 +481,7 @@ function get_bf4db_dump($url) {
     curl_close($curl);
     return $data;
 }
+
+function containsNumbers($String){
+    return preg_match('/\\d/', $String) > 0;
+}
