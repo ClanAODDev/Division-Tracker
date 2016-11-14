@@ -110,9 +110,9 @@ class ApplicationController
     public static function _doGetPersonaId($player)
     {
         if ( ! empty($player)) {
-            return getBattlelogId($player);
+            echo getBattlelogId($player);
         } else {
-            return "You must provide a player name! Ex. /battlefield/get-persona-id/{player}";
+            echo "You must provide a player name! Ex. /battlefield/get-persona-id/{player}";
         }
     }
 }
