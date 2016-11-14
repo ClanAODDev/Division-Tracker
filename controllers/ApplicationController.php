@@ -110,7 +110,7 @@ class ApplicationController
     public static function _doGetPersonaId($player)
     {
         if ( ! empty($player)) {
-            echo getBattlelogId($player);
+            var_dump(getBattlelogId($player));
         } else {
             echo "You must provide a player name! Ex. /battlefield/get-persona-id/{player}";
         }
