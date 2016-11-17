@@ -259,15 +259,15 @@ function loadThreadCheck() {
         });
     }
 
-    if (ingame) {
+    if (player) {
 
-        ingame = ingame.replace('AOD_', '');
+        player = player.replace('AOD_', '');
 
-        $(".rank-name").html("AOD_Rct_" + ucwords(ingame));
-        $(".player-name").html(ucwords(ingame));
+        $(".rank-name").html("AOD_Rct_" + ucwords(player));
+        $(".player-name").html(ucwords(player));
 
         // full name copy
-        $('.player-name-copy').attr("data-clipboard-text", "AOD_Rct_" + ucwords(ingame))
+        $('.player-name-copy').attr("data-clipboard-text", "AOD_Rct_" + ucwords(player))
 
         // final member id for request
         $(".final_member_id").html(member_id);
