@@ -37,7 +37,7 @@
             </h2>
         </div>
 
-        <?php if ($user->role >= 3 && $member->game_id === $division->id || User::isDev()): ?>
+        <?php if ($user->role >= 2 && $member->game_id === $division->id || User::isDev()): ?>
             <?php if (count($unassigned)): ?>
                 <div class="unassigned-members-container">
                     <div class='row'>
