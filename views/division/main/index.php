@@ -1,10 +1,10 @@
 <?php if (count($division)) : ?>
-    <?php if ($user->role >= 3 && $member->game_id === $division->id || User::isDev()): ?>
+    <?php if ($user->role >= 2 && $member->game_id === $division->id || User::isDev()): ?>
         <?php $unassigned = Division::findUnassigned($division->id); ?>
         <?php if (count($unassigned)): ?>
             <div class="container margin-top-20">
-                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <strong>Heads up!</strong> Your
-                    division has unassigned members. Drag them onto a <?php echo Locality::run('platoon',
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>
+                    <strong>Heads up!</strong> Your division has unassigned members. Drag them onto a <?php echo Locality::run('platoon',
                         $division->id); ?>
                     to assign them. Ensure they have been formally recruited.
                 </div>
@@ -38,7 +38,7 @@
         </div>
 
         <?php if ($user->role >= 2 && $member->game_id === $division->id || User::isDev()): ?>
-            <?php if (count($unassigned)): ?>
+            <?php if ( ! empty($unassigned) && count($unassigned)): ?>
                 <div class="unassigned-members-container">
                     <div class='row'>
                         <div class="col-xs-12">
