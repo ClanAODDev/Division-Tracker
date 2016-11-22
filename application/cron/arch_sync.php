@@ -24,18 +24,21 @@ if (count($divisions)) {
         $postResult = curl_exec($ch);
         $json = json_decode($postResult);
 
-        // 11 values in column sort as of 12/17/2014
+        // 14 values in column sort as of 11/22/2014
         // 0 "userid",
         // 1 "username",
         // 2 "joindate",
         // 3 "lastvisit",
-        // 4 "lastactivity",
-        // 5 "lastpost",
-        // 6 "postcount",
-        // 7 "aodrank",
-        // 8 "aodrankval",
-        // 9 "aoddivision",
-        // 10 "aodstatus"
+        // 4 "lastvisit_time",
+        // 5 "lastactivity",
+        // 6 "lastactivity_time",
+        // 7 "lastpost",
+        // 8 "lastpost_time",
+        // 9 "postcount",
+        // 10 "aodrank",
+        // 11 "aodrankval",
+        // 12 "aoddivision",
+        // 13 "aodstatus"
 
         // fetch all existing db members for array comparison
         $query = $pdo->prepare("SELECT member_id, forum_name FROM member WHERE status_id = 1 AND game_id = :gid");
@@ -47,7 +50,7 @@ if (count($divisions)) {
             $existingMembers[$member['forum_name']] = $member['member_id'];
         }
 
-        if (count($json->column_order) == 11 && ($json->column_order[0] == 'userid') && ($json->column_order[10] == 'aodstatus')) {
+        if (count($json->column_order) == 14 && ($json->column_order[0] == 'userid') && ($json->column_order[14] == 'aodstatus')) {
 
             $currentMembers = array();
 
@@ -57,16 +60,16 @@ if (count($divisions)) {
                 $memberid = $column[0];
                 $username = str_replace('AOD_', '', $column[1]);
                 $joindate = $column[2];
-                $lastvisit = $column[3];
-                $lastactive = $column[4];
-                $lastpost = $column[5];
-                $postcount = $column[6];
+                $lastvisit = $column[3] . " " . $column[4];
+                $lastactive = $column[5] . " " . $column[6];
+                $lastpost = $column[7] . " " . $column[8];
+                $postcount = $column[9];
 
                 // only convert if rank is recruit or above
-                $aodrankval = ($column[8] > 2) ? $column[8] - 2 : 1;
+                $aodrankval = ($column[11] > 2) ? $column[11] - 2 : 1;
                 
                 $aoddivision = $division['id'];
-                $aodstatus = convertStatus($column[10]);
+                $aodstatus = convertStatus($column[13]);
 
                 global $pdo;
                 $currentMembers[$username] = $memberid;
