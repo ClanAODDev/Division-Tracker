@@ -88,7 +88,11 @@ class BfDivisionStructure
 
             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
             $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
-            $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
+
+            $bl_url = (is_object($memberHandle))
+                ? "[url=" . $memberHandle->url . $player->handle . "][BL][/url]"
+                : $player->handle;
+
             $division_structure .= "{$aod_url} {$bl_url}\r\n";
         }
 
