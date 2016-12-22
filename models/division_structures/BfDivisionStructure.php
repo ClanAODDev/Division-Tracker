@@ -81,7 +81,11 @@ class BfDivisionStructure
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
         foreach ($general_sergeants as $player) {
             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
-            $player->handle = $memberHandle->handle_value;
+
+            $player->handle = (is_object($memberHandle))
+                ? $memberHandle->handle_value
+                : 'XXX';
+
             $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
             $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
             $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
