@@ -228,7 +228,7 @@ class AWDivisionStructure
 
             $division_structure .= "[/tr]";
             $division_structure .= "[/table]\r\n\r\n";
-            
+
 
             $i++;
         }
