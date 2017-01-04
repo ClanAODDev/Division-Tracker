@@ -140,7 +140,6 @@ class AWDivisionStructure
                         $squad->id, true));
 
                     if (count((array) $recruits)) {
-
                         foreach ($recruits as $player) {
                             $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
                             $aod_url = Member::createAODlink([
@@ -148,10 +147,8 @@ class AWDivisionStructure
                                 'forum_name' => $player_name,
                             ]);
 
-                            $division_structure .= "[*]{$aod_url}\r\n";
+                            $division_structure .= "*{$aod_url}\r\n";
                         }
-
-                        $division_structure .= "[/list]";
                     }
                 } else {
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Squad Leader[/color]\r\n[color={$this->squad_leaders_color}]TBA[/color][/size]\r\n";
@@ -179,7 +176,7 @@ class AWDivisionStructure
                         $division_structure .= "{$aod_url}\r\n";
                     }
                 }
-                
+
                 $division_structure .= "[/center][/td]";
             }
 
