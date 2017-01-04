@@ -113,7 +113,7 @@ class AWDivisionStructure
             // Regimental Leaders
             $squads = Squad::findAll($this->game_id, $platoon->id);
 
-            $division_structure .= "\r\n\r\n[table='align:center,width: {$this->players_width}']";
+            $division_structure .= "\r\n\r\n[table='align:center,class:grid,,width:900']";
             $division_structure .= "[tr]";
 
             foreach ($squads as $squad) {
