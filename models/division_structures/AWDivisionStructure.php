@@ -44,6 +44,7 @@ class AWDivisionStructure
         // header
         $division_structure = "[table='align:center,width: {$this->info_width}']";
         $division_structure .= "[tr][td]";
+        $division_structure .= "[img]https://s30.postimg.org/wy0yrxa69/Group_shot.png[/img]\r\n";
 
         /**
          * ------division leaders-----
