@@ -89,9 +89,8 @@ class AWDivisionStructure
         $i = 1;
 
         foreach ($platoons as $platoon) {
-            $countMembers = Platoon::countPlatoon($platoon->id);
 
-            $division_structure .= "[size=5]{$platoon->name}[/size]\r\n\r\n";
+            $division_structure .= "[center][size=5]{$platoon->name}[/size]\r\n\r\n";
 
             // Legion Commander
             $player = Member::findByMemberId($platoon->leader_id);
@@ -109,6 +108,8 @@ class AWDivisionStructure
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
             }
 
+            $division_structure .= "[/center]";
+
             // Regimental Leaders
             $squads = Squad::findAll($this->game_id, $platoon->id);
 
@@ -116,7 +117,7 @@ class AWDivisionStructure
             $division_structure .= "[tr]";
 
             foreach ($squads as $squad) {
-                $division_structure .= "[td]";
+                $division_structure .= "[td][center]";
 
                 if ($squad->leader_id != 0) {
                     $squad_leader = Member::findById($squad->leader_id);
@@ -177,7 +178,7 @@ class AWDivisionStructure
                 }
 
                 $division_structure .= "[/size]\r\n";
-                $division_structure .= "[/td]";
+                $division_structure .= "[/center][/td]";
             }
 
             $division_structure .= "[/tr][/table]";
