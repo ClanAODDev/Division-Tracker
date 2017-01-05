@@ -178,7 +178,7 @@ class BfDivisionStructure
                         foreach ($recruits as $player) {
                             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                             $bl_url = (is_object($memberHandle))
-                                ? "[url=" . $memberHandle->url . $memberHandle->value . "][BC][/url]"
+                                ? "[url=" . $memberHandle->url . $memberHandle->handle_value . "][BC][/url]"
                                 : 'XXX';
 
                             $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
