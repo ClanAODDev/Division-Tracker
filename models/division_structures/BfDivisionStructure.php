@@ -171,7 +171,7 @@ class BfDivisionStructure
                             $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
 
                             // does member have a division primary member handle?
-                            if (count(( array ) $memberHandle)) {
+                            if (is_object($memberHandle)) {
                                 $player->handle = $memberHandle->handle_value;
                                 $bl_url = "[url=" . $memberHandle->url .  $player->handle. "][BL][/url]";
                                 $division_structure .= "[*]{$aod_url} {$bl_url}\r\n";
