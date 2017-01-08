@@ -221,7 +221,7 @@ class BfDivisionStructure
                             'forum_name' => $player_name,
                         ]);
 
-                        $division_structure .= "[*]{$aod_url} {$bl_url}\r\n";
+                        $division_structure .= "{$aod_url} {$bl_url}\r\n";
                     }
                 }
 
