@@ -1,24 +1,15 @@
 <?php
 
 require 'config.php';
-require '/var/www/html/tracker/application/uagent.php';
+require '../uagent.php';
 
 function dbConnect()
 {
 	global $pdo;
 	$conn = '';
 
-	$now = new DateTime();
-	$mins = $now->getOffset() / 60;
-	$sgn = ($mins < 0 ? -1 : 1);
-	$mins = abs($mins);
-	$hrs = floor($mins / 60);
-	$mins -= $hrs * 60;
-	$offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
-
 	try {
 		$pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-		$pdo->exec("SET time_zone='$offset';");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 

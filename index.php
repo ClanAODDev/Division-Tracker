@@ -1,8 +1,12 @@
 <?php
 
+//require_once('vendor/mikecao/flight/flight.php');
+//require_once('vendor/github/GitHubClient.php');
 require_once 'vendor/autoload.php';
 require_once 'application/config.php';
 require_once 'application/functions.php';
+
+
 
 ini_set('session.save_path', realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 ini_set('session.gc_maxlifetime', 86400);
