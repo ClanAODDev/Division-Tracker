@@ -156,8 +156,6 @@
 
                             </li>
 
-                            <li><a href="https://paypal.me/aodtracker">Donate</a></li>
-
                         </ul>
                     </div>
 
