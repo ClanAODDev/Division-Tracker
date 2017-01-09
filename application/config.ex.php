@@ -24,13 +24,13 @@ define('ARCH_PASS', '');
 Flight::register('aod', 'Database', array('aod'));
 
 // defines for website URLs
-define('CLANAOD', 'http://www.clanaod.net/forums/member.php?u=');
-define('BATTLELOG', 'http://battlelog.battlefield.com/bfh/agent/');
-define('BATTLEREPORT', 'http://battlelog.battlefield.com/bf4/battlereport/show/1/');
-define('BF4DB', 'http://bf4db.com/players/');
-define('PRIVMSG', 'http://www.clanaod.net/forums/private.php?do=newpm&u=');
-define('EMAIL', 'http://www.clanaod.net/forums/sendmessage.php?do=mailmember&u=');
-define('REMOVE', 'http://www.clanaod.net/forums/modcp/aodmember.php?do=remaod&u=');
+define('CLANAOD', 'https://www.clanaod.net/forums/member.php?u=');
+define('BATTLELOG', 'https://battlelog.battlefield.com/bfh/agent/');
+define('BATTLEREPORT', 'https://battlelog.battlefield.com/bf4/battlereport/show/1/');
+define('BF4DB', 'https://bf4db.com/players/');
+define('PRIVMSG', 'https://www.clanaod.net/forums/private.php?do=newpm&u=');
+define('EMAIL', 'https://www.clanaod.net/forums/sendmessage.php?do=mailmember&u=');
+define('REMOVE', 'https://www.clanaod.net/forums/modcp/aodmember.php?do=remaod&u=');
 
 // defines for BF4 division activity status display
 define('PERCENTAGE_CUTOFF_GREEN', 75);

@@ -145,10 +145,10 @@ function download_bl_reports($personaId, $game) {
 
 	switch ($game) {
 		case 'bf4':
-		$url = "http://battlelog.battlefield.com/bf4/warsawbattlereportspopulate/{$personaId}/2048/1/";
+		$url = "https://battlelog.battlefield.com/bf4/warsawbattlereportspopulate/{$personaId}/2048/1/";
 		break;
 		case 'bfh':
-		$url = "http://battlelog.battlefield.com/bfh/warsawbattlereportspopulate/{$personaId}/8192/1/";
+		$url = "https://battlelog.battlefield.com/bfh/warsawbattlereportspopulate/{$personaId}/8192/1/";
 	}
 
 	$json = file_get_contents($url, false, $context);
@@ -166,7 +166,7 @@ function containsNumbers($String){
 
 function getBattlelogId($battlelogName) {
 	// check for bf4 entry
-	$url = "http://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
+	$url = "https://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
 	ini_set('default_socket_timeout', 10);
 	$headers = get_headers_curl($url);
 	if ($headers) {
@@ -236,10 +236,10 @@ function download_tanks_profile($account_id, $type) {
 
 	switch ($type) {
 		case 7:
-		$url = "http://api.worldoftanks.com/2.0/account/info/?application_id={$na_api_key}&account_id={$account_id}";
+		$url = "https://api.worldoftanks.com/2.0/account/info/?application_id={$na_api_key}&account_id={$account_id}";
 		break;
 		case 8:
-		$url = "http://api.worldoftanks.eu/2.0/account/info/?application_id={$eu_api_key}&account_id={$account_id}";
+		$url = "https://api.worldoftanks.eu/2.0/account/info/?application_id={$eu_api_key}&account_id={$account_id}";
 		break;
 	}
 

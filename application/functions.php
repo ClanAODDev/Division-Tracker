@@ -391,7 +391,7 @@ function curl_last_url(/*resource*/ $ch, /*int*/ &$maxredirect = null)
 
 function generate_report_link($game, $id)
 {
-    return "http://battlelog.battlefield.com/{$game}/battlereport/show/1/{$id}";
+    return "https://battlelog.battlefield.com/{$game}/battlereport/show/1/{$id}";
 }
 
 
@@ -414,19 +414,19 @@ function convertIcon($game)
 {
     switch ($game) {
         case "bf3":
-        $img = "[img]http://i.imgur.com/eiloJ8H.png[/img]";
+        $img = "[img]https://i.imgur.com/eiloJ8H.png[/img]";
         break;
         case "bf4":
-        $img = "[img]http://i.imgur.com/IHsTUwa.png[/img]";
+        $img = "[img]https://i.imgur.com/IHsTUwa.png[/img]";
         break;
         case "bfh":
-        $img = "[img]http://i.imgur.com/Azd2G5f.png[/img]";
+        $img = "[img]https://i.imgur.com/Azd2G5f.png[/img]";
         break;
         case "wt":
-        $img = "[img]http://i.imgur.com/WMF8ZYd.png[/img]";
+        $img = "[img]https://i.imgur.com/WMF8ZYd.png[/img]";
         break;
         case "ws":
-        $img = "[img]http://i.imgur.com/SYNAwZd.png[/img]";
+        $img = "[img]https://i.imgur.com/SYNAwZd.png[/img]";
         break;
 
     }
@@ -436,7 +436,7 @@ function convertIcon($game)
 
 function getBattlelogId($battlelogName) {
     // check for bf4 entry
-    $url = "http://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
+    $url = "https://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
     ini_set('default_socket_timeout', 10);
     $headers = get_headers_curl($url);
     if ($headers) {
