@@ -152,7 +152,7 @@ class Member extends Application
 
     public static function GetGravatarUrl($email, $size = 128, $type = 'retro', $rating = 'pg')
     {
-        $gravatar = sprintf('http://www.gravatar.com/avatar/%s?d=%s&s=%d&r=%s',
+        $gravatar = sprintf('//www.gravatar.com/avatar/%s?d=%s&s=%d&r=%s',
             md5($email), $type, $size, $rating);
         return $gravatar;
     }
