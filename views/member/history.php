@@ -1,6 +1,6 @@
 <div class="col-xs-1">
 	<div class="thumbnail">
-		<img class="img-responsive user-photo" src="http://www.clanaod.net/forums/image.php?type=thumb&u=31832">
+		<img class="img-responsive user-photo" src="https://www.clanaod.net/forums/image.php?type=thumb&u=31832">
 	</div>
 </div>
 <div class="col-xs-11">

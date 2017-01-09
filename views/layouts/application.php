@@ -84,7 +84,7 @@
                                     <li class='divider'></li>
 
                                     <li>
-                                        <a href="http://www.clanaod.net/forums/member.php?u=<?php echo $member->member_id; ?>"
+                                        <a href="https://www.clanaod.net/forums/member.php?u=<?php echo $member->member_id; ?>"
                                            target="_blank"> Forum profile</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#" data-toggle="pill" class="logout-btn"><i
@@ -150,7 +150,7 @@
                                         class="caret"></span></a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="http://www.clanaod.net/forums/private.php?do=newpm&u=31832">Report
+                                    <li><a href="https://www.clanaod.net/forums/private.php?do=newpm&u=31832">Report
                                             Issue</a></li>
                                 </ul>
 

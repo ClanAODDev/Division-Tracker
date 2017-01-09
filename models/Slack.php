@@ -33,7 +33,7 @@ class Slack
     {
         $data = [
             "username" => "Tracker-v2",
-            "icon_url" => "http://aodwebhost.site.nfoservers.com/tracker/assets/images/icons/small/tracker.png",
+            "icon_url" => "https://aodwebhost.site.nfoservers.com/tracker/assets/images/icons/small/tracker.png",
             "text" => $this->message
         ];
 

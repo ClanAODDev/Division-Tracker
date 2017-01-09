@@ -18,7 +18,7 @@ class Email
         $email->subject = "AOD Division Tracker - Email verification";
         $email->message .= "<h1><strong>{$user->username}</strong>,</h1>";
         $email->message .= "<p>This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser's address bar.</p>";
-        $email->message .= "<p>http://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\n</p>";
+        $email->message .= "<p>https://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\n</p>";
         $email->message .= "<p><small>PLEASE DO NOT REPLY TO THIS E-MAIL</small></p>";
         $email->send($user);
     }
@@ -37,7 +37,7 @@ class Email
                 'to' => $this->to,
                 'html' => $this->message,
                 'subject' => $this->subject,
-                'text' => "This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser\'s address bar. \r\n\r\nhttp://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\nPLEASE DO NOT REPLY TO THIS E-MAIL"
+                'text' => "This email was used by someone with the IP {$_SERVER['REMOTE_ADDR']} to create an account on the AOD Division Tracker. Please verify that it was you by clicking the link provided below, or copy-paste the URL into your browser\'s address bar. \r\n\r\nhttps://aod-tracker.com/tracker/authenticate?id={$user->validation}\r\n\r\nPLEASE DO NOT REPLY TO THIS E-MAIL"
             ]
         );
     }

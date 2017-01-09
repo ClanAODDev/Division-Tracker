@@ -39,7 +39,7 @@
 
 									<?php $flagged_ids[] = $player->member_id; ?>
 
-									<?php $flaggedCopy .= "[tr][td][COLOR=\"#FF0000\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=http://aodwebhost.site.nfoservers.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][/tr]"; ?>
+									<?php $flaggedCopy .= "[tr][td][COLOR=\"#FF0000\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=https://aodwebhost.site.nfoservers.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][/tr]"; ?>
 
 
 									<li class='list-group-item clearfix' data-user-id='<?php echo $player->member_id ?>' data-player-id='<?php echo $player->member_id ?>'>
@@ -49,7 +49,7 @@
 										<div class='col-xs-3 removed-by text-center text-muted'>Flagged by <?php echo Member::findForumName($player->flagged_by); ?></div>
 										<div class='col-xs-3 actions btn-group'>
 											<span class='pull-right'>
-												<a href='http://www.clanaod.net/forums/private.php?do=newpm&u=<?php echo $player->member_id ?>' class='popup-link btn btn-default btn-xs'><i class='fa fa-comment'></i> PM</a>
+												<a href='https://www.clanaod.net/forums/private.php?do=newpm&u=<?php echo $player->member_id ?>' class='popup-link btn btn-default btn-xs'><i class='fa fa-comment'></i> PM</a>
 												<button class='btn btn-default btn-xs view-profile'><i class='fa fa-user'></i> View Profile</button>
 												<?php if ($user->role >= 2 && $member->rank_id >= 9) : ?>
 													<a href="<?php echo REMOVE ?>" title="Remove player from AOD" class='removeMember btn btn-danger btn-xs'><i class='fa fa-times'></i> Remove</a>
@@ -96,14 +96,14 @@
 							<?php foreach ($inactives as $player) : ?>
 								<?php $inactive_ids[] = $player->member_id; ?>
 
-								<?php $inactiveCopy .= "[tr][td][COLOR=\"#FFD700\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=http://aod-tracker.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][td]" . formatTime(strtotime($player->last_activity)) . "[/td][td]" . ordSuffix($player->plt_number) . " Platoon[/td][/tr]"; ?>
+								<?php $inactiveCopy .= "[tr][td][COLOR=\"#FFD700\"]{$player->forum_name}[/color][/td][td][url=" . CLANAOD . "{$player->member_id}]Forum Account[/url][/td][td][url=https://aod-tracker.com/tracker/member/{$player->member_id}]Tracker Profile[/url][/td][td]" . formatTime(strtotime($player->last_activity)) . "[/td][td]" . ordSuffix($player->plt_number) . " Platoon[/td][/tr]"; ?>
 
 								<li class='list-group-item clearfix' data-user-id='<?php echo $player->member_id ?>' data-player-id='<?php echo $player->member_id ?>'>
 									<div class='col-xs-1'><img src='assets/images/grab.svg' style='width: 8px; opacity: .20;' /></div>
 									<div class='col-xs-2'><?php echo $player->forum_name ?></div>
 									<div class='col-xs-3 text-muted text-center'>Seen <?php echo formatTime(strtotime($player->last_activity)); ?></div>
 									<div class='col-xs-3 removed-by text-center text-muted'><?php echo $player->plt_name ?></div>
-									<div class='col-xs-3 actions btn-group'><span class='pull-right'><a href='http://www.clanaod.net/forums/private.php?do=newpm&u=<?php echo $player->member_id ?>' class='popup-link btn btn-default btn-xs'><i class='fa fa-comment'></i> PM</a> <button class='btn btn-default btn-xs view-profile'><i class='fa fa-user'></i> View Profile</button></span>
+									<div class='col-xs-3 actions btn-group'><span class='pull-right'><a href='https://www.clanaod.net/forums/private.php?do=newpm&u=<?php echo $player->member_id ?>' class='popup-link btn btn-default btn-xs'><i class='fa fa-comment'></i> PM</a> <button class='btn btn-default btn-xs view-profile'><i class='fa fa-user'></i> View Profile</button></span>
 									</div>
 								</li>
 
