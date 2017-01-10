@@ -50,7 +50,7 @@ if (count($divisions)) {
             $existingMembers[$member['forum_name']] = $member['member_id'];
         }
 
-        if (property_exists('column_order', $json)
+        if (property_exists($json, 'column_order')
             && count($json->column_order) == 14
             && ($json->column_order[0] == 'userid')
             && ($json->column_order[13] == 'aodstatus')
