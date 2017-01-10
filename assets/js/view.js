@@ -9,6 +9,11 @@ $(function() {
         allSelectedText: 'All games selected'
     });
 
+    // deal with issue where subsequent profile edits does not show correct info
+    $(".viewPanel").on("hidden.bs.modal", function () {
+        location.reload();
+    });
+
     // auto select values
     var squad_id = $("#cur_squad_id").val(),
         platoon_id = $("#cur_platoon_id").val(),
