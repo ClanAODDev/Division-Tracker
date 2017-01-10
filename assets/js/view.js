@@ -8,7 +8,7 @@ $(function() {
         includeSelectAllOption: true,
         allSelectedText: 'All games selected'
     });
-    
+
     $("#submit-form").click(function(event) {
         event.preventDefault();
 

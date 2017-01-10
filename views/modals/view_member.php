@@ -111,7 +111,7 @@
 
                                 <?php endif; ?>
 
-                                <option value='0'>None (Division Leader)</option>
+                                <option value='0' <?= ($squad->id == $member->squad_id) ? "selected" : 0; ?>>None (Division Leader)</option>
                             </select>
                         </div>
 
