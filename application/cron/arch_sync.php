@@ -50,7 +50,11 @@ if (count($divisions)) {
             $existingMembers[$member['forum_name']] = $member['member_id'];
         }
 
-        if (count($json->column_order) == 14 && ($json->column_order[0] == 'userid') && ($json->column_order[13] == 'aodstatus')) {
+        if (property_exists('column_order', $json)
+            && count($json->column_order) == 14
+            && ($json->column_order[0] == 'userid')
+            && ($json->column_order[13] == 'aodstatus')
+        ) {
 
             $currentMembers = array();
 
@@ -156,6 +160,8 @@ if (count($divisions)) {
 
         } else {
             echo date('Y-m-d h:i:s A') . " - Error: Column count has changed. Parser needs to be updated.\r\n";
+            echo "Failed on {$division['full_name']}\r\n";
+            echo $json;
             die;
         }
 
