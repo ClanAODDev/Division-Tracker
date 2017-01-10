@@ -1,7 +1,5 @@
 <?php
 
-
-
 require 'config.php';
 require '../uagent.php';
 

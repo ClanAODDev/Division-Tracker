@@ -102,7 +102,7 @@
                                         <?php $platoon = Platoon::findById($squad->platoon_id); ?>
 
                                         <option value='<?php echo $squad->id ?>'
-                                            <?= ($squad->id == $member->squad_id) ? "selected" : 0; ?>>
+                                            <?= ($squad->id == $member->squad_id) ? "selected" : null; ?>>
                                             <?php echo ($squad->leader_id != 0)
                                                 ? Rank::convert($leader->rank_id)->abbr . " " . ucwords($leader->forum_name)
                                                 : "TBA (Squad #{$squad->id})"; ?> - <?php echo $platoon->name ?></option>
@@ -111,7 +111,7 @@
 
                                 <?php endif; ?>
 
-                                <option value='0' <?= ($squad->id == $member->squad_id) ? "selected" : 0; ?>>None (Division Leader)</option>
+                                <option value='0' <?= ($squad->id == $member->squad_id) ? "selected" : null; ?>>None (Division Leader)</option>
                             </select>
                         </div>
 
