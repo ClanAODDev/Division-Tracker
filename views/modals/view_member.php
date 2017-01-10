@@ -93,6 +93,7 @@
                             <label for='squad_id' class='control-label'><?php echo Locality::run('squad',
                                     $member->game_id); ?></label>
                             <select name='squad_id' id='squad_id' class='form-control'>
+                                <option value='0' selected>None (Division Leader)</option>
 
                                 <?php if (count(Division::countSquadLeaders($member->game_id))) : ?>
 
@@ -101,8 +102,7 @@
                                         <?php $leader = Member::findById($squad->leader_id); ?>
                                         <?php $platoon = Platoon::findById($squad->platoon_id); ?>
 
-                                        <option value='<?php echo $squad->id ?>'
-                                            <?= ($squad->id == $member->squad_id) ? "selected" : null; ?>>
+                                        <option value='<?php echo $squad->id ?>' <?= ($squad->id == $member->squad_id) ? "selected" : null; ?>>
                                             <?php echo ($squad->leader_id != 0)
                                                 ? Rank::convert($leader->rank_id)->abbr . " " . ucwords($leader->forum_name)
                                                 : "TBA (Squad #{$squad->id})"; ?> - <?php echo $platoon->name ?></option>
@@ -110,8 +110,6 @@
                                     <?php endforeach; ?>
 
                                 <?php endif; ?>
-
-                                <option value='0' <?= ($squad->id == $member->squad_id) ? "selected" : null; ?>>None (Division Leader)</option>
                             </select>
                         </div>
 
