@@ -15,21 +15,6 @@
         <div class='col-xs-5'>
             <h2>
                 <strong><?php echo Rank::convert($memberInfo->rank_id)->abbr . " " . $memberInfo->forum_name; ?></strong>
-					<span class="games_played">
-						<?php if (count($gamesPlayed)):
-                            $gamesPlayed = arrayToObject($gamesPlayed); ?>
-                            <?php foreach ($gamesPlayed as $game): ?>
-                            <?php $img = "assets/images/game_icons/16x16/{$game->short_name}.png"; ?>
-                            <?php if (file_exists($img)): ?>
-                                <sup><img class="img-circle" title="<?php echo $game->full_name ?>"
-                                          src="<?php echo $img ?>"/></sup>
-                            <?php else: ?>
-                                <sup><img class="img-circle" title="<?php echo $game->full_name ?>"
-                                          src="assets/images/game_icons/16x16/unk.png"/></sup>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                        <?php endif; ?>
-					</span>
                 <br/><a class='btn btn-default btn-xs popup-link'
                         href='<?php echo PRIVMSG . $memberInfo->member_id ?>&url=<?php echo CLANAOD . $memberInfo->member_id ?>'
                         target='_blank'><i class='fa fa-comment'></i> Send PM</a><a

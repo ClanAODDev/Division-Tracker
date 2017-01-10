@@ -31,15 +31,6 @@ class MemberController
             $pctAod = ($totalGames > 0) ? $aodGames * 100 / $totalGames : 0;
 
             switch ($divisionInfo->short_name) {
-                case "bf":
-                    $activity = array(
-                        'totalGames' => $totalGames,
-                        'aodGames' => $aodGames,
-                        'games' => $games,
-                        'pctAod' => $pctAod
-                    );
-                    $activity_page = $divisionInfo->short_name;
-                    break;
                 case "ps2":
                     $handle_info = MemberHandle::findHandle($memberInfo->id, 11);
 
@@ -87,8 +78,7 @@ class MemberController
                 'member' => $member,
                 'memberInfo' => $memberInfo,
                 'divisionInfo' => $divisionInfo,
-                'platoonInfo' => $platoonInfo,
-                'gamesPlayed' => $gamesPlayed
+                'platoonInfo' => $platoonInfo
             ), 'content');
             Flight::render('layouts/application', array(
                 'js' => 'member',
