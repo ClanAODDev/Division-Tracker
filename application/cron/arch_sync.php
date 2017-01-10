@@ -22,7 +22,7 @@ if (count($divisions)) {
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 
         $postResult = curl_exec($ch);
-        $json = json_decode($postResult);
+        $json = json_decode(utf8_encode($postResult));
 
         // 14 values in column sort as of 11/22/2014
         // 0 "userid",
