@@ -16,15 +16,6 @@
 
 				<?php use Carbon\Carbon;
 
-                if ($division->id == 2): ?>
-					<th class='text-center tool' title='In AOD servers'><b>AOD</b></th>
-					<th class='text-center'><b>Overall</b></th>	
-				<?php endif; ?>
-
-				<?php if ($division->id == 3): ?>
-					<th class='text-center'><b>Last Battle</b></th>	
-				<?php endif; ?>
-
 			</tr>
 		</thead>
 		<tbody>
@@ -44,15 +35,6 @@
 					<td class='text-center hidden-xs hidden-sm'><?php echo Rank::convert($member->rank_id)->abbr; ?></td>
 					<td class='text-center hidden-xs hidden-sm'><?php echo date('m-d-y', strtotime($member->join_date)); ?></td>
 					<td class='text-center text-<?php echo lastSeenColored($member->last_activity); ?>'><?php echo Carbon::createFromTimestamp(strtotime($member->last_activity))->diffForHumans(); ?></td>
-
-					<?php if ($division->id == 2): ?>
-						<td class='text-center'><?php echo BfActivity::countPlayerAODGames($member->member_id, $bdate, $edate); ?></td>
-						<td class='text-center'><?php echo BfActivity::countPlayerGames($member->member_id, $bdate, $edate); ?></td>
-					<?php endif; ?>
-
-					<?php if ($division->id == 3): ?>
-						<td class='text-center'><?php echo WgActivity::getLastBattleTime($member->memberid); ?></td>
-					<?php endif; ?>
 					
 				</tr>
 			<?php endforeach; ?>
