@@ -122,7 +122,9 @@ class UserController
                         $data['message'] = "No AOD member exists with that forum name.";
                     } else {
                         $user['member_id'] = $memberObj->id;
+
                         User::create($user);
+                        
                         $data['success'] = true;
                         $data['message'] = "Your account was created!";
                     }

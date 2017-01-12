@@ -13,8 +13,6 @@ class User extends Application
     public $last_seen;
     public $developer;
     public $member_id;
-    public $validation;
-    public $validated;
 
     public static $table = 'users';
     public static $id_field = 'id';
@@ -22,7 +20,7 @@ class User extends Application
 
     public static function findByMemberId($member_id)
     {
-        return self::find(array('member_id' => $member_id));
+        return self::find(['member_id' => $member_id]);
     }
 
     public static function findAll()
@@ -33,8 +31,8 @@ class User extends Application
 
     public static function isUser($member_id)
     {
-        $user = self::find(array('member_id' => $member_id));
-        if (!empty($user)) {
+        $user = self::find(['member_id' => $member_id]);
+        if ( ! empty($user)) {
             return true;
         } else {
             return false;
@@ -46,6 +44,7 @@ class User extends Application
         if (isset($_SESSION['loggedIn']) && ($_SESSION['loggedIn'] === true)) {
             return true;
         }
+
         return false;
     }
 
@@ -65,6 +64,7 @@ class User extends Application
     public static function isOnSafeList($id)
     {
         $params = Flight::aod()->sql("SELECT count(*) as count FROM dev_safelist WHERE user_id = {$id}")->one();
+
         return ($params['count'] > 0) ? true : false;
     }
 
@@ -116,9 +116,9 @@ class User extends Application
         $params = self::find($user);
         $member = Member::find($user);
 
-        if (!empty($params)) {
+        if ( ! empty($params)) {
             if ($pass == hasher($pass, $params->credential)) {
-                return array('userid' => $params->id, 'memberid' => $member->id);
+                return ['userid' => $params->id, 'memberid' => $member->id];
             } else {
                 return false;
             }
@@ -130,8 +130,8 @@ class User extends Application
     public static function updateActivityStatus($id)
     {
         Flight::aod()->from(self::$table)
-            ->where(array('id' => $id))
-            ->update(array('last_seen' => date('Y-m-d H:i:s')))
+            ->where(['id' => $id])
+            ->update(['last_seen' => date('Y-m-d H:i:s')])
             ->one();
     }
 
@@ -176,7 +176,7 @@ class User extends Application
         $sqdField = ($allowSqdAssignmentEdit) ? "block" : "none";
         $posField = ($allowPosAssignmentEdit) ? "block" : "none";
 
-        return (object) array('pltField' => $pltField, 'sqdField' => $sqdField, 'posField' => $posField);
+        return (object) ['pltField' => $pltField, 'sqdField' => $sqdField, 'posField' => $posField];
     }
 
     public static function modify($params)
@@ -190,6 +190,7 @@ class User extends Application
 
     public static function create($params)
     {
+
         $user = new User;
         $user->username = $params['user'];
         $user->credential = hasher($params['password']);
@@ -199,9 +200,10 @@ class User extends Application
         $user->member_id = $params['member_id'];
         $user->date_joined = date('Y-m-d H:i:s');
         $user->role = 0;
-        $user->last_logged = 0;
-        $user->last_seen = 0;
+        $user->last_logged = null;
+        $user->last_seen = null;
         $user->developer = 0;
         $user->save();
+
     }
 }
