@@ -1,8 +1,10 @@
+<?php use Carbon\Carbon; ?>
+
 <div class='panel panel-info'>
     <div class='panel-heading'><strong>Member Information</strong></div>
     <ul class='list-group'>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Status: </strong></span> <span
-                class='text-muted'><?php echo Status::convert($memberInfo->status_id)->desc ?></span></li>
+                class='text-muted'><?= Status::convert($memberInfo->status_id)->desc ?></span></li>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Division: </strong></span> <span
                 class='text-muted'><?php echo $divisionInfo->full_name ?></span></li>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Last promoted: </strong></span>
@@ -37,11 +39,11 @@
     <div class='panel-heading'><strong>Forum Activity</strong></div>
     <ul class='list-group'>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Joined:</strong></span> <span
-                class='text-muted'><?php echo date('Y-m-d', strtotime($memberInfo->join_date)); ?></span></li>
+                class='text-muted'><?= date('Y-m-d', strtotime($memberInfo->join_date)); ?></span></li>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Last seen:</strong></span> <span
-                class='text-muted'><?php echo formatTime(strtotime($memberInfo->last_activity)); ?></span></li>
+                class='text-muted'><?= Carbon::createFromTimestamp(strtotime($memberInfo->last_activity))->diffForHumans(); ?></span></li>
         <li class='list-group-item text-right'><span class='pull-left'><strong>Last posted:</strong></span> <span
-                class='text-muted'><?php echo formatTime(strtotime($memberInfo->last_forum_post)); ?></span></li>
+                class='text-muted'><?= Carbon::createFromTimestamp(strtotime($memberInfo->last_forum_post))->diffForHumans(); ?></span></li>
     </ul>
 </div>
 
