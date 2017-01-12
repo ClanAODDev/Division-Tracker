@@ -2,6 +2,8 @@
 
 require_once 'uagent.php';
 
+use Carbon\Carbon;
+
 /**
  * converts role id into real string
  * @param  int $role role id (aod.members)
@@ -11,31 +13,32 @@ function getUserRoleName($role)
 {
     switch ($role) {
         case 0:
-        $role = "User";
-        break;
+            $role = "User";
+            break;
         case 1:
-        $role = "Squad Leader";
-        break;
+            $role = "Squad Leader";
+            break;
         case 2:
-        $role = "Platoon Leader";
-        break;
+            $role = "Platoon Leader";
+            break;
         case 3:
-        $role = "Command Staff";
-        break;
+            $role = "Command Staff";
+            break;
         case 4:
-        $role = "Administrator";
-        break;
+            $role = "Administrator";
+            break;
     }
+
     return $role;
 }
 
 function hex2rgb($hex)
 {
-    return array(
-        hexdec(substr($hex,1,2)),
-        hexdec(substr($hex,3,2)),
-        hexdec(substr($hex,5,2))
-    );
+    return [
+        hexdec(substr($hex, 1, 2)),
+        hexdec(substr($hex, 3, 2)),
+        hexdec(substr($hex, 5, 2)),
+    ];
 }
 
 /**
@@ -44,7 +47,7 @@ function hex2rgb($hex)
 function hasher($info, $encdata = false)
 {
     $strength = "10";
-    
+
     //if encrypted data is passed, check it against input ($info) 
     if ($encdata) {
         if (substr($encdata, 0, 60) == crypt($info, "$2a$" . $strength . "$" . substr($encdata, 60))) {
@@ -59,33 +62,34 @@ function hasher($info, $encdata = false)
         for ($i = 0; $i < 22; $i++) {
             $salt .= substr("./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", mt_rand(0, 63), 1);
         }
-        //return 82 char string (60 char hash & 22 char salt) 
+
+        //return 82 char string (60 char hash & 22 char salt)
         return crypt($info, "$2a$" . $strength . "$" . $salt) . $salt;
     }
 }
 
 /**
  * generates a human readable number suffix
- * @param  int $n 
- * @return string    
+ * @param  int $n
+ * @return string
  */
 function ordSuffix($n)
 {
     $str = "$n";
-    $t   = $n > 9 ? substr($str, -2, 1) : 0;
-    $u   = substr($str, -1);
+    $t = $n > 9 ? substr($str, -2, 1) : 0;
+    $u = substr($str, -1);
     if ($t == 1) {
         return $str . 'th';
     } else {
         switch ($u) {
             case 1:
-            return $str . 'st';
+                return $str . 'st';
             case 2:
-            return $str . 'nd';
+                return $str . 'nd';
             case 3:
-            return $str . 'rd';
+                return $str . 'rd';
             default:
-            return $str . 'th';
+                return $str . 'th';
         }
     }
 }
@@ -96,19 +100,20 @@ function ordSuffix($n)
  */
 function forceEndSession()
 {
-    $_SESSION = array();
+    $_SESSION = [];
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+        setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"],
+            $params["httponly"]);
     }
-    
+
     session_destroy();
 }
 
 /**
  * helper function -- array->object
- * @param  array $d 
- * @return object    
+ * @param  array $d
+ * @return object
  */
 function arrayToObject($d)
 {
@@ -121,7 +126,7 @@ function arrayToObject($d)
 
 /**
  * helper function -- object->array
- * @param  object $d 
+ * @param  object $d
  * @return array
  */
 function objectToArray($d)
@@ -142,39 +147,9 @@ function objectToArray($d)
  * @param  int $ptime date
  * @return string
  */
-function formatTime($distant_timestamp, $max_units = 2) {
-    $i = 0;
-    $time = time() - $distant_timestamp; // to get the time since that moment
-    $tokens = [
-        31536000 => 'year',
-        2592000 => 'month',
-        604800 => 'week',
-        86400 => 'day',
-        3600 => 'hour',
-        60 => 'minute',
-        1 => 'second'
-    ];
-
-    $responses = [];
-    while ($i < $max_units) {
-        foreach ($tokens as $unit => $text) {
-            if ($time < $unit) {
-                continue;
-            }
-            $i++;
-            $numberOfUnits = floor($time / $unit);
-
-            $responses[] = $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '');
-            $time -= ($unit * $numberOfUnits);
-            break;
-        }
-    }
-
-    if (!empty($responses)) {
-        return implode(', ', $responses) . ' ago';
-    }
-
-    return 'Just now';
+function formatTime($distant_timestamp, $max_units = 2)
+{
+    return Carbon::createFromTimestamp($distant_timestamp)->diffForHumans();
 }
 
 function lastSeenFlag($last_seen)
@@ -186,26 +161,32 @@ function lastSeenFlag($last_seen)
     } else {
         $status = null;
     }
+
     return $status;
 }
 
 function lastSeenColored($last_seen)
 {
-    if (strtotime($last_seen) < strtotime('-30 days')) {
-        $status = 'danger';
-    } elseif (strtotime($last_seen) < strtotime('-14 days')) {
-        $status = 'warning';
-    } else {
-        $status = 'default';
+    $dateLastSeen = Carbon::createFromTimestamp(
+        strtotime($last_seen)
+    );
+
+    if ($dateLastSeen->diffInDays() > 30) {
+        return 'danger';
     }
-    return $status;
+
+    if ($dateLastSeen->diffInDays() > 14) {
+        return 'warning';
+    }
+
+    return 'default';
 }
 
 
 /**
  * class name for last_seen column (inactivity)
- * @param  timestamp $last_seen 
- * @return string            
+ * @param  timestamp $last_seen
+ * @return string
  */
 function inactiveClass($last_seen)
 {
@@ -216,6 +197,7 @@ function inactiveClass($last_seen)
     } else {
         $status = 'muted';
     }
+
     return $status;
 }
 
@@ -226,36 +208,37 @@ function singledigitToWord($number)
 {
     switch ($number) {
         case 0:
-        $word = "zero";
-        break;
+            $word = "zero";
+            break;
         case 1:
-        $word = "one";
-        break;
+            $word = "one";
+            break;
         case 2:
-        $word = "two";
-        break;
+            $word = "two";
+            break;
         case 3:
-        $word = "three";
-        break;
+            $word = "three";
+            break;
         case 4:
-        $word = "four";
-        break;
+            $word = "four";
+            break;
         case 5:
-        $word = "five";
-        break;
+            $word = "five";
+            break;
         case 6:
-        $word = "six";
-        break;
+            $word = "six";
+            break;
         case 7:
-        $word = "seven";
-        break;
+            $word = "seven";
+            break;
         case 8:
-        $word = "eight";
-        break;
+            $word = "eight";
+            break;
         case 9:
-        $word = "nine";
-        break;
+            $word = "nine";
+            break;
     }
+
     return $word;
 }
 
@@ -269,44 +252,9 @@ function getPercentageColor($pct)
     } else {
         $percent_class = "danger";
     }
+
     return $percent_class;
 }
-
-
-/**
- * colors for users online list
- * @param  string $user user's name
- * @param  int $level role level
- * @return string combined role string
- */
-function userColor($user, $level, $last_seen)
-{
-    $last_seen = formatTime(strtotime($last_seen));
-
-    switch ($level) {
-        case 99:
-        $span = "<span class='text-muted tool-user idling' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-        case 4:
-        $span = "<span class='text-danger tool-user' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-        case 3:
-        $span = "<span class='text-warning tool-user' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-        case 2:
-        $span = "<span class='text-info tool-user' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-        case 1:
-        $span = "<span class='text-primary tool-user' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-        default:
-        $span = "<span class='text-muted tool-user' title='Last active: {$last_seen}'>" . $user . "</span>";
-        break;
-    }
-    
-    return $span;
-}
-
 
 /**
  * colors for member tables
@@ -319,23 +267,23 @@ function memberColor($user, $level)
     switch ($level) {
         case 3:
         case 8:
-        $span = "<span class='text-danger tool' title='Administrator'><i class='fa fa-shield '></i> " . $user . "</span>";
-        break;
+            $span = "<span class='text-danger tool' title='Administrator'><i class='fa fa-shield '></i> " . $user . "</span>";
+            break;
         case 2:
         case 1:
-        $span = "<span class='text-warning tool' title='Command Staff'><i class='fa fa-shield '></i> " . $user . "</span>";
-        break;
+            $span = "<span class='text-warning tool' title='Command Staff'><i class='fa fa-shield '></i> " . $user . "</span>";
+            break;
         case 4:
-        $span = "<span class='text-info tool' title='Platoon Leader'><i class='fa fa-shield '></i> " . $user . "</span>";
-        break;
+            $span = "<span class='text-info tool' title='Platoon Leader'><i class='fa fa-shield '></i> " . $user . "</span>";
+            break;
         case 5:
-        $span = "<span class='text-primary tool' title='Squad Leader'><i class='fa fa-shield '></i> " . $user . "</span>";
-        break;
+            $span = "<span class='text-primary tool' title='Squad Leader'><i class='fa fa-shield '></i> " . $user . "</span>";
+            break;
         default:
-        $span = $user;
-        break;
+            $span = $user;
+            break;
     }
-    
+
     return $span;
 }
 
@@ -346,13 +294,15 @@ function average($array)
 }
 
 
-function curl_last_url(/*resource*/ $ch, /*int*/ &$maxredirect = null)
-{
+function curl_last_url(/*resource*/
+    $ch, /*int*/
+    &$maxredirect = null
+) {
     $mr = $maxredirect === null ? 5 : intval($maxredirect);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     if ($mr > 0) {
         $newurl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-        
+
         $rch = curl_copy_handle($ch);
         curl_setopt($rch, CURLOPT_HEADER, true);
         curl_setopt($rch, CURLOPT_NOBODY, true);
@@ -375,16 +325,19 @@ function curl_last_url(/*resource*/ $ch, /*int*/ &$maxredirect = null)
             }
         } while ($code && --$mr);
         curl_close($rch);
-        if (!$mr) {
+        if ( ! $mr) {
             if ($maxredirect === null) {
-                trigger_error('Too many redirects. When following redirects, libcurl hit the maximum amount.', E_USER_WARNING);
+                trigger_error('Too many redirects. When following redirects, libcurl hit the maximum amount.',
+                    E_USER_WARNING);
             } else {
                 $maxredirect = 0;
             }
+
             return false;
         }
         curl_setopt($ch, CURLOPT_URL, $newurl);
     }
+
     return $newurl;
 }
 
@@ -402,6 +355,7 @@ function excerpt($text, $limit)
         $pos = array_keys($words);
         $text = substr($text, 0, $pos[$limit]) . '...';
     }
+
     return $text;
 }
 
@@ -414,74 +368,82 @@ function convertIcon($game)
 {
     switch ($game) {
         case "bf3":
-        $img = "[img]https://i.imgur.com/eiloJ8H.png[/img]";
-        break;
+            $img = "[img]https://i.imgur.com/eiloJ8H.png[/img]";
+            break;
         case "bf4":
-        $img = "[img]https://i.imgur.com/IHsTUwa.png[/img]";
-        break;
+            $img = "[img]https://i.imgur.com/IHsTUwa.png[/img]";
+            break;
         case "bfh":
-        $img = "[img]https://i.imgur.com/Azd2G5f.png[/img]";
-        break;
+            $img = "[img]https://i.imgur.com/Azd2G5f.png[/img]";
+            break;
         case "wt":
-        $img = "[img]https://i.imgur.com/WMF8ZYd.png[/img]";
-        break;
+            $img = "[img]https://i.imgur.com/WMF8ZYd.png[/img]";
+            break;
         case "ws":
-        $img = "[img]https://i.imgur.com/SYNAwZd.png[/img]";
-        break;
+            $img = "[img]https://i.imgur.com/SYNAwZd.png[/img]";
+            break;
 
     }
+
     return $img;
 }
 
 
-function getBattlelogId($battlelogName) {
+function getBattlelogId($battlelogName)
+{
     // check for bf4 entry
     $url = "https://api.bf4stats.com/api/playerInfo?plat=pc&name={$battlelogName}";
     ini_set('default_socket_timeout', 10);
     $headers = get_headers_curl($url);
     if ($headers) {
         if (stripos($headers[0], '40') !== false || stripos($headers[0], '50') !== false) {
-            $result = array('error' => true, 'message' => 'Player not found, or BF Stats server down.');
+            $result = ['error' => true, 'message' => 'Player not found, or BF Stats server down.'];
         } else {
             $json = get_bf4db_dump($url);
             $data = json_decode($json);
             $personaId = $data->player->id;
-            if (!containsNumbers($data->player->id)) {
-                $result = array('error' => true, 'message' => 'Player not found, or BF Stats server down.');
+            if ( ! containsNumbers($data->player->id)) {
+                $result = ['error' => true, 'message' => 'Player not found, or BF Stats server down.'];
             } else {
-                $result = array('error' => false, 'id' => $personaId);
+                $result = ['error' => false, 'id' => $personaId];
             }
         }
+
         return $result;
     }
-    return $result = array('error' => true, 'message' => 'Timed out. Probably a 404.');
+
+    return $result = ['error' => true, 'message' => 'Timed out. Probably a 404.'];
 }
 
 function get_headers_curl($url)
 {
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,            $url);
-    curl_setopt($ch, CURLOPT_HEADER,         true);
-    curl_setopt($ch, CURLOPT_NOBODY,         true);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_NOBODY, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT,        15);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 
     $r = curl_exec($ch);
     $r = split("\n", $r);
+
     return $r;
 }
 
-function get_bf4db_dump($url) {
+function get_bf4db_dump($url)
+{
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_HEADER, false);
     $data = curl_exec($curl);
     curl_close($curl);
+
     return $data;
 }
 
-function containsNumbers($String){
+function containsNumbers($String)
+{
     return preg_match('/\\d/', $String) > 0;
 }

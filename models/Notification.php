@@ -27,10 +27,5 @@ class Notification extends Application
                     "<div class=\"alert alert-warning\"><i class=\"fa fa-exclamation-circle\"></i> Your division has unassigned members. Visit your division page to resolve this.</div>");
             }
         }
-
-        if (!User::isValidated()) {
-            array_push($this->messages,
-                "<div class='alert alert-info'><i class='fa fa-envelope fa-lg'></i> Your account email has not been verified. <a href='#' class='alert-link send-email-validation' data-email='{$user->email}'>Send Validation</a></div>");
-        }
     }
 }

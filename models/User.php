@@ -30,11 +30,6 @@ class User extends Application
         return self::fetch_all();
     }
 
-    public static function isValidated()
-    {
-        $params = self::find($_SESSION['userid']);
-        return (boolean) $params->validated;
-    }
 
     public static function isUser($member_id)
     {
@@ -43,20 +38,6 @@ class User extends Application
             return true;
         } else {
             return false;
-        }
-    }
-
-    public static function validateCode($params)
-    {
-        $user = self::find(array('email' => $params['email'], 'validation' => $params['validation'], 'validated' => 0));
-
-        if (empty($user)) {
-            return false;
-        } else {
-            $user->validated = 1;
-            $user->validation = null;
-            Flight::aod()->save($user);
-            return true;
         }
     }
 
@@ -117,12 +98,6 @@ class User extends Application
         } else {
             return false;
         }
-    }
-
-    public static function onlineList()
-    {
-        $params = Flight::aod()->sql("SELECT member.member_id, users.username, users.last_seen, users.role, users.idle FROM " . self::$table . " LEFT JOIN member ON users.username = member.forum_name WHERE last_seen >= CURRENT_TIMESTAMP - INTERVAL 10 MINUTE ORDER BY idle, last_seen DESC")->many();
-        return $params;
     }
 
     public static function exists($forum_name)
@@ -213,21 +188,6 @@ class User extends Application
         $user->update($params);
     }
 
-    public static function resetValidation($email)
-    {
-        $user = self::find(array('email' => $email));
-
-        if (empty($user)) {
-            return false;
-        } else {
-            $user->validation = md5(time() . rand());
-            $user->validated = 0;
-            Flight::aod()->save($user);
-            Email::validate($user);
-            return true;
-        }
-    }
-
     public static function create($params)
     {
         $user = new User;
@@ -236,8 +196,6 @@ class User extends Application
         $user->email = $params['email'];
         $user->date_joined = date("Y-m-d H:i:s");
         $user->ip = $_SERVER['REMOTE_ADDR'];
-        $user->validation = md5(time() . rand());
-        $user->validated = 0;
         $user->member_id = $params['member_id'];
         $user->date_joined = date('Y-m-d H:i:s');
         $user->role = 0;
@@ -245,6 +203,5 @@ class User extends Application
         $user->last_seen = 0;
         $user->developer = 0;
         $user->save();
-        Email::validate($user);
     }
 }
