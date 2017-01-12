@@ -1,3 +1,5 @@
+<?php use Carbon\Carbon; ?>
+
 <div class='panel panel-default'>
 	<div class='panel-heading'><div class='download-area hidden-xs'></div>Members (last 30 days)<span></span></div>
 	<div class='panel-body border-bottom'><div id='playerFilter'></div>
@@ -13,8 +15,6 @@
 				<th class='nosearch text-center hidden-xs hidden-sm'><b>Rank</b></th>
 				<th class='text-center hidden-xs hidden-sm'><b>Joined</b></th>
 				<th class='text-center'><b>Forum Activity</b></th>
-
-				<?php use Carbon\Carbon;
 
 			</tr>
 		</thead>
