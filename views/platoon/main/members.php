@@ -14,7 +14,9 @@
 				<th class='text-center hidden-xs hidden-sm'><b>Joined</b></th>
 				<th class='text-center'><b>Forum Activity</b></th>
 
-				<?php if ($division->id == 2): ?>
+				<?php use Carbon\Carbon;
+
+                if ($division->id == 2): ?>
 					<th class='text-center tool' title='In AOD servers'><b>AOD</b></th>
 					<th class='text-center'><b>Overall</b></th>	
 				<?php endif; ?>
@@ -41,7 +43,7 @@
 
 					<td class='text-center hidden-xs hidden-sm'><?php echo Rank::convert($member->rank_id)->abbr; ?></td>
 					<td class='text-center hidden-xs hidden-sm'><?php echo date('m-d-y', strtotime($member->join_date)); ?></td>
-					<td class='text-center text-<?php echo lastSeenColored($member->last_activity); ?>'><?php echo formatTime(strtotime($member->last_activity)); ?></td>
+					<td class='text-center text-<?php echo lastSeenColored($member->last_activity); ?>'><?php echo Carbon::createFromTimestamp(strtotime($member->last_activity))->diffForHumans(); ?></td>
 
 					<?php if ($division->id == 2): ?>
 						<td class='text-center'><?php echo BfActivity::countPlayerAODGames($member->member_id, $bdate, $edate); ?></td>
