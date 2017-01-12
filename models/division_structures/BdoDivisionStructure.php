@@ -62,7 +62,7 @@ class BdoDivisionStructure
 
         // banner
         $division_structure .= "[center][img]http://i.imgur.com/n460d57.png[/img]
-        [size=5][color=#fff]NA Orwen Server*[/color][/size]
+        [size=5][color=#fff]NA Server*[/color][/size]
         [size=2]*Check TS channel header for server channel[/size][/center]\r\n";
 
         /**
