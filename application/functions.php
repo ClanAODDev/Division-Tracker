@@ -149,7 +149,7 @@ function objectToArray($d)
  */
 function formatTime($distant_timestamp, $max_units = 2)
 {
-    return Carbon::createFromTimestamp($distant_timestamp)->diffInDays();
+    return Carbon::createFromTimestamp($distant_timestamp)->diffInDays() . " days ago";
 }
 
 function lastSeenFlag($last_seen)
