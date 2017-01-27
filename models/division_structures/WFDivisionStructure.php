@@ -60,9 +60,6 @@ class WFDivisionStructure
         $division_structure = "[table='align:center,width: {$this->info_width}']";
         $division_structure .= "[tr][td]";
 
-        // banner
-        $division_structure .= "[center][img]http://i.imgur.com/n460d57.png[/img][/center]\r\n";
-
         /**
          * ------division leaders-----
          */
