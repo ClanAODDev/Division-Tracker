@@ -29,7 +29,7 @@ class WFDivisionStructure
 
         // widths
         $this->players_width = 900;
-        $this->info_width = 800;
+        $this->info_width = 850;
 
         // misc settings
         $this->min_num_squad_leaders = 2;
@@ -159,7 +159,6 @@ class WFDivisionStructure
                     $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id, $squad->id, true));
 
                     if (count((array) $recruits)) {
-                        $division_structure .= "[list=1]";
 
                         foreach ($recruits as $player) {
                             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
@@ -169,13 +168,12 @@ class WFDivisionStructure
                             // does member have a division primary member handle?
                             if (count(( array ) $memberHandle)) {
                                 $bl_url = "IGN: {$memberHandle->handle_value}";
-                                $division_structure .= "[*]{$aod_url}\r\n{$bl_url}\r\n\r\n";
+                                $division_structure .= "* {$aod_url}\r\n{$bl_url}\r\n\r\n";
                             } else {
-                                $division_structure .= "[*]{$aod_url} [color=red]XX[/color]\r\n";
+                                $division_structure .= "* {$aod_url} [color=red]XX[/color]\r\n";
                             }
                         }
 
-                        $division_structure .= "[/list]";
                     }
                 } else {
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Section Leader[/color]\r\n[color={$this->squad_leaders_color}]TBA[/color][/size]\r\n";
