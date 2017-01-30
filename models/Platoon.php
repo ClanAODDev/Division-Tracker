@@ -124,7 +124,7 @@ class Platoon extends Application
             'value' => $twoWeeksMonth['count']
         );
         $data[] = array(
-            'label' => 'more than 30 days',
+            'label' => '> 30 days',
             'color' => '#ff4136',
             'highlight' => '#ff6c64',
             'value' => $oneMonth['count']
