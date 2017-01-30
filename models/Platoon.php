@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class Platoon extends Application
 {
     public static $id_field = "id";
@@ -96,12 +98,16 @@ class Platoon extends Application
 
     public static function forumActivity($platoon_id)
     {
-        $conditions = "status_id IN (1,999) AND platoon_id = {$platoon_id}";
-        $underTwoWeeks = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . ' AND last_activity BETWEEN DATE_ADD(CURDATE(), INTERVAL -2 WEEK) AND CURDATE();')->one();
-        $twoWeeksMonth = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . ' AND last_activity BETWEEN DATE_ADD(CURDATE(), INTERVAL -30 DAY) AND DATE_ADD(CURDATE(), INTERVAL -2 WEEK);')->one();
-        $oneMonth = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . ' AND last_activity BETWEEN DATE_ADD(CURDATE(), INTERVAL -45 DAY) AND DATE_ADD(CURDATE(), INTERVAL -30 DAY);')->one();
-        $moreThanOneMonth = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . ' AND last_activity < DATE_ADD(CURDATE(), INTERVAL -45 DAY)')->one();
+        $twoWeeksAgo = Carbon::now()->subDays(14);
+        $oneMonthAgo = Carbon::now()->subDays(30);
 
+        $conditions = "status_id = 1 AND platoon_id = {$platoon_id}";
+
+        $underTwoWeeks = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . " AND last_activity >= '{$twoWeeksAgo}'")->one();
+
+        $twoWeeksMonth = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . " AND last_activity <= '{$twoWeeksAgo}' AND last_activity >= '{$oneMonthAgo}'")->one();
+
+        $oneMonth = Flight::aod()->sql('SELECT count(*) as count FROM ' . Member::$table . ' WHERE ' . $conditions . " AND last_activity <= '{$oneMonthAgo}'")->one();
 
         // generate json for graph
         $data = array();
@@ -123,12 +129,7 @@ class Platoon extends Application
             'highlight' => '#ff6c64',
             'value' => $oneMonth['count']
         );
-        $data[] = array(
-            'label' => '> 45 days ago',
-            'color' => '#000',
-            'highlight' => '#333',
-            'value' => $moreThanOneMonth['count']
-        );
+
         return json_encode($data);
     }
 
