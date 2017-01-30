@@ -118,13 +118,13 @@ class Platoon extends Application
             'value' => $underTwoWeeks['count']
         );
         $data[] = array(
-            'label' => '14 - 30 days ago',
+            'label' => '14 - 30 days',
             'color' => '#ff851b',
             'highlight' => '#ffa14f',
             'value' => $twoWeeksMonth['count']
         );
         $data[] = array(
-            'label' => '30 - 45 days ago',
+            'label' => 'more than 30 days',
             'color' => '#ff4136',
             'highlight' => '#ff6c64',
             'value' => $oneMonth['count']
