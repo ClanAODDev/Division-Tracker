@@ -147,9 +147,15 @@ function objectToArray($d)
  * @param  int $ptime date
  * @return string
  */
-function formatTime($distant_timestamp, $max_units = 2)
+function formatTime($distant_timestamp)
 {
-    return Carbon::createFromTimestamp($distant_timestamp)->diffInDays() . " days ago";
+    $daysAgo = Carbon::createFromTimestamp($distant_timestamp)->diffInDays();
+
+    if ($daysAgo == 0) {
+        return "Today";
+    }
+
+    return $daysAgo . " days ago";
 }
 
 function lastSeenFlag($last_seen)
