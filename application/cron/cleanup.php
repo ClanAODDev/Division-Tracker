@@ -23,7 +23,7 @@ if (dbConnect()) {
 		$pdo->prepare("DELETE FROM member_games WHERE member_id NOT IN (SELECT member.id FROM member WHERE status_id IN (1,999,3))")->execute();
 
 		// clean up part time for non members
-        $pdo->prepare('DELETE FROM part_timers WHERE member_id NOT IN (SELECT member.id FROM member WHERE status_id IN (1,999,3))')->execute();
+        $pdo->prepare('DELETE FROM part_timers WHERE member_id NOT IN (SELECT member.member_id FROM member WHERE status_id IN (1,999,3))')->execute();
 
 	} catch (PDOException $e) {
 		echo "ERROR: " . $e->getMessage();			
