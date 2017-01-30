@@ -75,7 +75,9 @@ if (count($divisions)) {
                 $aodrankval = ($column[11] > 2) ? $column[11] - 2 : 1;
                 
                 $aoddivision = $division['id'];
-                $aodstatus = convertStatus($column[13]);
+
+                // if you're listed, you're active
+                $aodstatus = 1;
 
                 global $pdo;
                 $currentMembers[$username] = $memberid;

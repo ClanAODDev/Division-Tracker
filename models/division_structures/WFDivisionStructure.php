@@ -3,7 +3,7 @@
 /**
  * BF Division Structure
  *
- * Generates a bb-code template with prepopulated member data
+ * Generates a bb-code template with pre-populated member data
  *
  */
 class WFDivisionStructure
