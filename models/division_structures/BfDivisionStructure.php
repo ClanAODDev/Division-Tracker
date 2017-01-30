@@ -62,7 +62,7 @@ class BfDivisionStructure
         $division_structure .= "[tr][td]";
 
         // banner
-        $division_structure .= "[center][img]http://i.imgur.com/iWpjGZG.png[/img][/center]\r\n";
+        $division_structure .= "[center][img]http://i.imgur.com/Xb2X4je.png[/img][/center]\r\n";
 
         /**
          * ------division leaders-----
