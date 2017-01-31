@@ -60,6 +60,8 @@ class WFDivisionStructure
         $division_structure = "[table='align:center,width: {$this->info_width}']";
         $division_structure .= "[tr][td]";
 
+        $division_structure .= "[center][img]http://i.imgur.com/4wAGhhc.png[/img][/center]\r\n";
+
         /**
          * ------division leaders-----
          */
@@ -73,21 +75,26 @@ class WFDivisionStructure
         /**
          * -----general sergeants-----
          */
-
-        $division_structure .= "[center][size=3][color={$this->platoon_pos_color}]General Sergeants[/color]\r\n";
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
-        foreach ($general_sergeants as $player) {
-            $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+        if (count($general_sergeants)) {
+            $division_structure .= "[center][size=3][color={$this->platoon_pos_color}]General Sergeants[/color]\r\n";
 
-            $player->handle = (is_object($memberHandle))
-                ? $memberHandle->handle_value
-                : 'XXX';
+            foreach ($general_sergeants as $player) {
+                $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
 
-            $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-            $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>$player_name));
+                $player->handle = (is_object($memberHandle))
+                    ? $memberHandle->handle_value
+                    : 'XXX';
 
-            $bl_url = "[size=1]IGN: {$player->handle}[/size]";
-            $division_structure .= "{$aod_url} \r\n{$bl_url}\r\n\r\n";
+                $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
+                $aod_url = Member::createAODlink(array(
+                    'member_id' => $player->member_id,
+                    'forum_name' => $player_name
+                ));
+
+                $bl_url = "[size=1]IGN: {$player->handle}[/size]";
+                $division_structure .= "{$aod_url} \r\n{$bl_url}\r\n\r\n";
+            }
         }
 
         $division_structure .= "[/size][/center]";
@@ -121,7 +128,7 @@ class WFDivisionStructure
                     ? $memberHandle->handle_value
                     : 'XXX';
 
-                $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
+                $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
                 $aod_url = Member::createAODlink(array(
                     'member_id' => $player->member_id,
                     'forum_name' => $player_name
@@ -143,9 +150,13 @@ class WFDivisionStructure
 
                     $memberHandle = MemberHandle::findHandle($squad_leader->id, $this->division->primary_handle);
 
-                    $player_name = Rank::convert($squad_leader->rank_id)->abbr." ".$squad_leader->forum_name;
+                    $player_name = Rank::convert($squad_leader->rank_id)->abbr . " " . $squad_leader->forum_name;
 
-                    $aod_url = Member::createAODlink(array('member_id'=>$squad_leader->member_id, 'forum_name'=>$player_name, 'color'=>$this->squad_leaders_color));
+                    $aod_url = Member::createAODlink(array(
+                        'member_id' => $squad_leader->member_id,
+                        'forum_name' => $player_name,
+                        'color' => $this->squad_leaders_color
+                    ));
 
                     if (is_object($memberHandle)) {
                         $bl_url = "[size=1]IGN: {$memberHandle->handle_value}[/size]";
@@ -156,15 +167,19 @@ class WFDivisionStructure
                     $division_structure .= "[size=3][color={$this->platoon_pos_color}]Section Leader[/color][/size]\r\n{$aod_url}\r\n{$bl_url}\r\n\r\n";
 
                     // direct recruits
-                    $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id, $squad->id, true));
+                    $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
+                        $squad->id, true));
 
                     if (count((array) $recruits)) {
                         $division_structure .= "[list=1]";
 
                         foreach ($recruits as $player) {
                             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
-                            $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
-                            $aod_url = Member::createAODlink(['member_id'=>$player->member_id, 'forum_name'=>$player_name]);
+                            $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
+                            $aod_url = Member::createAODlink([
+                                'member_id' => $player->member_id,
+                                'forum_name' => $player_name
+                            ]);
 
                             // does member have a division primary member handle?
                             if (count(( array ) $memberHandle)) {
@@ -200,7 +215,7 @@ class WFDivisionStructure
                             ? $memberHandle->handle_value
                             : 'XXX';
 
-                        $player_name = Rank::convert($player->rank_id)->abbr." ".$player->forum_name;
+                        $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
                         $aod_url = Member::createAODlink(array(
                             'member_id' => $player->member_id,
                             'forum_name' => $player_name
@@ -251,7 +266,7 @@ class WFDivisionStructure
             }
             $aod_url = Member::createAODlink([
                 'member_id' => $player->member_id,
-                'forum_name'=> "AOD_" . $player->forum_name
+                'forum_name' => "AOD_" . $player->forum_name
             ]);
             $division_structure .= "{$aod_url}\r\nIGN: {$player->ingame_alias}\r\n\r\n";
             $i++;
@@ -264,7 +279,7 @@ class WFDivisionStructure
          * -----------LOAS------------
          */
 
-        if (count((array)LeaveOfAbsence::find_all($this->game_id))) {
+        if (count((array) LeaveOfAbsence::find_all($this->game_id))) {
             $i = 1;
 
             // header
@@ -277,9 +292,13 @@ class WFDivisionStructure
             $loas = LeaveOfAbsence::find_all($this->game_id);
 
             foreach ($loas as $player) {
-                $date_end = (strtotime($player->date_end) < strtotime('now')) ? "[COLOR='#FF0000']Expired " . formatTime(strtotime($player->date_end)) . "[/COLOR]" : date("M d, Y", strtotime($player->date_end));
+                $date_end = (strtotime($player->date_end) < strtotime('now')) ? "[COLOR='#FF0000']Expired " . formatTime(strtotime($player->date_end)) . "[/COLOR]" : date("M d, Y",
+                    strtotime($player->date_end));
                 $profile = Member::findByMemberId($player->member_id);
-                $aod_url = Member::createAODlink(array('member_id'=>$player->member_id, 'forum_name'=>"AOD_".$profile->forum_name));
+                $aod_url = Member::createAODlink(array(
+                    'member_id' => $player->member_id,
+                    'forum_name' => "AOD_" . $profile->forum_name
+                ));
 
                 $division_structure .= "[tr][td]{$aod_url}[/td][td]{$date_end}[/td][td]{$player->reason}[/td][/tr]";
                 $i++;
