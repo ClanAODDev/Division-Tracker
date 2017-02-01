@@ -24,7 +24,7 @@ class Member extends Application
 
     public static function findByName($forum_name)
     {
-        return (object)self::find($forum_name);
+        return (object) self::find($forum_name);
     }
 
     public static function exists($member_id)
@@ -75,12 +75,12 @@ class Member extends Application
 
     public static function findById($userId)
     {
-        return (object)self::find($userId);
+        return (object) self::find($userId);
     }
 
     public static function findByMemberId($member_id)
     {
-        return (object)self::find(array('member_id' => $member_id));
+        return (object) self::find(array('member_id' => $member_id));
     }
 
     public static function findForumName($member_id)
@@ -215,7 +215,7 @@ class Member extends Application
 
     public static function getLastRct()
     {
-        $params = (object)Flight::aod()
+        $params = (object) Flight::aod()
             ->from(Member::$table)
             ->sortDesc('member_id')
             ->where([
@@ -250,8 +250,10 @@ class Member extends Application
 
     public static function kickFromAod($id)
     {
-        $member = self::find(array('member_id' => $id));
+        $member = self::find(['member_id' => $id]);
         $member->status_id = 4;
+        $member->platoon_id = 0;
+        $member->squad_id = 0;
         $member->save();
     }
 
