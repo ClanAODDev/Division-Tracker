@@ -223,7 +223,7 @@
     <script src="assets/js/libraries/sweetalert2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v=4.5"></script>
 
     <?php if (isset($js) && file_exists("assets/js/{$js}.js")) : ?>
         <script src="assets/js/<?php echo $js ?>.js"></script>
@@ -238,18 +238,6 @@
 
 
     } ?>
-
-    <?php
-
-    // debug information
-
-    if (isset($_SESSION['userid'])) {
-        Flight::aod()->show_sql = true;
-        error_reporting(E_ALL);
-        ini_set('display_errors', '1');
-    }
-
-    ?>
 
 </body>
 </html>
