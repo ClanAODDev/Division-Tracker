@@ -26,6 +26,12 @@
     <link href="assets/css/sweetalert2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+    <script>
+        window.Tracker = <?php echo json_encode([
+            'appPath' => "//" . $_SERVER['HTTP_HOST'] . "/"
+        ]); ?>
+    </script>
+
 </head>
 <body>
 
