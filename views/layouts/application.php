@@ -226,12 +226,12 @@
     <script src="assets/js/main.js?v=4.5"></script>
 
     <?php if (isset($js) && file_exists("assets/js/{$js}.js")) : ?>
-        <script src="assets/js/<?php echo $js ?>.js"></script>
+        <script src="assets/js/<?php echo $js ?>.js?"></script>
     <?php endif; ?>
     <?php if ( ! empty($extrajs) && is_array($extrajs)) {
         foreach ($extrajs as $js) {
             if (isset($js) && file_exists("assets/js/{$js}.js")) { ?>
-                <script src="assets/js/<?php echo $js ?>.js"></script>
+                <script src="assets/js/<?php echo $js ?>.js?"></script>
             <?php }
 
         }
