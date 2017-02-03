@@ -23,7 +23,7 @@
 			<?php foreach ($members as $member) : ?>
 				<?php $position = Position::convert($member->position_id); ?>
 				<tr title='Click to view profile' data-id='<?php echo $member->member_id; ?>'
-                    data-member-url="<?php echo Flight::request()->base . "member/{$member->member_id}" ?>">
+                    data-member-url="<?php echo Flight::request()->base . "/member/{$member->member_id}" ?>">
 					<td class='text-center col-hidden'><?php echo $member->rank_id ?></td>
 					<td class='text-center col-hidden'><?php echo $member->last_activity ?></td>
 
