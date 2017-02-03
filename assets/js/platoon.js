@@ -1,7 +1,7 @@
     $(function() {
 
         $("#members-table tbody tr").click(function() {
-            window.location.href = "://" + $(this).attr('data-member-url');
+            window.location.href = "//" + $(this).attr('data-member-url');
         })
 
         var platoonNum = parseInt($('.platoon-number').text()),
