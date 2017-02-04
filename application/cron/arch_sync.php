@@ -136,7 +136,7 @@ if (count($divisions)) {
         } else {
             echo date('Y-m-d h:i:s A') . " - Error: Column count has changed. Parser needs to be updated.\r\n";
             echo "Failed on {$division['full_name']}\r\n";
-            echo $json;
+            var_dump($json);
             die;
         }
     }
@@ -158,8 +158,8 @@ function getData($division)
 
     $args = http_build_query([
         'type' => 'json',
+        'division' => $division['full_name'],
         'authcode' => $authcode,
-        'division' => $division['full_name']
     ]);
 
     $ch = curl_init();
@@ -182,7 +182,6 @@ function getToken()
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $token_path);
-    curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $token = curl_exec($ch);
