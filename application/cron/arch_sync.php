@@ -159,13 +159,13 @@ function getData($division)
     $args = http_build_query([
         'type' => 'json',
         'authcode' => $authcode,
-        'division' => $division
+        'division' => $division['full_name']
     ]);
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $data_path . $args);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 
     $results = curl_exec($ch);
     curl_close($ch);
