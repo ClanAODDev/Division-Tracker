@@ -2,6 +2,8 @@
 
 require_once('lib.php');
 
+$token = getToken();
+
 date_default_timezone_set('America/New_York');
 
 $divisions = getDivisions();
@@ -9,7 +11,7 @@ $divisions = getDivisions();
 if (count($divisions)) {
     foreach ($divisions as $division) {
 
-        $postResult = getData($division);
+        $postResult = getData($division, $token);
 
         $json = json_decode(utf8_encode($postResult));
 
@@ -150,11 +152,11 @@ if (count($divisions)) {
  * @param $division
  * @return mixed
  */
-function getData($division)
+function getData($division, $token)
 {
     $data_path = "https://www.clanaod.net/forums/aodinfo.php?";
 
-    $authcode = hash('sha256', getToken() . ARCH_PASS);
+    $authcode = hash('sha256', $token . ARCH_PASS);
 
     $args = http_build_query([
         'type' => 'json',
