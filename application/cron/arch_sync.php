@@ -1,6 +1,6 @@
 <?php
 
-require 'lib.php';
+require_once('lib.php');
 
 date_default_timezone_set('America/New_York');
 
@@ -9,44 +9,15 @@ $divisions = getDivisions();
 if (count($divisions)) {
     foreach ($divisions as $division) {
 
-        $cred = ARCH_PASS;
-        $cur_minute = floor(time() / 60) * 60;
-        $auth_code = md5($cur_minute . $cred);
+        $postResult = getData($division);
 
-        $json_url = "https://www.clanaod.net/forums/aodinfo.php?type=json&division={$division['full_name']}&authcode={$auth_code}";
-        $agent = "AOD Division Tracking Tool";
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_USERAGENT, $agent);
-        curl_setopt($ch, CURLOPT_URL, $json_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-
-        $postResult = curl_exec($ch);
         $json = json_decode(utf8_encode($postResult));
-
-        // 14 values in column sort as of 11/22/2014
-        // 0 "userid",
-        // 1 "username",
-        // 2 "joindate",
-        // 3 "lastvisit",
-        // 4 "lastvisit_time",
-        // 5 "lastactivity",
-        // 6 "lastactivity_time",
-        // 7 "lastpost",
-        // 8 "lastpost_time",
-        // 9 "postcount",
-        // 10 "aodrank",
-        // 11 "aodrankval",
-        // 12 "aoddivision",
-        // 13 "aodstatus"
 
         // fetch all existing db members for array comparison
         $query = $pdo->prepare("SELECT member_id, forum_name FROM member WHERE status_id = 1 AND game_id = :gid");
-        $query->execute(array(':gid' => intval($division["id"])));
+        $query->execute([':gid' => intval($division["id"])]);
         $existingMemberArray = $query->fetchAll();
-        $existingMembers = array();
+        $existingMembers = [];
 
         foreach ($existingMemberArray as $member) {
             $existingMembers[$member['forum_name']] = $member['member_id'];
@@ -58,7 +29,7 @@ if (count($divisions)) {
             && ($json->column_order[13] == 'aodstatus')
         ) {
 
-            $currentMembers = array();
+            $currentMembers = [];
 
             // loop through member records
             foreach ($json->data as $column) {
@@ -73,7 +44,7 @@ if (count($divisions)) {
 
                 // only convert if rank is recruit or above
                 $aodrankval = ($column[11] > 2) ? $column[11] - 2 : 1;
-                
+
                 $aoddivision = $division['id'];
 
                 // if you're listed, you're active
@@ -118,7 +89,7 @@ if (count($divisions)) {
 
                     try {
                         $query->execute(
-                            array(
+                            [
                                 ':username' => $username,
                                 ':memberid' => $memberid,
                                 ':rank' => $aodrankval,
@@ -129,7 +100,7 @@ if (count($divisions)) {
                                 ':last_active' => $lastactive,
                                 ':last_post' => $lastpost,
                                 ':forum_posts' => $postcount
-                            )
+                            ]
                         );
 
                     } catch (PDOException $e) {
@@ -146,7 +117,7 @@ if (count($divisions)) {
 
                 try {
                     $query = $pdo->prepare("UPDATE member SET status_id = 4, squad_id = 0, platoon_id = 0  WHERE member_id IN ({$removalIds}) AND game_id = :gid");
-                    $query->execute(array(':gid' => intval($division["id"])));
+                    $query->execute([':gid' => intval($division["id"])]);
                 } catch (PDOException $e) {
                     echo "ERROR: " . $e->getMessage();
                 }
@@ -168,9 +139,58 @@ if (count($divisions)) {
             echo $json;
             die;
         }
-
     }
 
 } else {
     echo "There are no divisions to sync.";
+}
+
+
+/**
+ * @param $division
+ * @return mixed
+ */
+function getData($division)
+{
+    $data_path = "https://www.clanaod.net/forums/aodinfo.php?";
+
+    $authcode = hash('sha256', getToken() . ARCH_PASS);
+
+    $args = http_build_query([
+        'type' => 'json',
+        'authcode' => $authcode,
+        'division' => $division
+    ]);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $data_path . $args);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $results = curl_exec($ch);
+    curl_close($ch);
+
+    return $results;
+}
+
+/**
+ * @return array
+ */
+function getToken()
+{
+    $token_path = "https://www.clanaod.net/forums/aodinfo.php?type=gettoken";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $token_path);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $token = curl_exec($ch);
+    curl_close($ch);
+
+    if ( ! $token) {
+        die(date('Y-m-d H:i:s') . 'Failed while requesting token');
+    }
+
+    return $token;
 }
