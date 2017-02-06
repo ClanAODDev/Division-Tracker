@@ -29,7 +29,7 @@ $(function() {
     function cleanupHandles() {
         $("tr.member-handle").each(function() {
             var handleType = $(this).attr('data-handle-type');
-            $("#alias-selector option[value*='" + handleType + "']").remove();
+            $("#alias-selector option[value='" + handleType + "']").remove();
         });
     }
 
