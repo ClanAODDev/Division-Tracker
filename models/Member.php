@@ -131,15 +131,15 @@ class Member extends Application
     public static function findRecruits($member_id, $platoon_id = false, $squad_id = false, $division_structure = false)
     {
         $conditions = array('recruiter' => $member_id);
-        
+
         if ($platoon_id) {
-            $conditions = array_merge($conditions, array('platoon_id' => $platoon_id));
+            $conditions = array_merge($conditions, array('platoon_id' => $platoon_id), array('position_id' => 6));
         }
         if ($squad_id) {
-            $conditions = array_merge($conditions, array('squad_id' => $squad_id));
+            $conditions = array_merge($conditions, array('squad_id' => $squad_id), array('position_id' => 6));
         }
         if ($division_structure) {
-            $conditions = array_merge($conditions, array('status_id @' => array(1, 3, 999)));
+            $conditions = array_merge($conditions, array('status_id @' => array(1, 3, 999)), array('position_id' => 6));
         }
         return Flight::aod()->from(self::$table)->sortDesc(array('rank_id'))->sortAsc(array('forum_name'))->where($conditions)->select()->many();
     }
