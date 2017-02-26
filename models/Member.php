@@ -130,7 +130,8 @@ class Member extends Application
 
     public static function findRecruits($member_id, $platoon_id = false, $squad_id = false, $division_structure = false)
     {
-        $conditions = array('recruiter' => $member_id, 'position_id' => 6);
+        $conditions = array('recruiter' => $member_id);
+        
         if ($platoon_id) {
             $conditions = array_merge($conditions, array('platoon_id' => $platoon_id));
         }
