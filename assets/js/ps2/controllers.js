@@ -8,8 +8,6 @@ ps2App.config(['$locationProvider', 'ChartJsProvider', function ($locationProvid
     });
 
     ChartJsProvider.setOptions({
-      //  colours: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-        //  colours: ['#db1515', '#4286f4', '#af41f4', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
         responsive: true,
         animationSteps: 7,
         animationEasing: 'easeOutBounce'
