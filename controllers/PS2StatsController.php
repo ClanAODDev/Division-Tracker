@@ -29,7 +29,7 @@ class PS2StatsController
               case 1:
                 $VS[]=$character;
             }
-
+          //  $characters[]=$character;
 
         }
       }

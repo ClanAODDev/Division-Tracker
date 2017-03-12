@@ -7,6 +7,7 @@ class Census
 
     public function getUserByName($character_name)
     {
+      //  $url = "/character?name.first=" . $character_name . "&c:case=false&c:limit=1000&c:join=type:characters_world^list:0^inject_at:world^terms:world_id=17^outer:0,type:outfit_member_extended^list:0^inject_at:outfit_member^terms:outfit_id=37530159341115681^outer:0,type:faction^inject_at:faction";
         $url = "/character?name.first=" . $character_name . "&c:case=false&c:limit=1000&c:join=type:characters_world^list:0^inject_at:world^terms:world_id=17^outer:0,type:outfit_member_extended^list:0^inject_at:outfit_member^outer:0,type:faction^inject_at:faction";
 
         $character = $this->query($url);
@@ -47,7 +48,7 @@ class Census
             $labels = array();
             $data = array();
             $count = 0;
-            $labels = array();
+            $labels = array();// = date("m-d-Y", $member->last_save);
             for($i=0;$i<31;$i++){
               $labels[]=date("m-d-Y", strtotime("- $i days"));
             }
@@ -55,12 +56,12 @@ class Census
               for($i=0;$i<intval($day_diff);$i++){
                 $data[]=0;
               }
-
+            // $member->pl_lead=platoonleading($member->character_id);
             foreach (( array ) $member->day as $key => $val) {
-
+                //$labels [] = $label;
                 $data [] = number_format((($val * 1) / 60) / 60, 2);
                 $count++;
-
+              //  $label = date("m-d-Y", strtotime("- $count days", $member->last_save));
             }
             $member->day->chart = new stdClass ();
             $member->day->chart->labels = $labels;
@@ -70,7 +71,9 @@ class Census
             $labels = array();
             $data = array();
             $count = 0;
-
+            // $cur_date= new DateTime("now");
+            // $save_date=new DateTime();
+            //$save_date->setTimestamp(strtotime($member->last_save_date));
             $date_diff=$this->s_datediff("m","now",$member->last_save_date);
             $cur_month=intval(date("n"));
             for($i=$cur_month+1;$i<13;$i++){
@@ -86,7 +89,7 @@ class Census
             }
             foreach (( array ) $member->month as $key => $val) {
 
-
+              //  $labels [] = date("F", strtotime("- $count months", $member->last_save));
                 $data [] = number_format((($val * 1) / 60) / 60, 2);
                 $count++;
             }
