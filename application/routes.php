@@ -73,7 +73,7 @@ if (empty($_SESSION['userid'])) {
     Flight::route('/battlefield/get-persona-id/@player', ['ApplicationController', '_doGetPersonaId']);
 
     //REST API FOR PS2 STATS
-    Flight::route('GET /ps2activity', array('PS2StatsController', '_getPS2Activity'));
+    Flight::route('GET /ps2activity/@char', array('PS2StatsController', '_getPS2Activity'));
 
     // update user activity
     if (isset($_SESSION['userid'])) {
@@ -108,3 +108,4 @@ Flight::route('/stats/@division/top10.png', array('GraphicsController', '_genera
 Flight::route('GET /authenticate', array('UserController', '_authenticate'));
 Flight::route('POST /do/authenticate', array('UserController', '_doAuthenticate'));
 Flight::route('POST /do/reset-authentication', array('UserController', '_doResetAuthentication'));
+
