@@ -15,33 +15,35 @@
         <div class='col-xs-5'>
             <h2>
                 <strong><?php echo Rank::convert($memberInfo->rank_id)->abbr . " " . $memberInfo->forum_name; ?></strong>
-                <br/><a class='btn btn-default btn-xs popup-link'
-                        href='<?php echo PRIVMSG . $memberInfo->member_id ?>&url=<?php echo CLANAOD . $memberInfo->member_id ?>'
-                        target='_blank'><i class='fa fa-comment'></i> Send PM</a><a
-                    class='btn btn-default btn-xs popup-link'
-                    href='<?php echo EMAIL . $memberInfo->member_id ?>&url=<?php echo CLANAOD . $memberInfo->member_id ?>'
-                    target='_blank'><i class='fa fa-envelope'></i> Send Email</a>
+                <br /><a class='btn btn-default btn-xs popup-link'
+                         href='<?php echo PRIVMSG . $memberInfo->member_id ?>&url=<?php echo CLANAOD . $memberInfo->member_id ?>'
+                         target='_blank'><i class='fa fa-comment'></i> Send PM</a><a
+                        class='btn btn-default btn-xs popup-link'
+                        href='<?php echo EMAIL . $memberInfo->member_id ?>&url=<?php echo CLANAOD . $memberInfo->member_id ?>'
+                        target='_blank'><i class='fa fa-envelope'></i> Send Email</a>
             </h2>
         </div>
 
         <div class='col-xs-6'>
-            <?php if (User::canEdit($memberInfo->member_id, $user, $member)) : ?>
-                <div class='btn-group pull-right' data-player-id='<?php echo $memberInfo->member_id ?>'
-                     data-user-id='<?php echo $member->member_id ?>'>
+
+            <div class='btn-group pull-right' data-player-id='<?php echo $memberInfo->member_id ?>'
+                 data-user-id='<?php echo $member->member_id ?>'>
+
+                <?php if (User::canEdit($memberInfo->member_id, $user, $member)) : ?>
                     <button type='button' class='btn btn-info edit-member'><i class="fa fa-pencil fa-lg"></i> Edit
                     </button>
-                    <!-- <button type='button' class='btn btn-success'><i class="fa fa-user-plus fa-lg"></i> <span class="hidden-sm hidden-xs">Promote</span></button> -->
-                    <?php if ($member->rank_id >= 9 && $memberInfo->status_id != 4) : ?>
-                        <a href="<?php echo REMOVE ?>" title="Remove player from AOD"
-                           class='removeMember btn btn-danger'><i class='fa fa-trash fa-lg'></i> Remove<span
+                <?php endif; ?>
+
+                <?php if ($member->rank_id >= 9 && $memberInfo->status_id != 4) : ?>
+                    <a href="<?php echo REMOVE ?>" title="Remove player from AOD"
+                       class='removeMember btn btn-danger'><i class='fa fa-trash fa-lg'></i> Remove<span
                                 class="hidden-sm hidden-xs"> from AOD</span></a>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
+            </div>
+
         </div>
 
     </div>
-
 
     <!-- page data -->
 
