@@ -275,7 +275,7 @@ function loadThreadCheck() {
     }
 
     if (player) {
-        $(".search-subject").html("<p class='text-muted'>Searching threads for posts by: <code>" + ucwords(player) + "</code></p>");
+        $(".search-subject").html("<p class='text-muted'>Searching threads for posts by: <code>" + member_id + "</code> (" + ucwords(player) + ")</p>");
     }
 
     $(".thread-results").html('<img src="assets/images/loading.gif " class="margin-top-20" />');
@@ -284,7 +284,7 @@ function loadThreadCheck() {
             url: "do/check-division-threads",
             type: 'POST',
             data: {
-                player: player,
+                player: member_id,
                 game: game
             },
             cache: false,

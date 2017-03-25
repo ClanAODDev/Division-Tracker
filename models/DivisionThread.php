@@ -2,13 +2,12 @@
 
 class DivisionThread extends Application
 {
+    public static $table = "games_threads";
+    public static $id_field = "id";
     public $id;
     public $game_id;
     public $thread_url;
     public $thread_title;
-
-    public static $table = "games_threads";
-    public static $id_field = "id";
 
     public static function find_all($game_id)
     {
@@ -29,7 +28,7 @@ class DivisionThread extends Application
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         $getPosts = curl_exec($ch);
         $countPosts = stripos($getPosts, $player);
-        if (!$countPosts) {
+        if ( ! $countPosts) {
             $url = parse_url(curl_last_url($ch));
             $query = $url['query'];
             parse_str($query, $url_array);
