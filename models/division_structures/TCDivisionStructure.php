@@ -128,7 +128,7 @@ class TCDivisionStructure
 
             // group leader
             $division_structure .= "[TR][TD][/TD][TD]";
-            $division_structure .= "{$banner}\r\n\r\n";
+            $division_structure .= "[center][img]{$banner}[/img[/center]]\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
             // is a group leader assigned?
@@ -138,7 +138,7 @@ class TCDivisionStructure
                     'forum_name' => Rank::convert($group_leader->rank_id)->abbr . " " . $group_leader->forum_name,
                     'color' => $this->platoon_leader_color
                 ));
-                $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
+                $division_structure .= "[size=4][center]{$aod_url}[/center][/size]\r\n\r\n";
 
             } else {
                 $division_structure .= "[size=4]TBA[/size]\r\n\r\n";
