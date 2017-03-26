@@ -57,9 +57,6 @@ class TCDivisionStructure
         $division_structure = $this->getGroups($division_structure);
         $division_structure .= "[/table]";
 
-        // reaper group
-        $division_structure = $this->getReaperGroup($division_structure);
-
         // LOAs
         $division_structure = $this->getLoas($division_structure);
 
