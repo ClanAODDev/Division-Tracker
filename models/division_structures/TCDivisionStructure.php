@@ -124,9 +124,8 @@ class TCDivisionStructure
             }
 
 
-            // group leader
-            $division_structure .= "[TABLE=\"align: center\"]";
-            $division_structure .= "[TR][TD][/TD][TD]";
+            // platoon image and group leader
+            
             $division_structure .= "[center][img]{$banner}[/img][/center]\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
@@ -142,7 +141,9 @@ class TCDivisionStructure
             } else {
                 $division_structure .= "[size=4]TBA[/size]\r\n\r\n";
             }
-            $division_structure .= "[/td][/tr]";
+
+            // group leader
+            $division_structure .= "[TABLE=\"align: center\"]";
 
             /**
              * Squads
