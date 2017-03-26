@@ -128,7 +128,7 @@ class TCDivisionStructure
 
             // group leader
             $division_structure .= "[TR][TD][/TD][TD]";
-            $division_structure .= "[center][img]{$banner}[/img[/center]]\r\n\r\n";
+            $division_structure .= "[center][img]{$banner}[/img][/center]\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
             // is a group leader assigned?
