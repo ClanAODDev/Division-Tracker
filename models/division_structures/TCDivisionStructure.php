@@ -53,9 +53,7 @@ class TCDivisionStructure
         $division_structure .= "[/size][/center]";
 
         // groups
-        $division_structure .= "[TABLE=\"align: center\"]";
         $division_structure = $this->getGroups($division_structure);
-        $division_structure .= "[/table]";
 
         // LOAs
         $division_structure = $this->getLoas($division_structure);
@@ -127,6 +125,7 @@ class TCDivisionStructure
 
 
             // group leader
+            $division_structure .= "[TABLE=\"align: center\"]";
             $division_structure .= "[TR][TD][/TD][TD]";
             $division_structure .= "[center][img]{$banner}[/img][/center]\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
@@ -153,6 +152,7 @@ class TCDivisionStructure
 
             $division_structure .= "[/tr]";
             $division_structure .= "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
+            $division_structure .= "[/TABLE]";
         }
         return $division_structure;
     }
