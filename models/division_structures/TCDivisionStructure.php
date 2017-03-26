@@ -128,8 +128,7 @@ class TCDivisionStructure
 
             // group leader
             $division_structure .= "[TR][TD][/TD][TD]";
-            $division_structure .= "[TR][TD][img]{$banner}[/img][/TD][TD]";
-            $division_structure .= "[size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
+            $division_structure .= "{$banner}\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
             // is a group leader assigned?
@@ -215,7 +214,7 @@ class TCDivisionStructure
 
 
             if (count((array) $squadMembers)) {
-                $division_structure .= "[list=1]";
+                $division_structure .= "[list]";
                 foreach ($squadMembers as $squadMember) {
                     $player_name = Rank::convert($squadMember->rank_id)->abbr . " " . $squadMember->forum_name;
                     $aod_url = Member::createAODlink(array(
