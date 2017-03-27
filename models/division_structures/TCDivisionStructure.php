@@ -48,7 +48,7 @@ class TCDivisionStructure
         $division_structure .= "[/size]\r\n\r\n";
 
         // general sergeants
-        $division_structure = $this->getGeneralSergeants($division_structure);
+        //$division_structure = $this->getGeneralSergeants($division_structure);
 
         // groups
         $division_structure = $this->getGroups($division_structure);
@@ -87,7 +87,7 @@ class TCDivisionStructure
     {
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
 
-        if (count($general_sergeants)) {
+        if ($general_sergeants) {
             $division_structure .= "[size=3][color={$this->general_sergeants_color}]General Sergeants[/color]\r\n";
 
             foreach ($general_sergeants as $general_sergeant) {
@@ -98,7 +98,7 @@ class TCDivisionStructure
                 ]);
                 $division_structure .= "{$aod_url}\r\n";
             }
-            
+
             $division_structure .= "[/size][/center]";
         }
         return $division_structure;
