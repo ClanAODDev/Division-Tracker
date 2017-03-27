@@ -18,7 +18,7 @@ class TCDivisionStructure
         $this->general_sergeants_color = "#00FFFF";
         $this->platoon_name_color = "#00FFFF";
         $this->platoon_leader_color = "#40E0D0";
-        $this->squad_leader_color = "orange";
+        $this->squad_leader_color = "#ffffff";
 
         // number of columns
         $this->num_columns_squads = 3;
@@ -164,7 +164,7 @@ class TCDivisionStructure
     private function getSquads($division_structure, $platoon)
     {
         $squads = Squad::findAll($this->game_id, $platoon->id);
-        $iterate_squad = 0;
+        $iterate_squad = 1;
 
         if ('spec group' == strtolower($platoon->name)) {
             $this->squad_leader_color = "#006699";
@@ -181,6 +181,7 @@ class TCDivisionStructure
                     'color' => $this->squad_leader_color
                 ]);
 
+                $division_structure .= "[size=4]Squad ". ordSuffix($iterate_squad) . " Leader[/size]\r\n";
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
