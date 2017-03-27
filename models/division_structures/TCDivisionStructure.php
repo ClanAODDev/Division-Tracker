@@ -16,9 +16,9 @@ class TCDivisionStructure
         // colors
         $this->division_leaders_color = "#FF0000";
         $this->general_sergeants_color = "#00FFFF";
-        $this->platoon_name_color = "#00FFFF";
-        $this->platoon_leader_color = "#40E0D0";
-        $this->squad_leader_color = "#ffffff";
+        $this->platoon_name_color = "#40E0D0";
+        $this->platoon_leader_color = "#FFFFFF";
+        $this->squad_leader_color = "#FFFFFF";
 
         // number of columns
         $this->num_columns_squads = 3;
@@ -134,6 +134,8 @@ class TCDivisionStructure
                     'forum_name' => Rank::convert($group_leader->rank_id)->abbr . " " . $group_leader->forum_name,
                     'color' => $this->platoon_leader_color
                 ));
+
+                $division_structure .= "[size=4][center][color=#40E0D0]Platoon Leader[/color][/center][/size]\r\n\r\n";
                 $division_structure .= "[size=4][center]{$aod_url}[/center][/size]\r\n\r\n";
 
             } else {
@@ -181,7 +183,7 @@ class TCDivisionStructure
                     'color' => $this->squad_leader_color
                 ]);
 
-                $division_structure .= "[size=4]" . ordSuffix($iterate_squad) . " Squad Leader[/size]\r\n";
+                $division_structure .= "[size=4][color=#40E0D0]" . ordSuffix($iterate_squad) . " Squad Leader[/color][/size]\r\n";
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
