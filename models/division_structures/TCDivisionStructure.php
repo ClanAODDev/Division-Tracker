@@ -36,7 +36,7 @@ class TCDivisionStructure
     public function generate()
     {
         // header
-        $division_structure = "[center]";
+        $division_structure = "";
 
         // groups
         $division_structure = $this->getGroups($division_structure);
