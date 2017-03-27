@@ -38,18 +38,6 @@ class TCDivisionStructure
         // header
         $division_structure = "[center]";
 
-        // banner
-        $division_structure .= "[img]{$this->banner}[/img]\r\n";
-
-        // division leaders
-        $division_structure .= "\r\n\r\n[size=5][color={$this->division_leaders_color}][b][i][u]Division Leadership[/u][/i][/b][/color][/size]\r\n";
-        $division_structure .= "[size=4]";
-        $division_structure = $this->getDivisionLeaders($division_structure);
-        $division_structure .= "[/size]\r\n\r\n";
-
-        // general sergeants
-        //$division_structure = $this->getGeneralSergeants($division_structure);
-
         // groups
         $division_structure = $this->getGroups($division_structure);
 
