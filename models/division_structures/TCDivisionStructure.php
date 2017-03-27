@@ -17,7 +17,7 @@ class TCDivisionStructure
         $this->division_leaders_color = "#FF0000";
         $this->general_sergeants_color = "#00FFFF";
         $this->platoon_name_color = "#00FFFF";
-        $this->platoon_leader_color = "#FFA07A";
+        $this->platoon_leader_color = "#40E0D0";
         $this->squad_leader_color = "orange";
 
         // number of columns
@@ -106,8 +106,6 @@ class TCDivisionStructure
     private function getGroups($division_structure)
     {
         foreach ($this->platoons as $platoon) {
-            $division_structure .= "[tr][td]\r\n\r\n\r\n[/td][/tr]";
-
             switch ($platoon->name) {
                 case "Rogues":
                     $banner = "http://i.imgur.com/mqqwtmK.png";
@@ -125,7 +123,7 @@ class TCDivisionStructure
 
 
             // platoon image and group leader
-            
+
             $division_structure .= "[center][img]{$banner}[/img][/center]\r\n\r\n";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
