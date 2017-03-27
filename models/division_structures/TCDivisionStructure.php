@@ -181,7 +181,7 @@ class TCDivisionStructure
                     'color' => $this->squad_leader_color
                 ]);
 
-                $division_structure .= "[size=4]Squad ". ordSuffix($iterate_squad) . " Leader[/size]\r\n";
+                $division_structure .= "[size=4]" . ordSuffix($iterate_squad) . " Squad Leader[/size]\r\n";
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
@@ -229,7 +229,7 @@ class TCDivisionStructure
             $division_structure .= "[/td]";
             $iterate_squad++;
 
-            if ($iterate_squad % 3 == 0) {
+            if ($iterate_squad % 4 == 0) {
                 $division_structure .= "[/tr][tr]";
             }
         }
