@@ -48,9 +48,7 @@ class TCDivisionStructure
         $division_structure .= "[/size]\r\n\r\n";
 
         // general sergeants
-        $division_structure .= "[size=3][color={$this->general_sergeants_color}]General Sergeants[/color]\r\n";
         $division_structure = $this->getGeneralSergeants($division_structure);
-        $division_structure .= "[/size][/center]";
 
         // groups
         $division_structure = $this->getGroups($division_structure);
@@ -88,13 +86,20 @@ class TCDivisionStructure
     private function getGeneralSergeants($division_structure)
     {
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
-        foreach ($general_sergeants as $general_sergeant) {
-            $aod_url = Member::createAODlink([
-                'member_id' => $general_sergeant->member_id,
-                'rank' => Rank::convert($general_sergeant->rank_id)->abbr,
-                'forum_name' => $general_sergeant->forum_name,
-            ]);
-            $division_structure .= "{$aod_url}\r\n";
+
+        if (count($general_sergeants)) {
+            $division_structure .= "[size=3][color={$this->general_sergeants_color}]General Sergeants[/color]\r\n";
+
+            foreach ($general_sergeants as $general_sergeant) {
+                $aod_url = Member::createAODlink([
+                    'member_id' => $general_sergeant->member_id,
+                    'rank' => Rank::convert($general_sergeant->rank_id)->abbr,
+                    'forum_name' => $general_sergeant->forum_name,
+                ]);
+                $division_structure .= "{$aod_url}\r\n";
+            }
+            
+            $division_structure .= "[/size][/center]";
         }
         return $division_structure;
     }
@@ -135,7 +140,7 @@ class TCDivisionStructure
                     'color' => $this->platoon_leader_color
                 ));
 
-                $division_structure .= "[size=4][center][color=#40E0D0]Platoon Leader[/color][/center][/size]\r\n\r\n";
+                $division_structure .= "[size=4][center][color=#40E0D0]Platoon Leader[/color][/center][/size]\r\n";
                 $division_structure .= "[size=4][center]{$aod_url}[/center][/size]\r\n\r\n";
 
             } else {
