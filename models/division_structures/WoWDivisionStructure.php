@@ -53,7 +53,7 @@ class WoWDivisionStructure
         $division_structure .= "[/center]";
 
         // groups
-        $division_structure .= "[TABLE=\"align: center\"]";
+        $division_structure .= "[TABLE=align:center]";
         $division_structure = $this->getGroups($division_structure);
         $division_structure .= "[/table]";
 
@@ -65,41 +65,6 @@ class WoWDivisionStructure
 
         // populate content
         $this->content = $division_structure;
-    }
-
-    private function getPartTimers($division_structure)
-    {
-        $partTimers = PartTime::find_all($this->game_id);
-
-        if (count($partTimers)) {
-            $i = 1;
-
-            // header
-            $division_structure .= "\r\n[table='align:center,width: {$this->info_width}']";
-            $division_structure .= "[tr][td]\r\n[center][size=3][color={$this->platoon_name_color}][b]Part Time Members[/b][/color][/size][/center][/td][/tr]";
-            $division_structure .= "[/table]\r\n\r\n";
-
-            // players
-            $division_structure .= "[table='align:center,width: {$this->info_width}']";
-            $division_structure .= "[tr][td]";
-
-            foreach ($partTimers as $player) {
-                if ($i % 20 == 0) {
-                    $division_structure .= "[/td][td]";
-                }
-                $aod_url = Member::createAODlink(array(
-                    'member_id' => $player->member_id,
-                    'forum_name' => "AOD_" . $player->forum_name
-                ));
-                $division_structure .= "{$aod_url}\r\n";
-                $i++;
-            }
-
-            $division_structure .= "[/td]";
-            $division_structure .= "[/tr][/table]\r\n\r\n";
-
-        }
-        return $division_structure;
     }
 
     /**
@@ -152,12 +117,12 @@ class WoWDivisionStructure
      */
     private function getGroups($division_structure)
     {
+        $division_structure .= "[tr]";
         foreach ($this->platoons as $platoon) {
-            $division_structure .= "[tr][td]\r\n\r\n\r\n[/td][/tr]";
 
             // group leader
-            $division_structure .= "[TR][TD][/TD][TD][center]";
-            $division_structure .= "[size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
+            $division_structure .= "[td][size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
+            $division_structure .= "[center]";
             $group_leader = Member::findByMemberId($platoon->leader_id);
 
             // is a group leader assigned?
@@ -172,17 +137,19 @@ class WoWDivisionStructure
             } else {
                 $division_structure .= "[size=4]TBA[/size]\r\n\r\n";
             }
-            $division_structure .= "[/center][/td][/tr]";
+
+            $division_structure .= "[/center]";
 
             /**
              * Squads
              */
-            $division_structure .= "[tr]";
             list($division_structure, $aod_url) = $this->getSquads($division_structure, $platoon);
 
-            $division_structure .= "[/tr]";
             $division_structure .= "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
         }
+
+        $division_structure .= "[/td][/tr]";
+
         return $division_structure;
     }
 
@@ -196,12 +163,8 @@ class WoWDivisionStructure
         $squads = Squad::findAll($this->game_id, $platoon->id);
         $iterate_squad = 0;
 
-        if ('spec group' == strtolower($platoon->name)) {
-            $this->squad_leader_color = "#006699";
-        }
-
         foreach ($squads as $squad) {
-            $division_structure .= "[td]";
+            $division_structure .= "[center]";
             // squad leader
             if ($squad->leader_id != 0) {
                 $squad_leader = Member::findById($squad->leader_id);
@@ -214,16 +177,14 @@ class WoWDivisionStructure
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
                     false, true));
-                $division_structure .= "[size=1]";
+
                 foreach ($recruits as $recruit) {
                     $aod_url = Member::createAODlink([
                         'member_id' => $recruit->member_id,
                         'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
                     ]);
-                    $division_structure .= "{$aod_url}\r\n\r\n";
+                    $division_structure .= "{$aod_url}\r\n";
                 }
-                $division_structure .= "[/size]\r\n";
-
 
             } else {
                 $division_structure .= "[size=4][color={$this->squad_leader_color}]TBA[/color][/size]\r\n\r\n";
@@ -241,6 +202,9 @@ class WoWDivisionStructure
                     $division_structure .= "{$aod_url}\r\n";
                 }
             }
+
+            $division_structure .= "[/center]";
+
             // end squad members
             $division_structure .= "[/td]";
             $iterate_squad++;
@@ -251,8 +215,6 @@ class WoWDivisionStructure
         }
         return array($division_structure, $aod_url);
     }
-
-
 
     /**
      * @param $division_structure
@@ -287,6 +249,41 @@ class WoWDivisionStructure
 
             $division_structure .= "[/table]";
             return $division_structure;
+        }
+        return $division_structure;
+    }
+
+    private function getPartTimers($division_structure)
+    {
+        $partTimers = PartTime::find_all($this->game_id);
+
+        if (count($partTimers)) {
+            $i = 1;
+
+            // header
+            $division_structure .= "\r\n[table='align:center,width: {$this->info_width}']";
+            $division_structure .= "[tr][td]\r\n[center][size=3][color={$this->platoon_name_color}][b]Part Time Members[/b][/color][/size][/center][/td][/tr]";
+            $division_structure .= "[/table]\r\n\r\n";
+
+            // players
+            $division_structure .= "[table='align:center,width: {$this->info_width}']";
+            $division_structure .= "[tr][td]";
+
+            foreach ($partTimers as $player) {
+                if ($i % 20 == 0) {
+                    $division_structure .= "[/td][td]";
+                }
+                $aod_url = Member::createAODlink(array(
+                    'member_id' => $player->member_id,
+                    'forum_name' => "AOD_" . $player->forum_name
+                ));
+                $division_structure .= "{$aod_url}\r\n";
+                $i++;
+            }
+
+            $division_structure .= "[/td]";
+            $division_structure .= "[/tr][/table]\r\n\r\n";
+
         }
         return $division_structure;
     }
