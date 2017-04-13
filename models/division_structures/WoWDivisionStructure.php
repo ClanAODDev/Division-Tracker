@@ -143,12 +143,12 @@ class WoWDivisionStructure
             /**
              * Squads
              */
-            list($division_structure, $aod_url) = $this->getSquads($division_structure, $platoon);
+            $division_structure = $this->getSquads($division_structure, $platoon);
 
             $division_structure .= "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
         }
 
-        $division_structure .= "[/tr]";
+        $division_structure .= "[/td][/tr]";
 
         return $division_structure;
     }
@@ -164,7 +164,7 @@ class WoWDivisionStructure
         $iterate_squad = 0;
 
         foreach ($squads as $squad) {
-            $division_structure .= "[center]";
+            $division_structure .= "[td][center]";
             // squad leader
             if ($squad->leader_id != 0) {
                 $squad_leader = Member::findById($squad->leader_id);
@@ -213,7 +213,7 @@ class WoWDivisionStructure
                 $division_structure .= "[/tr][tr]";
             }
         }
-        return array($division_structure, $aod_url);
+        return $division_structure;
     }
 
     /**
