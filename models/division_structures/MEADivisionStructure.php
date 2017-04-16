@@ -37,23 +37,6 @@ class MEADivisionStructure
         self::generate();
     }
 
-    private function getDivisionLeaders($division_structure)
-    {
-        $division_leaders = Division::findDivisionLeaders($this->game_id);
-        foreach ($division_leaders as $division_leader) {
-            $aod_url = Member::createAODlink([
-                'member_id' => $division_leader->member_id,
-                'rank' => Rank::convert($division_leader->rank_id)->abbr,
-                'forum_name' => $division_leader->forum_name,
-            ]);
-            $division_structure .= (property_exists($division_leader,
-                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n" : "{$aod_url}\r\n";
-        }
-
-        return $division_structure;
-    }
-
-
     public function generate()
     {
 
@@ -91,7 +74,7 @@ class MEADivisionStructure
             $aod_url = Member::createAODlink(['member_id' => $player->member_id, 'forum_name' => $player_name]);
 
             $bl_url = (is_object($memberHandle))
-                ? "[url=" . $memberHandle->url . $player->handle . "][BC][/url]"
+                ? "({$player->handle})"
                 : $player->handle;
 
             $division_structure .= "{$aod_url} {$bl_url}\r\n";
@@ -133,7 +116,7 @@ class MEADivisionStructure
                     'forum_name' => $player_name,
                     'color' => $this->platoon_leaders_color,
                 ]);
-                $bl_url = "[url=" . $memberHandle->url . $player->handle . "][BC][/url]";
+                $bl_url = "({$player->handle})";
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n{$aod_url} {$bl_url}[/size]\r\n\r\n";
             } else {
                 $division_structure .= "[size=3][color={$this->platoon_pos_color}]Platoon Leader[/color]\r\n[color={$this->platoon_leaders_color}]TBA[/color][/size]\r\n\r\n";
@@ -160,7 +143,7 @@ class MEADivisionStructure
                     ]);
 
                     if (is_object($memberHandle)) {
-                        $bl_url = "[url=" . $memberHandle->url . $squad_leader->handle . "][BC][/url]";
+                        $bl_url = "({$squad_leader->handle})";
                     } else {
                         $bl_url = '[color=#ff0000]XXX[/color]';
                     }
@@ -212,7 +195,7 @@ class MEADivisionStructure
                     foreach ($squadMembers as $player) {
                         $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                         $bl_url = (is_object($memberHandle))
-                            ? "[url=" . $memberHandle->url . $memberHandle->handle_value . "][BC][/url]"
+                            ? "({$memberHandle->handle_value})"
                             : 'XXX';
 
                         $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
@@ -311,5 +294,25 @@ class MEADivisionStructure
         }
 
         $this->content = $division_structure;
+    }
+
+    private function getDivisionLeaders($division_structure)
+    {
+        $division_leaders = Division::findDivisionLeaders($this->game_id);
+        foreach ($division_leaders as $division_leader) {
+            $handle = MemberHandle::findHandle($division_leader->id, $this->division->primary_handle);
+
+            $division_leader->handle = (is_object($handle)) ? $handle->handle_value : "(XXX)";
+
+            $aod_url = Member::createAODlink([
+                'member_id' => $division_leader->member_id,
+                'rank' => Rank::convert($division_leader->rank_id)->abbr,
+                'forum_name' => $division_leader->forum_name,
+            ]);
+            $division_structure .= (property_exists($division_leader,
+                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n{$division_leader->handle}" : "{$aod_url}\r\n";
+        }
+
+        return $division_structure;
     }
 }
