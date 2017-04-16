@@ -310,7 +310,7 @@ class MEADivisionStructure
                 'forum_name' => $division_leader->forum_name,
             ]);
             $division_structure .= (property_exists($division_leader,
-                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n{$division_leader->handle}" : "{$aod_url}\r\n";
+                'position_desc')) ? "{$aod_url} ({$division_leader->handle}) - {$division_leader->position_desc}\r\n" : "{$aod_url}\r\n";
         }
 
         return $division_structure;
