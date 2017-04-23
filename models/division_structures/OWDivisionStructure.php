@@ -45,7 +45,7 @@ class OWDivisionStructure
         $division_structure = "[table='align:center,width: {$this->info_width}']";
         $division_structure .= "[tr][td]";
 
-        $division_structure .= "[CENTER][img]http://i67.tinypic.com/2vwtsgk.png[/img][/CENTER]";
+        $division_structure .= "[CENTER][img]http://i.imgur.com/zDsnZfT.png[/img][/CENTER]";
 
         /**
          * ------division leaders-----
