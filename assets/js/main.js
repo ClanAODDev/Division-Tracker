@@ -499,13 +499,12 @@ function member_search() {
  * ZeroClipboard support
  */
 
-var client = new ZeroClipboard($('.copy-button'));
+var clippy = new Clipboard('.copy-button');
 
-client.on("ready", function (readyEvent) {
-    client.on("aftercopy", function (event) {
-        alert("Copied text to clipboard");
-    });
+clippy.on('success', function(e) {
+    alert('Copied to clipboard!');
 });
+
 
 
 function windowOpener(url, name, args) {
