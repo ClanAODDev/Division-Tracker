@@ -181,7 +181,7 @@ class TCDivisionStructure
 
                 $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
                     false, true));
-                $division_structure .= "[size=1][list]";
+                $division_structure .= "[list]";
                 foreach ($recruits as $recruit) {
                     $aod_url = Member::createAODlink([
                         'member_id' => $recruit->member_id,
@@ -189,7 +189,7 @@ class TCDivisionStructure
                     ]);
                     $division_structure .= "[*]{$aod_url}\r\n\r\n";
                 }
-                $division_structure .= "[/list][/size]\r\n";
+                $division_structure .= "[/list]";
 
 
             } else {
