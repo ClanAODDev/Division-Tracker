@@ -4,7 +4,13 @@
 	<?php foreach ($gameThreads as $gameThread) : ?>
 
 		<?php $status = DivisionThread::checkForPost($player, $gameThread->thread_url); ?>
-		<li class="list-group-item thread"><?php echo $gameThread->thread_title ?> <i class='fa fa-copy copy-button-rct text-primary' title='Copy link to clipboard' href='#' data-clipboard-text='<?php echo $gameThread->thread_url ?>'></i><?php echo ($status) ? "<span class=\"badge alert-success\"><i class=\"fa fa-check fa-lg\"></i></span>" : "<span class=\"badge alert-danger\" title=\"User has not completed this step\"><i class=\"fa fa-times fa-lg\"></i></span>"; ?>
+		<li class="list-group-item thread">
+            <?php echo $gameThread->thread_title ?>
+            <i class='fa fa-copy copy-button-rct text-primary'
+               title='Copy link to clipboard' href='#'
+               data-clipboard-text='<?php echo $gameThread->thread_url ?>'></i>
+
+            <?php echo ($status) ? "<span class=\"badge alert-success\"><i class=\"fa fa-check fa-lg\"></i></span>" : "<span class=\"badge alert-danger\" title=\"User has not completed this step\"><i class=\"fa fa-times fa-lg\"></i></span>"; ?>
 		</li>
 
 	<?php endforeach; ?>

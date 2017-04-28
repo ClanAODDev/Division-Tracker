@@ -208,19 +208,19 @@
         </div>
     </div>
 
-    <script src="assets/js/libraries/jquery-2.1.1.min.js"></script>
-    <script src="assets/js/libraries/jquery-ui.min.js"></script>
-    <script src="assets/js/libraries/jquery.easing.min.js"></script>
-    <script src="assets/js/libraries/jquery.powertip.min.js"></script>
-    <script src="assets/js/libraries/bootstrap.min.js"></script>
-    <script src="assets/js/libraries/jquery.dataTables.min.js"></script>
+    <script src="assets/js/libraries/jquery-2.1.1.js"></script>
+    <script src="assets/js/libraries/jquery-ui.js"></script>
+    <script src="assets/js/libraries/jquery.easing.js"></script>
+    <script src="assets/js/libraries/jquery.powertip.js"></script>
+    <script src="assets/js/libraries/bootstrap.js"></script>
+    <script src="assets/js/libraries/jquery.dataTables.js"></script>
     <script src="assets/js/libraries/dataTables.bootstrap.js"></script>
-    <script src="assets/js/libraries/dataTables.tableTools.min.js"></script>
-    <script src="assets/js/libraries/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/js/libraries/dataTables.tableTools.js"></script>
+    <script src="assets/js/libraries/jquery.bootstrap.wizard.js"></script>
     <script src="assets/js/libraries/bootstrap-multiselect.js"></script>
-    <script src="assets/js/libraries/ZeroClipboard.js"></script>
+    <script src="assets/js/libraries/copy-clipboard.js"></script>
     <script src="assets/js/libraries/touchpunch.js"></script>
-    <script src="assets/js/libraries/sweetalert2.min.js"></script>
+    <script src="assets/js/libraries/sweetalert2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
     <script src="assets/js/main.js?v=4.5"></script>

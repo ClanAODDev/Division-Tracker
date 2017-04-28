@@ -4,15 +4,15 @@ client.on("ready", function(readyEvent) {
         alert("Copied text to clipboard");
     });
 });
-
-$(".thread span.badge").click(function () {
-    if (!confirm("Manually override this thread check?")) {
-        return false;
-    }
-
-    $(this).toggleClass('alert-danger')
-        .toggleClass('alert-success')
-        .find('i').toggleClass('fa-times').toggleClass('fa-check');
-});
-
-
+//
+// $(".thread span.badge").click(function () {
+//     if (!confirm("Manually override this thread check?")) {
+//         return false;
+//     }
+//
+//     $(this).toggleClass('alert-danger')
+//         .toggleClass('alert-success')
+//         .find('i').toggleClass('fa-times').toggleClass('fa-check');
+// });
+//
+//
