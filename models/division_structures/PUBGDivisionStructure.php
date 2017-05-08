@@ -18,7 +18,7 @@ class PUBGDivisionStructure
         $this->general_sergeants_color = "#00FFFF";
         $this->platoon_name_color = "#00FFFF";
         $this->platoon_leader_color = "#FFA07A";
-        $this->squad_leader_color = "orange";
+        $this->squad_leader_color = "#00FFFF";
 
         // number of columns
         $this->num_columns_squads = 2;
@@ -48,9 +48,7 @@ class PUBGDivisionStructure
         $division_structure .= "[/size]\r\n\r\n";
 
         // general sergeants
-        $division_structure .= "[size=3][color={$this->general_sergeants_color}]General Sergeants[/color]\r\n";
         $division_structure = $this->getGeneralSergeants($division_structure);
-        $division_structure .= "[/size][/center]";
 
         // groups
         $division_structure = $this->getGroups($division_structure);
@@ -89,16 +87,22 @@ class PUBGDivisionStructure
     private function getGeneralSergeants($division_structure)
     {
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
-        foreach ($general_sergeants as $general_sergeant) {
-            $aod_url = Member::createAODlink([
-                'member_id' => $general_sergeant->member_id,
-                'rank' => Rank::convert($general_sergeant->rank_id)->abbr,
-                'forum_name' => $general_sergeant->forum_name,
-            ]);
-            $division_structure .= "{$aod_url}\r\n";
-        }
 
-        return $division_structure;
+        if (count((array) $general_sergeants)) {
+            $division_structure .= "[size=3][color={$this->general_sergeants_color}]General Sergeants[/color]\r\n";
+            foreach ($general_sergeants as $general_sergeant) {
+                $aod_url = Member::createAODlink([
+                    'member_id' => $general_sergeant->member_id,
+                    'rank' => Rank::convert($general_sergeant->rank_id)->abbr,
+                    'forum_name' => $general_sergeant->forum_name,
+                ]);
+                $division_structure .= "{$aod_url}\r\n";
+            }
+
+            $division_structure .= "[/size]";
+
+            return $division_structure;
+        }
     }
 
     /**
