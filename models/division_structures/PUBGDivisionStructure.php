@@ -176,7 +176,7 @@ class PUBGDivisionStructure
                 foreach ($recruits as $player) {
                     $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                     $player->handle = (is_object($memberHandle))
-                        ? "[color=#00FFFF][url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url][/color]"
+                        ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][color=#00FFFF][Steam][/color][/url]"
                         : 'XXX';
 
                     $aod_url = Member::createAODlink([
@@ -207,7 +207,7 @@ class PUBGDivisionStructure
 
                     $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                     $player->handle = (is_object($memberHandle))
-                        ? "[color=#00FFFF][url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url][/color]"
+                        ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][color=#00FFFF][Steam][/color][/url]"
                         : 'XXX';
 
                     $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
