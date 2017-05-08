@@ -21,7 +21,7 @@ class PUBGDivisionStructure
         $this->squad_leader_color = "orange";
 
         // number of columns
-        $this->num_columns_squads = 3;
+        $this->num_columns_squads = 2;
 
         // widths
         $this->players_width = 900;
@@ -110,11 +110,16 @@ class PUBGDivisionStructure
     private function getGroups($division_structure)
     {
         foreach ($this->platoons as $platoon) {
-            $division_structure .= "[tr][td]\r\n\r\n\r\n[/td][/tr]";
+            $division_structure .= "[tr][td]";
 
             // group leader
             $division_structure .= "[size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
+
             $group_leader = Member::findByMemberId($platoon->leader_id);
+            $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
+            $group_leader->handle = (is_object($memberHandle))
+                ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url]"
+                : 'XXX';
 
             // is a group leader assigned?
             if ($platoon->leader_id != 0) {
@@ -216,7 +221,7 @@ class PUBGDivisionStructure
                         'member_id' => $player->member_id,
                         'forum_name' => $player_name
                     ));
-                    $division_structure .= "[*]{$aod_url}\r\n";
+                    $division_structure .= "[*]{$aod_url} {$player->handle}\r\n";
                 }
                 $division_structure .= "[/list]";
             }
