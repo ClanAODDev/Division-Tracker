@@ -116,7 +116,7 @@ class PUBGDivisionStructure
             $group_leader = Member::findByMemberId($platoon->leader_id);
             $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
             $group_leader->handle = (is_object($memberHandle))
-                ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url]"
+                ? "[color=#00FFFF][url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url][/color]"
                 : 'XXX';
 
             // is a group leader assigned?
@@ -139,7 +139,7 @@ class PUBGDivisionStructure
             $division_structure .= "[table=align:center][tr]";
             $division_structure = $this->getSquads($division_structure, $platoon);
             $division_structure .= "[/tr][/table]";
-            
+
             $division_structure .= "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
         }
 
@@ -155,10 +155,6 @@ class PUBGDivisionStructure
     {
         $squads = Squad::findAll($this->game_id, $platoon->id);
         $iterate_squad = 0;
-
-        if ('spec group' == strtolower($platoon->name)) {
-            $this->squad_leader_color = "#006699";
-        }
 
         foreach ($squads as $squad) {
             $division_structure .= "[td]";
@@ -180,7 +176,7 @@ class PUBGDivisionStructure
                 foreach ($recruits as $player) {
                     $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                     $player->handle = (is_object($memberHandle))
-                        ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url]"
+                        ? "[color=#00FFFF][url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url][/color]"
                         : 'XXX';
 
                     $aod_url = Member::createAODlink([
@@ -211,7 +207,7 @@ class PUBGDivisionStructure
 
                     $memberHandle = MemberHandle::findHandle($player->id, $this->division->primary_handle);
                     $player->handle = (is_object($memberHandle))
-                        ? "[url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url]"
+                        ? "[color=#00FFFF][url=http://steamcommunity.com/profiles/{$memberHandle->handle_value}][Steam][/url][/color]"
                         : 'XXX';
 
                     $player_name = Rank::convert($player->rank_id)->abbr . " " . $player->forum_name;
