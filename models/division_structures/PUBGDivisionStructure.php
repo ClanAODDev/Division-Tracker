@@ -100,9 +100,9 @@ class PUBGDivisionStructure
             }
 
             $division_structure .= "[/size]";
-
-            return $division_structure;
         }
+
+        return $division_structure;
     }
 
     /**
