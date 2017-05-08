@@ -53,9 +53,7 @@ class PUBGDivisionStructure
         $division_structure .= "[/size][/center]";
 
         // groups
-        $division_structure .= "[TABLE=\"align: center\"]";
         $division_structure = $this->getGroups($division_structure);
-        $division_structure .= "[/table]";
 
         // LOAs
         $division_structure = $this->getLoas($division_structure);
@@ -110,7 +108,7 @@ class PUBGDivisionStructure
     private function getGroups($division_structure)
     {
         foreach ($this->platoons as $platoon) {
-            $division_structure .= "[tr][td][center]";
+            $division_structure .= "[table=align:center][tr][td][center]";
 
             // group leader
             $division_structure .= "[size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
@@ -133,15 +131,15 @@ class PUBGDivisionStructure
             } else {
                 $division_structure .= "[size=4]TBA[/size]\r\n\r\n";
             }
-            $division_structure .= "[/center][/td][/tr]";
+            $division_structure .= "[/center][/td][/tr][/table]";
 
             /**
              * Squads
              */
-            $division_structure .= "[tr]";
+            $division_structure .= "[table=align:center][tr]";
             $division_structure = $this->getSquads($division_structure, $platoon);
-
-            $division_structure .= "[/tr]";
+            $division_structure .= "[/tr][/table]";
+            
             $division_structure .= "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
         }
 
