@@ -126,7 +126,6 @@ class DivisionController
 
     public static function _manage_loas()
     {
-
         $user = User::find(intval($_SESSION['userid']));
         $member = Member::find(intval($_SESSION['memberid']));
         $tools = Tool::find_all($user->role);
@@ -186,6 +185,9 @@ class DivisionController
                 break;
             case 20:
                 $division_structure = new MEADivisionStructure($member->game_id);
+                break;
+            case 21:
+                $division_structure = new PUBGDivisionStructure($member->game_id);
                 break;
             default:
                 $division_structure = new DivisionStructure($member->game_id);
