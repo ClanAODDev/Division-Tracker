@@ -133,7 +133,7 @@ class PUBGDivisionStructure
             } else {
                 $division_structure .= "[size=4]TBA[/size]\r\n\r\n";
             }
-            $division_structure .= "[/td][/tr]";
+            $division_structure .= "[/center][/td][/tr]";
 
             /**
              * Squads
@@ -151,7 +151,7 @@ class PUBGDivisionStructure
     /**
      * @param $division_structure
      * @param $platoon
-     * @return array
+     * @return string
      */
     private function getSquads($division_structure, $platoon)
     {
@@ -226,7 +226,7 @@ class PUBGDivisionStructure
                 $division_structure .= "[/list]";
             }
             // end squad members
-            $division_structure .= "[/center][/td]";
+            $division_structure .= "[/td]";
             $iterate_squad++;
 
             if ($iterate_squad % 2 == 0) {
