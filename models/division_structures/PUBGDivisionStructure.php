@@ -110,7 +110,7 @@ class PUBGDivisionStructure
     private function getGroups($division_structure)
     {
         foreach ($this->platoons as $platoon) {
-            $division_structure .= "[tr][td]";
+            $division_structure .= "[tr][td][center]";
 
             // group leader
             $division_structure .= "[size=4][color={$this->platoon_name_color}]{$platoon->name}[/color][/size]\r\n\r\n";
@@ -226,10 +226,10 @@ class PUBGDivisionStructure
                 $division_structure .= "[/list]";
             }
             // end squad members
-            $division_structure .= "[/td]";
+            $division_structure .= "[/center][/td]";
             $iterate_squad++;
 
-            if ($iterate_squad % 3 == 0) {
+            if ($iterate_squad % 2 == 0) {
                 $division_structure .= "[/tr][tr]";
             }
         }
