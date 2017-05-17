@@ -55,7 +55,6 @@ class SFDivisionStructure
         $division_structure .= "[size=4]";
         $division_structure = $this->getDivisionLeaders($division_structure);
         $division_structure .= "[img]http://i.imgur.com/LjeXuoA.gif[/img]";
-        $division_structure .= "[/size][/center]\r\n\r\n";
 
         /**
          * -----general sergeants-----
