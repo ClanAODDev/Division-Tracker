@@ -183,6 +183,9 @@ class DivisionController
             case 16:
                 $division_structure = new AWDivisionStructure($member->game_id);
                 break;
+            case 19:
+                $division_structure = new SFDivisionStructure($member->game_id);
+                break;
             case 20:
                 $division_structure = new MEADivisionStructure($member->game_id);
                 break;
