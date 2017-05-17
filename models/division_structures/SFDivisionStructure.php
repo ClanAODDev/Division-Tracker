@@ -37,22 +37,6 @@ class SFDivisionStructure
         self::generate();
     }
 
-    private function getDivisionLeaders($division_structure)
-    {
-        $division_leaders = Division::findDivisionLeaders($this->game_id);
-        foreach ($division_leaders as $division_leader) {
-            $aod_url = Member::createAODlink([
-                'member_id' => $division_leader->member_id,
-                'rank' => Rank::convert($division_leader->rank_id)->abbr,
-                'forum_name' => $division_leader->forum_name,
-            ]);
-            $division_structure .= (property_exists($division_leader,
-                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n" : "{$aod_url}\r\n";
-        }
-        return $division_structure;
-    }
-
-
     public function generate()
     {
 
@@ -77,7 +61,7 @@ class SFDivisionStructure
          * -----general sergeants-----
          */
         $general_sergeants = Division::findGeneralSergeants($this->game_id);
-        if (count($general_sergeants)) {
+        if (count((array) $general_sergeants)) {
             $division_structure .= "[center][size=3][color={$this->platoon_pos_color}]General Sergeants[/color]\r\n";
 
             foreach ($general_sergeants as $player) {
@@ -309,5 +293,21 @@ class SFDivisionStructure
         }
 
         $this->content = $division_structure;
+    }
+
+    private function getDivisionLeaders($division_structure)
+    {
+        $division_leaders = Division::findDivisionLeaders($this->game_id);
+        foreach ($division_leaders as $division_leader) {
+            $aod_url = Member::createAODlink([
+                'member_id' => $division_leader->member_id,
+                'rank' => Rank::convert($division_leader->rank_id)->abbr,
+                'forum_name' => $division_leader->forum_name,
+            ]);
+            $division_structure .= (property_exists($division_leader,
+                'position_desc')) ? "{$aod_url} - {$division_leader->position_desc}\r\n" : "{$aod_url}\r\n";
+        }
+
+        return $division_structure;
     }
 }
