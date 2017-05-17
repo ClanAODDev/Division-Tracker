@@ -70,6 +70,7 @@ class SFDivisionStructure
         $division_structure .= "\r\n\r\n[center][size=5][color={$this->division_leaders_color}][b][i][u]Division Leadership[/u][/i][/b][/color][/size]\r\n";
         $division_structure .= "[size=4]";
         $division_structure = $this->getDivisionLeaders($division_structure);
+        $division_structure .= "[img]http://i.imgur.com/LjeXuoA.gif[/img]";
         $division_structure .= "[/size][/center]\r\n\r\n";
 
         /**
