@@ -67,7 +67,7 @@
                                 <?php foreach ($positionsArray as $position) : ?>
                                     <option value='<?php echo $position->id ?>'
                                         <?= ($position->id == $member->position_id) ? "selected" : null; ?>>
-                                        <?php echo Locality::run($position->desc, $memberInfo->game_id); ?>
+                                        <?php echo Locality::run($position->desc, $member->game_id); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
