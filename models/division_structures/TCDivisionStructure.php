@@ -179,17 +179,17 @@ class TCDivisionStructure
                 $division_structure .= "[size=4][color=#40E0D0]" . ordSuffix($iterate_squad) . " Squad Leader[/color][/size]\r\n";
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
 
-                $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
-                    false, true));
-                $division_structure .= "[list]";
-                foreach ($recruits as $recruit) {
-                    $aod_url = Member::createAODlink([
-                        'member_id' => $recruit->member_id,
-                        'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
-                    ]);
-                    $division_structure .= "[*]{$aod_url}\r\n\r\n";
-                }
-                $division_structure .= "[/list]";
+//                $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
+//                    false, true));
+//                $division_structure .= "[list]";
+//                foreach ($recruits as $recruit) {
+//                    $aod_url = Member::createAODlink([
+//                        'member_id' => $recruit->member_id,
+//                        'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
+//                    ]);
+//                    $division_structure .= "[*]{$aod_url}\r\n\r\n";
+//                }
+//                $division_structure .= "[/list]";
 
 
             } else {
@@ -203,7 +203,7 @@ class TCDivisionStructure
                 Squad::findSquadMembers(
                     $squad->id,
                     true,
-                    (isset($squad_leader)) ? $squad_leader->member_id : null
+                    null
                 )
             );
 
