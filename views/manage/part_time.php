@@ -7,7 +7,6 @@
         <li class='active'>Manage part time players</li>
     </ul>
 
-
     <div class='page-header'>
         <h2><strong>Manage
                 <small>Part Time Members</small>
@@ -23,17 +22,17 @@
                     <form action="do/add-parttime" method="POST">
                         <div class="form-group">
                             <label for="member_id" class="control-label">Member ID</label>
-                            <input type="number" class="form-control" name="member_id"/>
+                            <input type="number" class="form-control" name="member_id" />
                         </div>
 
                         <div class="form-group">
                             <label for="name" class="control-label">Forum Name</label>
-                            <input type="text" class="form-control" name="name"/>
+                            <input type="text" class="form-control" name="name" />
                         </div>
 
                         <div class="form-group">
                             <label for="ingame_alias" class="control-label">Ingame Alias</label>
-                            <input type="text" class="form-control" name="ingame_alias"/>
+                            <input type="text" class="form-control" name="ingame_alias" />
                         </div>
 
                         <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add</button>
@@ -48,7 +47,7 @@
                 <?php if (count($part_time)): ?>
                     <div class="panel-body">
                         <!--  Form Input -->
-                        <input class="form-control" id="search-collection" type="text" placeholder="Filter list"/>
+                        <input class="form-control" id="search-collection" type="text" placeholder="Filter list" />
                     </div>
                 <?php endif; ?>
                 <div class="collection">
@@ -57,8 +56,8 @@
                         <?php foreach ($part_time as $member): ?>
                             <li class="list-group-item collection-item part-timer"
                                 data-member-id="<?php echo $member->id ?>"><?php echo $member->forum_name ?><span
-                                    class="pull-right delete-part-time" title="Remove part-time member"><i
-                                        class="fa fa-trash text-danger"></i></span></li>
+                                        class="pull-right delete-part-time" title="Remove part-time member"><i
+                                            class="fa fa-trash text-danger"></i></span></li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p class="list-group-item text-muted">You have no part time members assigned.</p>
@@ -66,7 +65,6 @@
                 </div>
             </div><!-- panel -->
         </div><!-- col-md-8 -->
-
 
     </div><!-- row -->
 

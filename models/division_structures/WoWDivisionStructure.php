@@ -193,12 +193,17 @@ class WoWDivisionStructure
             $squadMembers = arrayToObject(Squad::findSquadMembers($squad->id, true, $squad_leader->member_id));
             if (count((array) $squadMembers)) {
                 foreach ($squadMembers as $squadMember) {
+                    $memberHandle = MemberHandle::findHandle($squadMember->id, $this->division->primary_handle);
+                    $blizzName = (is_object($memberHandle))
+                        ? $memberHandle->handle_value
+                        : 'XXX';
+
                     $player_name = Rank::convert($squadMember->rank_id)->abbr . " " . $squadMember->forum_name;
                     $aod_url = Member::createAODlink(array(
                         'member_id' => $squadMember->member_id,
                         'forum_name' => $player_name
                     ));
-                    $division_structure .= "{$aod_url}\r\n";
+                    $division_structure .= "{$aod_url} [{$blizzName}]\r\n";
                 }
             }
 
