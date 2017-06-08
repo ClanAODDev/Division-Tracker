@@ -178,11 +178,15 @@ class WoWDivisionStructure
                     false, true));
 
                 foreach ($recruits as $recruit) {
+                    $memberHandle = MemberHandle::findHandle($recruit->id, $this->division->primary_handle);
+                    $blizzName = (is_object($memberHandle))
+                        ? $memberHandle->handle_value
+                        : 'XXX';
                     $aod_url = Member::createAODlink([
                         'member_id' => $recruit->member_id,
                         'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
                     ]);
-                    $division_structure .= "{$aod_url}\r\n";
+                    $division_structure .= "{$aod_url} [{$blizzName}]\r\n";
                 }
 
             } else {
