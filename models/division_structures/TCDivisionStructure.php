@@ -109,6 +109,9 @@ class TCDivisionStructure
                 case "Protocol Black":
                     $banner = "http://i.imgur.com/x8tA7Ad.png";
                     break;
+                case "White Zodiacs":
+                    $banner = "http://i.imgur.com/wIsWQHE.png";
+                    break;
                 default:
                     $banner = "";
                     break;
@@ -178,19 +181,6 @@ class TCDivisionStructure
 
                 $division_structure .= "[size=4][color=#40E0D0]" . ordSuffix($iterate_squad) . " Squad Leader[/color][/size]\r\n";
                 $division_structure .= "[size=4]{$aod_url}[/size]\r\n\r\n";
-
-//                $recruits = arrayToObject(Member::findRecruits($squad_leader->member_id, $squad_leader->platoon_id,
-//                    false, true));
-//                $division_structure .= "[list]";
-//                foreach ($recruits as $recruit) {
-//                    $aod_url = Member::createAODlink([
-//                        'member_id' => $recruit->member_id,
-//                        'forum_name' => Rank::convert($recruit->rank_id)->abbr . " " . $recruit->forum_name,
-//                    ]);
-//                    $division_structure .= "[*]{$aod_url}\r\n\r\n";
-//                }
-//                $division_structure .= "[/list]";
-
 
             } else {
                 $division_structure .= "[size=4][color={$this->squad_leader_color}]TBA[/color][/size]\r\n\r\n";
